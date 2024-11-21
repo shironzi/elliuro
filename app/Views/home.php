@@ -11,6 +11,7 @@
 <body>
     <?php include __DIR__ . '/components/nav.php'; ?>
     <h1>Hello</h1>
+    <?php include __DIR__ . '/components/footer.php'; ?>
 </body>
 
 </html>

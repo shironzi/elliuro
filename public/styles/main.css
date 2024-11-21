@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "explore", sans-serif;
+  font-family: Explore;
 }
 
 nav {
@@ -14,12 +14,11 @@ nav {
 }
 
 nav a {
-  color: var(--text-color, #fff);
+  color: #e0e0e0;
   text-decoration: none;
 }
 
 .nav-logo {
-  font-family: Explore;
   font-size: 29.3px;
   font-style: normal;
   font-weight: 400;
@@ -37,4 +36,64 @@ nav a {
 .nav-link-singup {
   background-color: #b08d57;
   padding: 9px 30px;
+}
+
+footer {
+  background-color: #1a1f2e;
+  padding: 35px 22px;
+  justify-content: center; /* Center the child elements horizontally */
+  align-items: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: #e0e0e0;
+}
+
+footer hr {
+  border: 1px solid #b08d57;
+  margin: 30px;
+}
+
+footer h4 {
+  font-family: Arial;
+  color: #e0e0e0;
+  font-weight: 500;
+  font-size: 18.75px;
+  letter-spacing: 0.938px;
+}
+
+.footer-links-container {
+  padding: 0 100px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-links-container a {
+  font-weight: 200;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 18px;
+}
+
+.footer-copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+.footer-copyright p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  color: #e0e0e0;
+  padding: 0 5px;
 }
