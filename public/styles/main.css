@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "explore", sans-serif;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--background, #121212);
+  padding: 22px 20.75px 22px 22px;
+}
+
+nav a {
+  color: var(--text-color, #fff);
+  text-decoration: none;
+}
+
+.nav-logo {
+  font-family: Explore;
+  font-size: 29.3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 1.465px;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+
+.nav-link-singup {
+  background-color: #b08d57;
+  padding: 9px 30px;
+}
