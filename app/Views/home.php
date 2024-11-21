@@ -18,13 +18,27 @@
             </p>
         </div>
         <div class="banner-slider">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
-            <img class="banner-slider-image" src="<?= base_url('assets/house.png') ?>" alt="">
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
+            <div class="banner-slider-card">
+                <h4>REAL ESTATE</h4>
+            </div>
 
         </div>
     </div>

@@ -144,9 +144,25 @@ footer h4 {
   margin-left: -50px;
 }
 
-.banner-slider-image {
+.banner-slider-card {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url("../assets/house.png");
+  background-size: cover;
   width: 233.778px;
   height: 133px;
   border-radius: 10px;
+  position: relative;
   flex-shrink: 0;
+}
+
+.banner-slider-card h4 {
+  font-family: Arial;
+  font-size: 14.219px;
+  font-weight: 400;
+  letter-spacing: 1.422px;
+  color: #e0e0e0;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  margin: 0;
 }
