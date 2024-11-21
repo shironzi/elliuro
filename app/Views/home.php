@@ -42,6 +42,138 @@
 
         </div>
     </div>
+
+    <div class="properties">
+        <h1>FEATURED PROPERTIES</h1>
+        <hr>
+        <div class="properties-card">
+            <div class="properties-details custom-padding-right">
+                <h2>Luxe Haven Residences</h2>
+
+
+                <p>Nestled in the heart of Manila, this exceptional property combines modern elegance with unparalleled
+                    comfort, offering spacious interiors, top-of-the-line amenities, and breathtaking views – the
+                    perfect
+                    retreat for refined living.</p>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/pool-icon.png') ?>" alt="">
+                        <p>Swimming Pool</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bed-icon.png') ?>" alt="">
+                        <p>5 Room</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/car-icon.png') ?>" alt="">
+                        <p>4 car Port</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bathtub-icon.png') ?>" alt="">
+                        <p>4 Bathrooms</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-listing">
+                    <p>PHP 5,000,000.0</p>
+                    <a href="">VIEW LISTING</a>
+                </div>
+            </div>
+
+            <div class="properties-image custom-vl-left">
+                <img src="<?= base_url('assets/estate1.png') ?>" alt="">
+            </div>
+        </div>
+
+        <div class="properties-card">
+            <div class="properties-image custom-vl-right">
+                <img src="<?= base_url('assets/estate1.png') ?>" alt="">
+            </div>
+            <div class="properties-details custom-padding-left">
+                <h2>Luxe Haven Residences</h2>
+
+
+                <p>Nestled in the heart of Manila, this exceptional property combines modern elegance with unparalleled
+                    comfort, offering spacious interiors, top-of-the-line amenities, and breathtaking views – the
+                    perfect
+                    retreat for refined living.</p>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/pool-icon.png') ?>" alt="">
+                        <p>Swimming Pool</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bed-icon.png') ?>" alt="">
+                        <p>5 Room</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/car-icon.png') ?>" alt="">
+                        <p>4 car Port</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bathtub-icon.png') ?>" alt="">
+                        <p>4 Bathrooms</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-listing ">
+                    <p>PHP 5,000,000.0</p>
+                    <a href="">VIEW LISTING</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="properties-card">
+            <div class="properties-details custom-padding-right">
+                <h2>Luxe Haven Residences</h2>
+
+
+                <p>Nestled in the heart of Manila, this exceptional property combines modern elegance with unparalleled
+                    comfort, offering spacious interiors, top-of-the-line amenities, and breathtaking views – the
+                    perfect
+                    retreat for refined living.</p>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/pool-icon.png') ?>" alt="">
+                        <p>Swimming Pool</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bed-icon.png') ?>" alt="">
+                        <p>5 Room</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-icons">
+                    <div>
+                        <img src="<?= base_url('assets/car-icon.png') ?>" alt="">
+                        <p>4 car Port</p>
+                    </div>
+                    <div>
+                        <img src="<?= base_url('assets/bathtub-icon.png') ?>" alt="">
+                        <p>4 Bathrooms</p>
+                    </div>
+                </div>
+
+                <div class="properties-details-listing">
+                    <p>PHP 5,000,000.0</p>
+                    <a href="">VIEW LISTING</a>
+                </div>
+            </div>
+
+            <div class="properties-image custom-vl-left">
+                <img src="<?= base_url('assets/estate1.png') ?>" alt="">
+            </div>
+        </div>
+    </div>
     <?php include __DIR__ . '/components/footer.php'; ?>
 </body>
 

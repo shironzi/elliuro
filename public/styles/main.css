@@ -103,7 +103,7 @@ footer h4 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 92vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -165,4 +165,109 @@ footer h4 {
   bottom: 15px;
   right: 15px;
   margin: 0;
+}
+
+.properties {
+  background-color: #121212;
+  color: #e0e0e0;
+  margin-top: -22px;
+  padding: 100px 130px;
+}
+
+.properties h1 {
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 100;
+}
+
+.properties hr {
+  width: 500px;
+  border: 1px solid #b08d57;
+}
+
+.properties-card {
+  display: flex;
+  margin-top: 150px;
+}
+
+.properties-image img {
+  width: 634px;
+  height: 422.718px;
+  flex-shrink: 0;
+}
+
+.properties-details h2 {
+  color: #b08d57;
+  font-size: 29.3px;
+  letter-spacing: 1.465px;
+}
+
+.properties-details p {
+  font-size: 18.44px;
+  letter-spacing: 1.172px;
+  color: #e0e0e0;
+  margin: 25px 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.properties-details-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.properties-details-icons img {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.properties-details-icons div {
+  display: flex;
+  align-items: center;
+}
+
+.properties-details-icons p {
+  color: #b08d57;
+  letter-spacing: 0.8px;
+  font-size: 16px;
+}
+
+.properties-details-listing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #e0e0e0;
+}
+
+.properties-details-listing a {
+  padding: 9px 30px;
+  font-size: 17.28px;
+  color: #fff;
+  background-color: #b08d57;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.custom-vl-right {
+  border-right: #e0e0e0 solid 2px;
+  padding-right: 150px;
+}
+
+.custom-vl-left {
+  border-left: #e0e0e0 solid 2px;
+  padding-left: 150px;
+}
+
+.custom-padding-left {
+  padding-left: 20px;
+}
+
+.custom-padding-right {
+  padding-right: 20px;
+}
+
+.properties-image {
+  justify-content: center;
+  margin: auto;
 }
