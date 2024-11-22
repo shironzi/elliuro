@@ -174,6 +174,9 @@
             </div>
         </div>
     </div>
+    <div class="getTouch">
+        <button>Touch</button>
+    </div>
     <?php include __DIR__ . '/components/footer.php'; ?>
 </body>
 
