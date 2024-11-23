@@ -1,7 +1,33 @@
+@font-face {
+  font-family: "Mogella";
+  src: url("../fonts/Mogella.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima";
+  src: url("../fonts/ProximaNova.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Explore";
+  src: url("../fonts/Explore.ttf") format("opentype");
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Mogella", sans-serif;
+  font-weight: 400;
+}
+p {
+  font-family: Proxima, sans-serif;
 }
 
 nav {
@@ -26,6 +52,12 @@ nav a {
   font-weight: 400;
   line-height: normal;
   letter-spacing: 1.465px;
+  display: inline-block;
+  font-family: Explore, monospace;
+}
+
+.nav-logo:hover {
+  color: #b08d57;
 }
 
 .nav-links {
@@ -38,10 +70,24 @@ nav a {
 .nav-link-singup {
   background-color: #b08d57;
   padding: 9px 30px;
+  transition: background-color 0.5s ease;
 }
 
 .nav-link-singup:hover {
   background-color: #1a1f2e;
+}
+
+.nav-links-effect {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease;
+  padding-bottom: 5px;
+  margin-bottom: -5px;
+  transition: 0.5 ease;
+}
+
+.nav-links-effect:hover {
+  border-bottom: 1px solid #b08d57;
+  color: #b08d57;
 }
 
 footer {
@@ -62,9 +108,7 @@ footer hr {
 }
 
 footer h4 {
-  font-family: Arial;
   color: #e0e0e0;
-  font-weight: 500;
   font-size: 18.75px;
   letter-spacing: 0.938px;
 }
@@ -76,7 +120,6 @@ footer h4 {
 }
 
 .footer-links-container a {
-  font-weight: 200;
   font-size: 16px;
   letter-spacing: 0.8px;
 }
@@ -97,7 +140,6 @@ footer h4 {
 }
 
 .footer-copyright p {
-  font-family: Arial, Helvetica, sans-serif;
   font-size: 12px;
   letter-spacing: 0.6px;
   color: #e0e0e0;
@@ -117,11 +159,11 @@ footer h4 {
   justify-content: center;
   padding-left: 12rem;
   color: #e0e0e0;
+  font-family: "Mogella", sans-serif;
 }
 
 .banner h1 {
   margin-top: 200px;
-  font-family: Georgia;
   letter-spacing: 4.578px;
   font-size: 45.78px;
 }
@@ -129,7 +171,6 @@ footer h4 {
 .banner p {
   margin-top: 0;
   color: #e0e0e0;
-  font-family: Arial, sans-serif;
   letter-spacing: 2.074px;
   font-size: 16.74px;
 }
@@ -168,9 +209,7 @@ footer h4 {
 }
 
 .banner-slider-card h4 {
-  font-family: Arial;
   font-size: 14.219px;
-  font-weight: 400;
   letter-spacing: 1.422px;
   color: #e0e0e0;
   position: absolute;
@@ -198,8 +237,6 @@ footer h4 {
 
 .properties h1 {
   text-align: center;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 100;
 }
 
 .properties hr {
@@ -229,7 +266,6 @@ footer h4 {
   letter-spacing: 1.172px;
   color: #e0e0e0;
   margin: 25px 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .properties-details-icons {
@@ -268,7 +304,11 @@ footer h4 {
   color: #fff;
   background-color: #b08d57;
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.5s ease;
+}
+
+.properties-details-listing a:hover {
+  background-color: #1a1f2e;
 }
 
 .custom-vl-right {
@@ -342,6 +382,12 @@ footer h4 {
   color: #e0e0e0;
   text-decoration: none;
   margin-top: 50px;
+  transition: color 0.5s ease, border-color 0.5s ease;
+}
+
+.getInTouch-details a:hover {
+  color: #b08d57;
+  border-color: #e0e0e0;
 }
 
 .reviews {
@@ -363,7 +409,6 @@ footer h4 {
 .reviews h2 {
   font-size: 23.44px;
   letter-spacing: 1.172px;
-  font-weight: 600;
 }
 
 .reviews h4 {
