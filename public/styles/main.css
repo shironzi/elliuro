@@ -7,9 +7,12 @@ body {
 nav {
   display: flex;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
   align-items: center;
-  background-color: var(--background, #121212);
+  background-color: #121212;
   padding: 22px 20.75px 22px 22px;
+  z-index: 1000;
 }
 
 nav a {
@@ -270,4 +273,54 @@ footer h4 {
 .properties-image {
   justify-content: center;
   margin: auto;
+}
+
+.getInTouch {
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.getInTouch img {
+  width: 1024px;
+  height: auto;
+  z-index: -1;
+  flex-shrink: 0;
+  margin-bottom: -91.75px;
+}
+
+.getInTouch-details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #b08d57;
+  text-align: center;
+  z-index: 1;
+  margin-right: -30%;
+  padding-right: 22%;
+  clip-path: polygon(0 0, 80% 0, 60% 100%, 0% 100%);
+  z-index: 1;
+  background-color: #1a1f2e;
+}
+
+.getInTouch-details h1 {
+  font-size: 29.3px;
+  letter-spacing: 1.831px;
+}
+
+.getInTouch-details p {
+  font-size: 20.74px;
+  letter-spacing: 2.074px;
+}
+
+.getInTouch-details a {
+  padding: 20px;
+  border: 1px solid #b08d57;
+  color: #e0e0e0;
+  text-decoration: none;
+  margin-top: 50px;
 }

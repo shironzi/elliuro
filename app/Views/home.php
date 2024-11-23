@@ -174,8 +174,16 @@
             </div>
         </div>
     </div>
-    <div class="getTouch">
-        <button>Touch</button>
+    <div class="getInTouch">
+        <div class="getInTouch-details">
+            <h1>INVEST YOUR FUTURE WITH US</h1>
+            <p>Unlock access to premium properties and expert guidance tailored to your financial goals. Start building
+                a secure future with a trusted partner focused on your success.</p>
+
+            <a href="">Explore Investment Opportunities</a>
+        </div>
+        <div class="getInTouch-overlay"></div>
+        <img src="<?= base_url('assets/analog-landscape-buildings.png') ?>" alt="">
     </div>
     <?php include __DIR__ . '/components/footer.php'; ?>
 </body>
