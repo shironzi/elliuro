@@ -28,6 +28,7 @@ body {
   height: 70vh;
   background-color: #121212;
   padding-bottom: 100px;
+  width: 100%;
 }
 
 .auth-container h1 {
@@ -41,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
+  width: 30%;
 }
 
 .auth-form input,
@@ -52,6 +54,8 @@ body {
   background-color: transparent;
   font-size: 18.44px;
   letter-spacing: 1.172px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .auth-form input:focus,
