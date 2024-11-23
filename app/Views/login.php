@@ -20,6 +20,9 @@
             <input type="password" name="password" id="password" placeholder="PASSWORD" required>
             <button type="submit">SIGN IN</button>
         </form>
+        <div class="auth-login">
+            <p>Don't have an account? <a href="<?= base_url('/register') ?>">Sign up</a></p>
+        </div>
     </div>
 
 

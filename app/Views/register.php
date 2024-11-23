@@ -31,10 +31,11 @@
             </div>
             <button type="submit">SIGN UP</button>
         </form>
+
+        <div class="auth-login">
+            <p>Already have an account? <a href="<?= base_url('/login') ?>">Sign in</a></p>
+        </div>
     </div>
-
-
-
     <?php include __DIR__ . '/components/footer.php'; ?>
 </body>
 
