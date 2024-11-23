@@ -1,10 +1,10 @@
 <nav>
     <div>
-        <a href="" class="nav-logo">Elliuro</a>
+        <a href="<?= base_url('/') ?>" class="nav-logo">ELLIURO</a>
     </div>
     <div class="nav-links">
-        <a href="">EXPLORE PROPERTIES</a>
-        <a href="">LIST PROPERTY</a>
+        <a class="nav-links-effect" href="">EXPLORE PROPERTIES</a>
+        <a class="nav-links-effect" href="">LIST PROPERTY</a>
         <a href="" class="nav-link-singup">SIGNUP</a>
         <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-heart-fill" viewBox="0 0 16 16">
