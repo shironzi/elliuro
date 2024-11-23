@@ -40,6 +40,10 @@ nav a {
   padding: 9px 30px;
 }
 
+.nav-link-singup:hover {
+  background-color: #1a1f2e;
+}
+
 footer {
   background-color: #1a1f2e;
   padding: 35px 22px;
