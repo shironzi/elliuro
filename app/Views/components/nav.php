@@ -4,7 +4,7 @@
     </div>
     <div class="nav-links">
         <a class="nav-links-effect" href="">EXPLORE PROPERTIES</a>
-        <a class="nav-links-effect" href="">LIST PROPERTY</a>
+        <a class="nav-links-effect" href="<?= base_url('/properties') ?>">LIST PROPERTY</a>
         <a href="<?= base_url('/register') ?>" class="nav-link-singup">SIGNUP</a>
         <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-heart-fill" viewBox="0 0 16 16">
