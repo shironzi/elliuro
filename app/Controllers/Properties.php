@@ -18,4 +18,9 @@ class Properties extends BaseController
     {
         return view('property-form');
     }
+
+    public function propertyFormImage(): string
+    {
+        return view('property-form-image');
+    }
 }

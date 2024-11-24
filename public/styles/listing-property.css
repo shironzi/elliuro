@@ -162,3 +162,101 @@ p {
 .property-form-container form button:hover {
   background-color: #1a1f2e;
 }
+
+.form-image-container {
+  background-color: #121212;
+  color: #e0e0e0;
+  padding: 54px 114px;
+  height: 100vh;
+}
+
+.form-image-container h1 {
+  font-family: Mogella;
+  font-size: 29.3px;
+  letter-spacing: 1.465px;
+  border-bottom: 2px solid #b08d57;
+  width: fit-content;
+}
+
+.form-image-container p {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  color: rgba(224, 224, 224, 0.6);
+  margin-bottom: 50px;
+}
+
+.form-images {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  background-color: #b08d57;
+  column-gap: 1px;
+  border: 1px solid #b08d57;
+  border-radius: 34px;
+}
+
+.form-Images-cutom {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1px;
+}
+
+.details-image-1,
+.details-image-2,
+.details-image-3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212;
+}
+
+.details-image-1 {
+  width: 570px;
+  height: 365px;
+  border-radius: 34px 0 0 34px;
+}
+
+.details-image-2 {
+  width: 410px;
+  height: 182px;
+}
+
+.details-image-3 {
+  width: 451px;
+  height: 365px;
+  border-radius: 0 34px 34px 0;
+}
+
+#image1,
+#image2,
+#image3,
+#image4 {
+  opacity: 0;
+  position: absolute;
+}
+
+.preview-image {
+  object-fit: cover;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.form-image-container form button {
+  width: 378px;
+  padding: 13.5px;
+  align-items: center;
+  justify-content: center;
+  margin: 200px auto;
+  display: flex;
+  cursor: pointer;
+  color: #fff;
+  font-size: 18.92px;
+  background-color: #b08d57;
+  border: none;
+  transition: background-color 0.5s ease;
+}
+
+.form-image-container form button:hover {
+  background-color: #1a1f2e;
+}
