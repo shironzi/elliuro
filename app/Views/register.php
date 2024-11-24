@@ -15,11 +15,19 @@
     <div class="auth-container">
         <h1>SIGN UP</h1>
 
-        <form action="<?= base_url('register/submit') ?>" method="POST" class="auth-form">
+        <?php if (session()->getFlashdata('errors')): ?>
+            <div class="errors">
+                <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                    <p><?= $error ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
+        <form action="<?= base_url('/register/submit') ?>" method="post" class="auth-form">
             <input type="text" name="name" id="name" placeholder="NAME" required>
             <input type="email" name="email" id="email" placeholder="EMAIL" required>
             <input type="password" name="password" id="password" placeholder="PASSWORD" required>
-            <input type="password" name="confirm-password" id="confirm-password" placeholder="CONFIRM PASSWORD"
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="CONFIRM PASSWORD"
                 required>
             <div class="auth-form-custom">
                 <input type="date" name="birthday" id="birthday" placeholder="BIRTHDAY" required>

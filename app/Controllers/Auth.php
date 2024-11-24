@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
+
+$db = db_connect();
 
 class Auth extends BaseController
 {
@@ -22,7 +25,7 @@ class Auth extends BaseController
             'name' => 'required',
             'email' => 'required|valid_email',
             'password' => 'required|min_length[8]',
-            'confirm_password' => 'matches[password]',
+            'confirm_password' => 'required|matches[password]',
             'birthday' => 'required|valid_date',
             'gender' => 'required|in_list[male,female]'
         ];
@@ -31,9 +34,20 @@ class Auth extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
-        // Save the user to the database
-        // Example: $this->userModel->save($data);
+        $userModel = new UserModel();
 
-        return redirect()->to('/login')->with('message', 'Registration successful. Please login.');
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'birthday' => $this->request->getPost('birthday'),
+            'gender' => $this->request->getPost('gender')
+        ];
+
+        if ($userModel->save($data)) {
+            return redirect()->to('/login')->with('message', 'Registration successful. Please login.');
+        } else {
+            return redirect()->back()->withInput()->with('errors', ['Failed to save user data.']);
+        }
     }
 }

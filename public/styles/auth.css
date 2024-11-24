@@ -104,3 +104,10 @@ body {
   color: #b08d57;
   text-decoration: none;
 }
+
+.errors p {
+  color: #ff0000;
+  font-family: "Proxima", sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+}
