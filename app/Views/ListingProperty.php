@@ -23,7 +23,7 @@
                 tenants
                 and buyers. Start listing your property today and take the first step toward reaching your real estate
                 goals.</p>
-            <a href="">GET STARTED</a>
+            <a href="<?= base_url('/property-form') ?>">GET STARTED</a>
         </div>
     </div>
 

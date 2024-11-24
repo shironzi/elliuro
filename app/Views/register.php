@@ -15,7 +15,7 @@
     <div class="auth-container">
         <h1>SIGN UP</h1>
 
-        <form action="" class="auth-form">
+        <form action="<?= base_url('register/submit') ?>" method="POST" class="auth-form">
             <input type="text" name="name" id="name" placeholder="NAME" required>
             <input type="email" name="email" id="email" placeholder="EMAIL" required>
             <input type="password" name="password" id="password" placeholder="PASSWORD" required>
