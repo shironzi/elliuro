@@ -23,4 +23,9 @@ class Properties extends BaseController
     {
         return view('property-form-image');
     }
+
+    public function reviewListing(): string
+    {
+        return view('review-listing');
+    }
 }

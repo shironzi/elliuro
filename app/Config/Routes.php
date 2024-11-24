@@ -13,3 +13,4 @@ $routes->get('/properties', 'Properties::index');
 $routes->get('/property-form', 'Properties::propertyForm');
 $routes->get('/listing-property', 'Properties::index');
 $routes->get('/property-form-image', 'Properties::propertyFormImage');
+$routes->get('/review-listing', 'Properties::reviewListing');
