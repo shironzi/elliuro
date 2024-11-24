@@ -13,4 +13,9 @@ class Properties extends BaseController
     {
         return view('property-details');
     }
+
+    public function propertyForm(): string
+    {
+        return view('property-form');
+    }
 }
