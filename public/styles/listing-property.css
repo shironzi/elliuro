@@ -1,0 +1,78 @@
+@font-face {
+  font-family: "Mogella";
+  src: url("../fonts/Mogella.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima";
+  src: url("../fonts/ProximaNova.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Explore";
+  src: url("../fonts/Explore.ttf") format("opentype");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #121212;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Mogella", sans-serif;
+  font-weight: 400;
+}
+p {
+  font-family: Proxima, sans-serif;
+}
+
+.getStarted-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.getStated-description {
+  padding: 86.5px 154.5px;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.getStated-description p {
+  margin-bottom: 113px;
+  letter-spacing: 0.8px;
+  line-height: 30px;
+  font-size: 16px;
+  font-family: "Proxima";
+}
+
+.getStated-description h1 {
+  font-family: Mogella;
+  font-size: 31.62px;
+  line-height: 50px;
+  letter-spacing: 3.662px;
+}
+
+.getStated-description a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-family: Proxima;
+  font-size: 21.92px;
+  padding: 13.5px 45px;
+  background-color: #b08d57;
+  align-self: center;
+  transition: background-color 0.5s ease;
+}
+
+.getStated-description a:hover {
+  background-color: #1a1f2e;
+}
