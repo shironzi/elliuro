@@ -8,4 +8,9 @@ class Properties extends BaseController
     {
         return view('properties');
     }
+
+    public function show(int $id): string
+    {
+        return view('property', ['id' => $id]);
+    }
 }
