@@ -9,8 +9,8 @@ class Properties extends BaseController
         return view('properties');
     }
 
-    public function show(int $id): string
+    public function details(): string
     {
-        return view('property', ['id' => $id]);
+        return view('property-details');
     }
 }

@@ -8,4 +8,5 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/login', 'Auth::login');
 $routes->get('/register', 'Auth::register');
+$routes->get('/property', 'Properties::details');
 $routes->get('/properties', 'Properties::index');

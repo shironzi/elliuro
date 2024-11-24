@@ -1,0 +1,315 @@
+CRITICAL - 2024-11-24 03:45:43 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "property.php"
+[Method: GET, Route: property/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('property.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property', [], true)
+ 3 APPPATH\Controllers\Properties.php(14): view('property', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:46:04 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "property.php"
+[Method: GET, Route: property/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('property.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property', [], true)
+ 3 APPPATH\Controllers\Properties.php(14): view('property', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:46:12 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "property.php"
+[Method: GET, Route: property/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('property.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property', [], true)
+ 3 APPPATH\Controllers\Properties.php(14): view('property', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:46:13 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "property.php"
+[Method: GET, Route: property/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('property.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property', [], true)
+ 3 APPPATH\Controllers\Properties.php(14): view('property', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:46:13 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "property.php"
+[Method: GET, Route: property/1]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('property.php')
+ 2 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property', [], true)
+ 3 APPPATH\Controllers\Properties.php(14): view('property', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:33 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:37 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:37 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:37 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:48 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:47:49 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property/1]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->show(1)
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:48:54 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:18 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:18 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:19 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:28 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:28 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:49:49 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:50:15 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:50:44 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:50:59 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/header.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 11.
+ 1 APPPATH\Views\property-details.php(11): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/header.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 11)
+ 2 APPPATH\Views\property-details.php(11): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2024-11-24 03:51:21 --> ErrorException: include(C:\xampp\htdocs\elliuro\app\Views/footer.php): Failed to open stream: No such file or directory
+[Method: GET, Route: property]
+in APPPATH\Views\property-details.php on line 19.
+ 1 APPPATH\Views\property-details.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'include(C:\\xampp\\htdocs\\elliuro\\app\\Views/footer.php): Failed to open stream: No such file or directory', 'C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php', 19)
+ 2 APPPATH\Views\property-details.php(19): include()
+ 3 SYSTEMPATH\View\View.php(234): include('C:\\xampp\\htdocs\\elliuro\\app\\Views\\property-details.php')
+ 4 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 5 SYSTEMPATH\Common.php(1171): CodeIgniter\View\View->render('property-details', [], true)
+ 6 APPPATH\Controllers\Properties.php(14): view('property-details')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Properties->details()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Properties))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
