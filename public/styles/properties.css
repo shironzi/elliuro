@@ -92,6 +92,12 @@ hr {
   outline: none;
 }
 
+.properties-searchBar-options option {
+  background-color: #fff;
+  color: #333;
+  padding: 10px;
+}
+
 .properties-searchBar-price {
   background-color: transparent;
   border: none;
@@ -113,7 +119,7 @@ hr {
 .properties-results {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  column-gap: 25px;
 }
 
 .properties-map img {
@@ -156,6 +162,12 @@ hr {
 
 .properties-result-card-favorite h3 {
   width: 85%;
+}
+
+.properties-result-card-favorite button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 .properties-result-card-location {
