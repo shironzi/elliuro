@@ -76,3 +76,89 @@ p {
 .getStated-description a:hover {
   background-color: #1a1f2e;
 }
+
+.property-form-container {
+  background-color: #121212;
+  color: #e0e0e0;
+  padding: 54px 115px;
+}
+
+.property-form-container h1 {
+  font-family: Mogella;
+  font-size: 29.3px;
+  letter-spacing: 1.465px;
+  border-bottom: 1px solid #b08d57;
+  width: 491px;
+}
+
+.property-form-container form {
+  padding: 15px 30px;
+  font-family: Proxima;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+.property-form-container form label {
+  font-size: 19.44px;
+}
+
+.property-form-container form span {
+  font-size: 14px;
+  letter-spacing: 0.8px;
+  color: rgba(224, 224, 224, 0.6);
+}
+
+.form-title-price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.title-location-width {
+  width: 800px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+}
+
+.property-form-container form input,
+.property-form-container form textarea {
+  border: 1px solid #e0e0e0;
+  background-color: transparent;
+  padding: 10px;
+  color: #e0e0e0;
+  font-size: 18.47px;
+}
+
+.property-form-container form textarea {
+  resize: vertical;
+  height: 285px;
+  min-height: 100px;
+}
+
+.property-form-container form button {
+  padding: 13.5px 45px;
+  font-size: 20.92px;
+  background-color: #b08d57;
+  margin: 0 auto;
+  width: 288px;
+  margin-top: 30px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-family: "Proxima", sans-serif;
+  transition: background-color 0.5s ease;
+}
+
+.property-form-container form button:hover {
+  background-color: #1a1f2e;
+}
