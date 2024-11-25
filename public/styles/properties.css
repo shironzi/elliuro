@@ -173,3 +173,11 @@ hr {
 .properties-result-card-location {
   margin-right: 5px;
 }
+
+.no-properties > h2 {
+  background-color: #b08d57;
+  border: 1px solid #121212;
+  border-radius: 10px;
+  color: #e0e0e0;
+  padding: 20px 35px;
+}

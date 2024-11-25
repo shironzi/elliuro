@@ -16,7 +16,7 @@
         <h1>Showcase Your Property with Stunning Photos</h1>
         <p>Upload high-quality images of your property to capture its best features and appeal to potential buyers or
             renters.</p>
-        <form action="" enctype="multipart/form-data">
+        <form action="<?= base_url('/property-form-image/submit') ?>" method="post" enctype="multipart/form-data">
             <div class="form-images">
                 <div>
                     <label for="image1" class="details-image-1">
@@ -29,7 +29,8 @@
                         <img id="1" class="preview-image" style="display: none;" />
                     </label>
                     <input class="details-image-1 custom-image-effect" type="file" name="image1" id="image1"
-                        onchange="previewImage(event, '1', 'image1-svg')">
+                        accept="image/jpeg, image/png, image/gif" onchange="previewImage(event, '1', 'image1-svg')"
+                        required>
                 </div>
 
                 <div class="form-Images-cutom">
@@ -43,7 +44,7 @@
                             </svg>
                             <img id="123123" class="preview-image" style="display: none;" />
                         </label>
-                        <input class="" type="file" name="image2" id="image2"
+                        <input class="" type="file" name="image2" id="image2" accept="image/jpeg, image/png, image/gif"
                             onchange="previewImage(event, '123123', 'image2-svg')">
 
                     </div>
@@ -58,7 +59,7 @@
                             <img id="3" class="preview-image" style="display: none;" />
                         </label>
                         <input class="details-image-2 custom-image-effect" type="file" name="image3" id="image3"
-                            onchange="previewImage(event, '3', 'image3-svg')">
+                            accept="image/jpeg, image/png, image/gif" onchange="previewImage(event, '3', 'image3-svg')">
                     </div>
                 </div>
 
