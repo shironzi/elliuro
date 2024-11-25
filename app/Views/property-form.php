@@ -13,7 +13,7 @@
     <?php include __DIR__ . '/components/nav.php'; ?>
     <div class="property-form-container">
         <h1>LETS BEGIN WITH THE BASICS</h1>
-        <form action="">
+        <form action="<?php base_url('/list-property') ?>" method="post">
             <div class="form-title-price">
                 <div class="form-group">
                     <label for="title">TITLE</label>
