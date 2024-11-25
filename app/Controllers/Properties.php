@@ -191,7 +191,8 @@ class Properties extends BaseController
     }
     public function updateProperty()
     {
-        $propertyId = $this->request->getPost('property_id');
+        $session = session();
+        $propertyId = $session->get('propertyId');
 
         // Validation rules
         $rules = [
@@ -207,17 +208,19 @@ class Properties extends BaseController
 
         $propertyModel = new PropertyModel();
 
-        // Prepare data for update
+        if (!$propertyModel->find($propertyId)) {
+            return redirect()->back()->withInput()->with('errors', ['Property not found.']);
+        }
+
         $updatedData = [
-            'id' => $propertyId,
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'price' => $this->request->getPost('price'),
             'location' => $this->request->getPost('location'),
         ];
 
-        // Update property data
-        if ($propertyModel->save($updatedData)) {
+        // Update property data using the model's update method
+        if ($propertyModel->update($propertyId, $updatedData)) {
             // Remove propertyId from session after successful update
             $session = session();
             $session->remove('propertyId');
