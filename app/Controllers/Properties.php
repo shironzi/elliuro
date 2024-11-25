@@ -165,44 +165,6 @@ class Properties extends BaseController
         ]);
     }
 
-    /**
-     * Update existing property.
-     */
-    // public function updateProperty()
-    // {
-    //     $propertyId = $this->request->getPost('property_id');
-
-    //     // Validation rules
-    //     $rules = [
-    //         'title' => 'required',
-    //         'description' => 'required',
-    //         'price' => 'required|numeric',
-    //         'location' => 'required',
-    //     ];
-
-    //     if (!$this->validate($rules)) {
-    //         return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
-    //     }
-
-    //     $propertyModel = new PropertyModel();
-
-    //     // Prepare data for update
-    //     $updatedData = [
-    //         'id' => $propertyId,
-    //         'title' => $this->request->getPost('title'),
-    //         'description' => $this->request->getPost('description'),
-    //         'price' => $this->request->getPost('price'),
-    //         'location' => $this->request->getPost('location'),
-    //     ];
-
-    //     // Update property data
-    //     if ($propertyModel->save($updatedData)) {
-    //         return redirect()->to('/properties')->with('message', 'Property updated successfully.');
-    //     } else {
-    //         return redirect()->back()->withInput()->with('errors', ['Failed to update property data.']);
-    //     }
-    // }
-
     public function reviewListing(): mixed
     {
         $session = session();
