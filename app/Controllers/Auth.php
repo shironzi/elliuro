@@ -9,6 +9,12 @@ $db = db_connect();
 
 class Auth extends BaseController
 {
+    protected $session;
+
+    public function __construct()
+    {
+        $this->session = \Config\Services::session();
+    }
     public function login()
     {
         return view('login');
@@ -49,5 +55,33 @@ class Auth extends BaseController
         } else {
             return redirect()->back()->withInput()->with('errors', ['Failed to save user data.']);
         }
+    }
+
+    public function submitLoginForm()
+    {
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        $userModel = new UserModel();
+        $user = $userModel->where('email', $email)->first();
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Set user data in session
+            $this->session->set([
+                'user_name' => $user['name'],
+                'is_logged_in' => true
+            ]);
+
+            return redirect()->to('/')->with('message', 'Login successful.');
+        } else {
+            return redirect()->back()->with('error', 'Invalid email or password.');
+        }
+    }
+
+    public function logout()
+    {
+        // Destroy the session
+        $this->session->destroy();
+        return redirect()->to('/login')->with('message', 'Logged out successfully.');
     }
 }
