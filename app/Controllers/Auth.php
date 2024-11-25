@@ -62,13 +62,14 @@ class Auth extends BaseController
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
+        $session = session();
+
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
 
         if ($user && password_verify($password, $user['password'])) {
-            // Set user data in session
-            $this->session->set([
-                'user_name' => $user['name'],
+            $session->set([
+                'user_id' => $user['id'],
                 'is_logged_in' => true
             ]);
 

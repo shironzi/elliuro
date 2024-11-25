@@ -32,14 +32,19 @@ class Properties extends BaseController
             return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
         }
 
+
+
         $propertyModel = new PropertyModel();
 
-        // Prepare data for insertion
+        $session = session();
+        $user_id = $session->get('user_id');
+
         $propertyData = [
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'price' => $this->request->getPost('price'),
             'location' => $this->request->getPost('location'),
+            'created_by' => $user_id,
         ];
 
         // Save property data
@@ -48,7 +53,6 @@ class Properties extends BaseController
             $propertyId = $propertyModel->insertID();
 
             // Store property ID in session for image upload
-            $session = session();
             $session->set('propertyId', $propertyId);
 
             // Redirect to image upload form
@@ -212,11 +216,14 @@ class Properties extends BaseController
             return redirect()->back()->withInput()->with('errors', ['Property not found.']);
         }
 
+        $user_id = $session->get('user_id');
+
         $updatedData = [
             'title' => $this->request->getPost('title'),
             'description' => $this->request->getPost('description'),
             'price' => $this->request->getPost('price'),
             'location' => $this->request->getPost('location'),
+            'created_by' => $user_id,
         ];
 
         // Update property data using the model's update method
@@ -229,5 +236,14 @@ class Properties extends BaseController
         } else {
             return redirect()->back()->withInput()->with('errors', ['Failed to update property data.']);
         }
+    }
+
+    public function myProperties()
+    {
+        $session = session();
+        $user_id = $session->get('user_id');
+        $propertyModel = new PropertyModel();
+        $properties = $propertyModel->where('user_id', $user_id)->findAll();
+        return view('my-properties', ['properties' => $properties]);
     }
 }
