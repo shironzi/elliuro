@@ -15,7 +15,7 @@
     <div class="auth-container">
         <h1>SIGN IN</h1>
 
-        <form action="" class="auth-form">
+        <form action="<?= base_url('/login/submit') ?>" method="post" class="auth-form">
             <input type="email" name="email" id="email" placeholder="EMAIL" required>
             <input type="password" name="password" id="password" placeholder="PASSWORD" required>
             <button type="submit">SIGN IN</button>
