@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\PropertyModel;
 use App\Models\PropertyPhotoModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Properties extends BaseController
 {
