@@ -49,39 +49,59 @@
         <div class="properties-results">
             <?php if (!empty($properties)): ?>
                 <div class="properties-list">
-
                     <?php foreach ($properties as $property): ?>
-                        <div class="properties-result-card">
-                            <!-- Display the first image of the property -->
-                            <?php
-                            if (!empty($property['photos'])) {
-                                $photo = $property['photos'][0];
-                                $imageSrc = base_url($photo['photo_path']);
-                            } else {
-                                $imageSrc = base_url('assets/placeholder.png');
-                            }
-                            ?>
-                            <img src="<?= esc($imageSrc) ?>" alt="Property Image">
-                            <div class="properties-result-card-favorite">
-                                <h3><?= esc($property['title']) ?></h3>
-                                <button>
-                                    <!-- Heart SVG Icon -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                        class="bi bi-heart" viewBox="0 0 16 16">
-                                        <path
-                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                    </svg>
-                                </button>
+                        <div class="property-card">
+                            <div class="property-card-details">
+                                <h2><?= esc($property['title']) ?></h2>
+                                <p><?= esc($property['description']) ?></p>
+                                <p>Price: <?= esc($property['price']) ?></p>
+                                <p>Location: <?= esc($property['location']) ?></p>
+                                <!-- Favorite Icon -->
+                                <?php if (session()->get('is_logged_in')): ?>
+                                    <?php
+                                    // Check if the property is already favorited by the user
+                                    $favorite = $favoriteModel->where([
+                                        'user_id' => session()->get('user_id'),
+                                        'property_id' => $property['id']
+                                    ])->first();
+                                    ?>
+                                    <?php if ($favorite): ?>
+                                        <a href="<?= base_url('/favorites/remove/' . $property['id']) ?>" title="Remove from Favorites">
+                                            <!-- Filled Heart Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red"
+                                                class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 
+                                1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 
+                                6.286 6.357 3.452-2.368 5.365-4.542 
+                                6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
+                                10.4.28 8 
+                                2.01zm0 13C-7.333 4.868 3.279-3.04 7.824 
+                                1.143q.09.083.176.171a3 3 0 0 
+                                1 .176-.17C12.72-3.042 23.333 
+                                4.867 8 15z" />
+                                            </svg>
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="<?= base_url('/favorites/add/' . $property['id']) ?>" title="Add to Favorites">
+                                            <!-- Empty Heart Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                                class="bi bi-heart" viewBox="0 0 16 16">
+                                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 
+                                3.053c-.523 1.023-.641 2.5.314 
+                                4.385.92 1.815 2.834 3.989 6.286 
+                                6.357 3.452-2.368 5.365-4.542 
+                                6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 
+                                10.4.28 8 
+                                2.01zM8 15C-7.333 
+                                4.868 3.279-3.04 7.824 
+                                1.143q.09.083.176.171a3 3 0 0 
+                                1 .176-.17C12.72-3.042 23.333 
+                                4.867 8 15z" />
+                                            </svg>
+                                        </a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </div>
-                            <div class="properties-result-card-location">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                    class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                                </svg>
-                                <p><?= esc($property['location']) ?></p>
-                            </div>
-                            <h4>Php <?= number_format($property['price'], 2) ?></h4>
                         </div>
                     <?php endforeach; ?>
 
