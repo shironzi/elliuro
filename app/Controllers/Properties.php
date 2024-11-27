@@ -240,10 +240,12 @@ class Properties extends BaseController
 
     public function myProperties()
     {
-        $session = session();
-        $user_id = $session->get('user_id');
-        $propertyModel = new PropertyModel();
-        $properties = $propertyModel->where('user_id', $user_id)->findAll();
-        return view('my-properties', ['properties' => $properties]);
+        // $session = session();
+        // $user_id = $session->get('user_id');
+        // $propertyModel = new PropertyModel();
+        // $properties = $propertyModel->where('user_id', $user_id)->findAll();
+        // return view('my-properties', ['properties' => $properties]);
+
+        return view('my-properties');
     }
 }

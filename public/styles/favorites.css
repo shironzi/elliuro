@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "Mogella";
+  src: url("../fonts/Mogella.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Proxima";
+  src: url("../fonts/ProximaNova.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Explore";
+  src: url("../fonts/Explore.ttf") format("opentype");
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #121212;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Mogella", sans-serif;
+  font-weight: 400;
+}
+p {
+  font-family: Proxima, sans-serif;
+}
+
+.favorite-container {
+  padding: 115px 100px;
+}
+
+.favorite-container h1 {
+  color: #121212;
+  font-size: 31.62px;
+  letter-spacing: 1.831px;
+  font-family: "Mogella", sans-serif;
+  border-bottom: 2px solid #b08d57;
+  width: fit-content;
+  padding-right: 50px;
+}
+
+.property-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.property-card-details {
+  display: flex;
+  flex-direction: row;
+}
+
+.property-card img {
+  width: 371px;
+  height: 207px;
+  border-radius: 10px;
+  margin-right: 25px;
+}
+
+.property-card-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 10%;
+}
