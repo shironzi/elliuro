@@ -16,6 +16,7 @@ $routes->get('/logout', 'Auth::logout');
 
 $routes->get('/property', 'Properties::details');
 $routes->get('/properties', 'Properties::index');
+$routes->get('my-properties', 'Properties::myProperties');
 
 $routes->get('/property-form', 'Properties::propertyForm');
 $routes->post('/property-form/submit', 'Properties::postSubmitPropertyForm');
@@ -23,5 +24,7 @@ $routes->get('/property-form-image', 'Properties::propertyFormImage');
 $routes->post('/property-form-image/submit', 'Properties::postSubmitPropertyFormImage');
 $routes->get('/review-listing', 'Properties::reviewListing');
 $routes->post('/review-listing/update', 'Properties::updateProperty');
-
 $routes->get('/listing-property', 'ListingProperty::index');
+
+$routes->get('/profile', 'Profile::index');
+$routes->get('/favorites', 'Favorites::index');
