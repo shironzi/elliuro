@@ -50,15 +50,9 @@
             <?php if (!empty($properties)): ?>
                 <div class="properties-list">
                     <?php foreach ($properties as $property): ?>
-                        <div class="property-card">
-                            <div class="property-card-details">
-                                <h2><?= esc($property['title']) ?></h2>
-                                <p><?= esc($property['description']) ?></p>
-                                <p>Price: <?= esc($property['price']) ?></p>
-                                <p>Location: <?= esc($property['location']) ?></p>
-                                <!-- Favorite Icon -->
-                                <?php if (session()->get('is_logged_in')): ?>
-                                    <?php
+                        <div class="properties-result-card">
+                            <!-- Display the first image of the property -->
+                            <?php
                                     // Check if the property is already favorited by the user
                                     $favorite = $favoriteModel->where([
                                         'user_id' => session()->get('user_id'),
