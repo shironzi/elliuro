@@ -3,21 +3,23 @@ namespace App\Controllers;
 
 use App\Models\PropertyModel;
 use App\Models\PropertyPhotoModel;
+use App\Models\FavoriteModel;
 use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Properties extends BaseController
 {
-    /**
-     * Display the property creation form.
-     */
+
+    protected $favoriteModel; // Add this
+
+    public function __construct()
+    {
+        $this->favoriteModel = new FavoriteModel(); // Initialize FavoriteModel
+    }
     public function propertyForm(): string
     {
         return view('property-form');
     }
 
-    /**
-     * Handle submission of the property creation form.
-     */
     public function postSubmitPropertyForm()
     {
         // Validation rules
@@ -47,27 +49,19 @@ class Properties extends BaseController
             'created_by' => $user_id,
         ];
 
-        // Save property data
         if ($propertyModel->save($propertyData)) {
-            // Get the ID of the newly inserted property
             $propertyId = $propertyModel->insertID();
 
-            // Store property ID in session for image upload
             $session->set('propertyId', $propertyId);
 
-            // Redirect to image upload form
             return redirect()->to('/property-form-image')->with('message', 'Property created successfully. Please upload images.');
         } else {
             return redirect()->back()->withInput()->with('errors', ['Failed to save property data.']);
         }
     }
 
-    /**
-     * Display the property image upload form.
-     */
     public function propertyFormImage(): mixed
     {
-        // Check if property ID is in session
         $session = session();
         $propertyId = $session->get('propertyId');
 
@@ -75,16 +69,12 @@ class Properties extends BaseController
             return redirect()->to('/property-form')->with('errors', ['Property data is missing.']);
         }
 
-        // Optionally, fetch property details
         $propertyModel = new PropertyModel();
         $property = $propertyModel->find($propertyId);
 
         return view('property-form-image', ['property' => $property]);
     }
 
-    /**
-     * Handle submission of the property image upload form.
-     */
     public function postSubmitPropertyFormImage()
     {
         $session = session();
@@ -101,24 +91,19 @@ class Properties extends BaseController
             $image = $this->request->getFile($field);
 
             if ($image && $image->isValid() && !$image->hasMoved()) {
-                // Validate file type (optional but recommended)
                 $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png', 'image/apng'];
                 if (!in_array($image->getMimeType(), $allowedTypes)) {
                     return redirect()->back()->with('errors', ["Invalid file type for $field. Allowed types: JPEG, PNG, GIF."]);
                 }
 
-                // Validate file size (optional, e.g., max 2MB)
-                if ($image->getSize() > 20 * 1024 * 1024) { // 2MB
+                if ($image->getSize() > 20 * 1024 * 1024) {
                     return redirect()->back()->with('errors', ["File size too large for $field. Maximum allowed size is 2MB."]);
                 }
 
-                // Generate a unique file name
                 $newName = $image->getRandomName();
 
-                // Move the file to the uploads directory
                 $image->move(ROOTPATH . 'public/uploads/', $newName);
 
-                // Save the image path to the database
                 $propertyPhotoModel->save([
                     'property_id' => $propertyId,
                     'photo_path' => 'uploads/' . $newName,
@@ -126,30 +111,31 @@ class Properties extends BaseController
             }
         }
 
-        // Redirect to review listing without removing propertyId
         return redirect()->to('/review-listing')->with('message', 'Images uploaded successfully. Please review your listing.');
     }
 
-    /**
-     * Display the list of properties.
-     */
     public function index()
     {
         $propertyModel = new PropertyModel();
         $properties = $propertyModel->findAll();
 
-        // Load photos for each property
         $propertyPhotoModel = new PropertyPhotoModel();
         foreach ($properties as &$property) {
             $property['photos'] = $propertyPhotoModel->getPhotosByPropertyId($property['id']);
         }
 
-        return view('properties', ['properties' => $properties]);
+        $favorites = [];
+        if (session()->get('is_logged_in')) {
+            $userId = session()->get('user_id');
+            $favorites = $this->favoriteModel->getUserFavorites($userId);
+        }
+
+        return view('properties', [
+            'properties' => $properties,
+            'favorites' => $favorites
+        ]);
     }
 
-    /**
-     * Display property details with images.
-     */
     public function details($id): mixed
     {
         $propertyModel = new PropertyModel();
@@ -159,7 +145,6 @@ class Properties extends BaseController
             throw PageNotFoundException::forPageNotFound();
         }
 
-        // Fetch associated photos
         $propertyPhotoModel = new PropertyPhotoModel();
         $photos = $propertyPhotoModel->getPhotosByPropertyId($id);
 
@@ -226,9 +211,7 @@ class Properties extends BaseController
             'created_by' => $user_id,
         ];
 
-        // Update property data using the model's update method
         if ($propertyModel->update($propertyId, $updatedData)) {
-            // Remove propertyId from session after successful update
             $session = session();
             $session->remove('propertyId');
 
