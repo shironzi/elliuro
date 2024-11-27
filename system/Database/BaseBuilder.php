@@ -3514,27 +3514,21 @@ class BaseBuilder
      */
     protected function setBind(string $key, $value = null, bool $escape = true): string
     {
+        // Ensure the key is a string
+        $key = (string) $key;
+
         if (! array_key_exists($key, $this->binds)) {
             $this->binds[$key] = [
                 $value,
                 $escape,
             ];
-
             return $key;
         }
-
         if (! array_key_exists($key, $this->bindsKeyCount)) {
             $this->bindsKeyCount[$key] = 1;
         }
-
         $count = $this->bindsKeyCount[$key]++;
-
-        $this->binds[$key . '.' . $count] = [
-            $value,
-            $escape,
-        ];
-
-        return $key . '.' . $count;
+        return $key . '_' . $count;
     }
 
     /**

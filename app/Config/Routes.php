@@ -28,6 +28,6 @@ $routes->get('/listing-property', 'ListingProperty::index');
 
 $routes->get('/profile', 'Profile::index');
 
-$routes->get('/favorites', 'Favorites::index', ['filter' => 'auth']);
-$routes->get('/favorites/add/(:num)', 'Favorites::addFavorite/$1', ['filter' => 'auth']);
-$routes->get('/favorites/remove/(:num)', 'Favorites::removeFavorite/$1', ['filter' => 'auth']);
+$routes->get('/favorites', 'Favorites::index', );
+$routes->get('/favorites/add/(:num)', 'Favorites::addFavorite/$params', );
+$routes->get('/favorites/remove/(:num)', 'Favorites::removeFavorite/$params', );

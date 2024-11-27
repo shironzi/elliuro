@@ -26,11 +26,13 @@ class Favorites extends BaseController
         return view('favorites', ['favorites' => $favorites]);
     }
 
-    public function addFavorite($propertyId): mixed
+    public function addFavorite(string $propertyId): mixed
     {
         if (!session()->get('is_logged_in')) {
             return redirect()->to('/login')->with('error', 'Please log in to add favorites.');
         }
+
+        $propertyId = (int) $propertyId;
 
         $userId = session()->get('user_id');
 
@@ -41,7 +43,7 @@ class Favorites extends BaseController
         }
     }
 
-    public function removeFavorite($propertyId): mixed
+    public function removeFavorite(int $propertyId): mixed
     {
         if (!session()->get('is_logged_in')) {
             return redirect()->to('/login')->with('error', 'Please log in to remove favorites.');

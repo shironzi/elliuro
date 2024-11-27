@@ -14,34 +14,34 @@ class FavoriteModel extends Model
     protected $createdField = 'favorited_at';
     protected $updatedField = false;
 
-    /**
-     * Add a favorite
-     */
-    public function addFavorite($userId, $propertyId)
+    public function addFavorite(int $userId, int $propertyId): bool
     {
-        // Check if already favorited
         if ($this->where(['user_id' => $userId, 'property_id' => $propertyId])->first()) {
-            return false; // Already favorited
+            log_message('debug', "Favorite already exists for user_id={$userId}, property_id={$propertyId}");
+            return false;
         }
 
-        return $this->insert([
+        $data = [
             'user_id' => $userId,
             'property_id' => $propertyId,
-        ]);
+        ];
+
+        $result = $this->insert($data);
+
+        log_message('debug', "Favorite insert result: " . var_export($result, true));
+        return $result;
     }
 
-    /**
-     * Remove a favorite
-     */
-    public function removeFavorite($userId, $propertyId)
+    public function removeFavorite(int $userId, int $propertyId)
     {
-        return $this->where(['user_id' => $userId, 'property_id' => $propertyId])->delete();
+
+        $result = $this->where(['user_id' => $userId, 'property_id' => $propertyId])->delete();
+
+        log_message('debug', "Favorite delete result: " . var_export($result, true));
+        return $result;
     }
 
-    /**
-     * Get all favorites for a user
-     */
-    public function getUserFavorites($userId)
+    public function getUserFavorites(int $userId): array
     {
         return $this->where('user_id', $userId)->findAll();
     }

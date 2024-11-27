@@ -15,6 +15,28 @@ class Properties extends BaseController
     {
         $this->favoriteModel = new FavoriteModel(); // Initialize FavoriteModel
     }
+
+    public function index()
+    {
+        $propertyModel = new PropertyModel();
+        $properties = $propertyModel->findAll();
+
+        $propertyPhotoModel = new PropertyPhotoModel();
+        foreach ($properties as &$property) {
+            $property['photos'] = $propertyPhotoModel->getPhotosByPropertyId($property['id']);
+        }
+
+        $favorites = [];
+        if ($this->session->get('is_logged_in')) {
+            $userId = $this->session->get('user_id');
+            $favorites = $this->favoriteModel->getUserFavorites($userId);
+        }
+
+        return view('properties', [
+            'properties' => $properties,
+            'favorites' => $favorites
+        ]);
+    }
     public function propertyForm(): string
     {
         return view('property-form');
@@ -112,28 +134,6 @@ class Properties extends BaseController
         }
 
         return redirect()->to('/review-listing')->with('message', 'Images uploaded successfully. Please review your listing.');
-    }
-
-    public function index()
-    {
-        $propertyModel = new PropertyModel();
-        $properties = $propertyModel->findAll();
-
-        $propertyPhotoModel = new PropertyPhotoModel();
-        foreach ($properties as &$property) {
-            $property['photos'] = $propertyPhotoModel->getPhotosByPropertyId($property['id']);
-        }
-
-        $favorites = [];
-        if (session()->get('is_logged_in')) {
-            $userId = session()->get('user_id');
-            $favorites = $this->favoriteModel->getUserFavorites($userId);
-        }
-
-        return view('properties', [
-            'properties' => $properties,
-            'favorites' => $favorites
-        ]);
     }
 
     public function details($id): mixed

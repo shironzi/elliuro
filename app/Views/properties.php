@@ -75,8 +75,7 @@
                                     }
                                     ?>
                                     <?php if ($isFavorited): ?>
-                                        <a href="<?= base_url('/favorites/remove/' . $property['id']) ?>" title="Remove from Favorites">
-                                            <!-- Filled Heart Icon -->
+                                        <a href="<?= base_url('/favorites/remove/' . $property['id']) ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                                 class="bi bi-heart-fill" viewBox="0 0 16 16">
                                                 <path fill-rule="evenodd"
