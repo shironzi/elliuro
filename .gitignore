@@ -1,2 +1,5 @@
 /writable/
 /tests/
+.env
+*.jpg
+*.png
