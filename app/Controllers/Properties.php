@@ -102,13 +102,13 @@ class Properties extends BaseController
 
             if ($image && $image->isValid() && !$image->hasMoved()) {
                 // Validate file type (optional but recommended)
-                $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/x-png', 'image/apng'];
+                $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/x-png', 'image/apng'];
                 if (!in_array($image->getMimeType(), $allowedTypes)) {
                     return redirect()->back()->with('errors', ["Invalid file type for $field. Allowed types: JPEG, PNG, GIF."]);
                 }
 
                 // Validate file size (optional, e.g., max 2MB)
-                if ($image->getSize() > 2 * 1024 * 1024) { // 2MB
+                if ($image->getSize() > 20 * 1024 * 1024) { // 2MB
                     return redirect()->back()->with('errors', ["File size too large for $field. Maximum allowed size is 2MB."]);
                 }
 

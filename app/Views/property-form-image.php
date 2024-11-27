@@ -29,8 +29,7 @@
                         <img id="1" class="preview-image" style="display: none;" />
                     </label>
                     <input class="details-image-1 custom-image-effect" type="file" name="image1" id="image1"
-                        accept="image/jpeg, image/png, image/gif" onchange="previewImage(event, '1', 'image1-svg')"
-                        required>
+                        onchange="previewImage(event, '1', 'image1-svg')" required>
                 </div>
 
                 <div class="form-Images-cutom">
