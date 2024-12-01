@@ -1,5 +1,5 @@
-import { IoPersonCircleOutline } from "react-icons/io5";
-import { FaHeart } from "react-icons/fa";
+import { IoPersonCircleOutline } from 'react-icons/io5'
+import { FaHeart } from 'react-icons/fa'
 
 function Nav() {
   const isAuthenticated = localStorage.getItem('token')
@@ -20,12 +20,17 @@ function Nav() {
             >
               EXPLORE PROPERTIES
             </a>
-            <a className="tracking-widest border-b-2 border-transparent transition-all duration-300 ease-linear hover:text-beige-400 hover:border-beige-400 hover:border-opacity-100" href="">LIST PROPERTIES</a>
-            <a href="">
-              <FaHeart size={24}/>
+            <a
+              className="tracking-widest border-b-2 border-transparent transition-all duration-300 ease-linear hover:text-beige-400 hover:border-beige-400 hover:border-opacity-100"
+              href=""
+            >
+              LIST PROPERTIES
             </a>
             <a href="">
-              <IoPersonCircleOutline size={30}/>
+              <FaHeart size={24} />
+            </a>
+            <a href="">
+              <IoPersonCircleOutline size={30} />
             </a>
           </>
         ) : (
@@ -36,8 +41,18 @@ function Nav() {
             >
               EXPLORE PROPERTIES
             </a>
-            <a className="tracking-widest px-7 py-2.5 bg-beige-400 hover:bg-secondary-400 transition-all duration-300 ease-linear" href="">LOGIN</a>
-            <a className="tracking-widest px-7 py-2.5 bg-beige-400 hover:bg-secondary-400 transition-all duration-300 ease-linear" href="">SIGNUP</a>
+            <a
+              className="tracking-widest px-7 py-2.5 bg-beige-400 hover:bg-secondary-400 transition-all duration-300 ease-linear"
+              href=""
+            >
+              LOGIN
+            </a>
+            <a
+              className="tracking-widest px-7 py-2.5 bg-beige-400 hover:bg-secondary-400 transition-all duration-300 ease-linear"
+              href=""
+            >
+              SIGNUP
+            </a>
           </>
         )}
       </div>
