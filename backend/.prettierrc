@@ -1,9 +1,9 @@
 {
   "prettier/prettier": [
-    "error",
     {
       "singleQuote": true,
-      "parser": "flow",
+      "doubleQoute": true,
+      "jsxSingleQuote": true,
       "endOfLine": "lf"
     }
   ]
