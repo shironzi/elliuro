@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Explore';
+  src: url('../public/fonts/Explore.ttf');
+}
+
+@font-face {
+  font-family: 'Mogella';
+  src: url('../public/fonts/Mogella.ttf');
+}
+
+@font-face {
+  font-family: 'Proxima Nova';
+  src: url('../public/fonts/ProximaNova.ttf');
+}
+
+body {
+  font-family: 'Mogella';
+  color: #e0e0e0;
+  letter-spacing: 1.422px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7.5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
