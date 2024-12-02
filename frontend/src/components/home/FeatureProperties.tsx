@@ -27,7 +27,7 @@ function FeatureProperties() {
                     <a href="">VIEW LISTING</a>
                 </div>
             </div>
-            <img src="../../../public/images/featured-property.png" alt="" />
+            <img src="/images/featured-property.png" alt="" />
             </div>
             
         </div>
