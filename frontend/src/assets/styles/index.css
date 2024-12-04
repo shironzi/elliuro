@@ -4,17 +4,22 @@
 
 @font-face {
   font-family: 'Explore';
-  src: url('../public/fonts/Explore.ttf');
+  src: url('/fonts/Explore.ttf');
 }
 
 @font-face {
   font-family: 'Mogella';
-  src: url('../public/fonts/Mogella.ttf');
+  src: url('/fonts/Mogella.ttf');
 }
 
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('../public/fonts/ProximaNova.ttf');
+  src: url('/fonts/ProximaNova.ttf');
+}
+
+@font-face {
+  font-family: 'merryweather';
+  src: url('/fonts/Merriweather');
 }
 
 body {
