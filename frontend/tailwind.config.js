@@ -11,7 +11,7 @@ export default {
           400: '#121212',
         },
         primary: {
-          400: '#E0E0E0'
+          400: '#E0E0E0',
         },
         secondary: {
           400: '#1a1f2e',
@@ -20,6 +20,7 @@ export default {
       fontFamily: {
         explore: ['Explore', 'sans-serif'],
         proximaNova: ['Proxima Nova', 'sans-serif'],
+        merriweather:['Merriweather', 'sans-serif'],
       },
     },
   },
