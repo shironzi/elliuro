@@ -20,7 +20,7 @@ export default {
       fontFamily: {
         explore: ['Explore', 'sans-serif'],
         proximaNova: ['Proxima Nova', 'sans-serif'],
-        merriweather:['Merriweather', 'sans-serif'],
+        merriweather:['Merriweather'],
       },
     },
   },

@@ -2,8 +2,8 @@ import FeaturePropertyDesign1 from './FeaturePropertyDesign1'
 
 function FeatureProperties() {
   return (
-    <div className="container">
-      <h1>FEATURED PROPERTIES</h1>
+    <div className="container mx-auto">
+      <h1 className='text-center mb-48 mt-24 font-merriweather tracking-wider text-4xl text-beige-400 border-b-2 border-solid border-beige-400 w-fit mx-auto px-16 pb-2'>FEATURED PROPERTIES</h1>
       <FeaturePropertyDesign1
         title={'Luxe Haven Residences'}
         desc={
