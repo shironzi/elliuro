@@ -10,6 +10,9 @@ export default {
         darkGray: {
           400: '#121212',
         },
+        primary: {
+          400: '#E0E0E0'
+        },
         secondary: {
           400: '#1a1f2e',
         },
