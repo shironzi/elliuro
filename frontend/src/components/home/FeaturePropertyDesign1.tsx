@@ -10,7 +10,7 @@ function FeaturePropertyDesign1(props: {
   image: string
 }) {
   return (
-    <div className="container w-4/5 mx-auto border-b border-solid pb-28 pt-32">
+    <div className="container w-4/5 mx-auto border-b border-solid pb-28 mb-32">
       <div className="flex justify-between mx-auto gap-x-28 items-center">
         <div className="flex flex-col gap-y-11 border-r border-solid pr-10 ">
           <h1 className="text-3xl text-beige-400 tracking-wider">
