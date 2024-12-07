@@ -1,7 +1,7 @@
 import { FaStar } from 'react-icons/fa'
 import { FaRegStar } from 'react-icons/fa'
 
-function Rate(props: { ratingDesc: string; rate: number, name: string }) {
+function RateCard(props: { ratingDesc: string; rate: number, name: string }) {
   return (
     <div>
       <h1>{props.ratingDesc}</h1>
@@ -11,4 +11,4 @@ function Rate(props: { ratingDesc: string; rate: number, name: string }) {
   )
 }
 
-export default Rate
+export default RateCard;
