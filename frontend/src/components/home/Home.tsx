@@ -1,6 +1,7 @@
 import Banner from './Banner'
 import FeatureProperties from './FeatureProperties'
 import InvestWithUs from './InvestWithUs'
+import RatingSection from './RatingSection'
 
 function Home() {
   return (
@@ -8,6 +9,7 @@ function Home() {
       <Banner />
       <FeatureProperties />
       <InvestWithUs />
+      <RatingSection />
     </div>
   )
 }
