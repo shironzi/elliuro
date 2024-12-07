@@ -1,7 +1,6 @@
 import { MdEmail } from 'react-icons/md'
 import { FaPhone } from 'react-icons/fa'
-import { FaRegCopyright } from "react-icons/fa";
-
+import { FaRegCopyright } from 'react-icons/fa'
 
 function Footer() {
   return (
@@ -49,11 +48,13 @@ function Footer() {
             </ul>
           </div>
         </div>
-        <div className='flex flex-row gap-2 items-center justify-center mt-10'>
-        <FaRegCopyright/>
-        <p className='text-center tracking-widest text-xs '> Copyright 2024 Elliuro Properties</p>
+        <div className="flex flex-row gap-2 items-center justify-center mt-10">
+          <FaRegCopyright />
+          <p className="text-center tracking-widest text-xs ">
+            {' '}
+            Copyright 2024 Elliuro Properties
+          </p>
         </div>
-        
       </div>
     </div>
   )

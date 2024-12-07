@@ -5,7 +5,7 @@ function Nav() {
   const isAuthenticated = localStorage.getItem('token')
 
   return (
-    <nav className="flex justify-between mx-auto items-center p-6 bg-darkGray-400 w-full transition-shadow shadow-md top-0 sticky z-50 -m-11">
+    <nav className="flex justify-between mx-auto items-center p-6 bg-darkGray-400 w-full transition-shadow shadow-md top-0 sticky z-50">
       <div>
         <h1 className="tracking-widest cursor-pointer font-explore text-3xl hover:text-beige-400 transition-all duration-300 ease-linear">
           Elliuro

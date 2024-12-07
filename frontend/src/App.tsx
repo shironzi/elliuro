@@ -9,7 +9,7 @@ function App() {
     <>
       <Nav />
       {/* <Home /> */}
-      <Login/>
+      <Login />
       <Footer />
     </>
   )
