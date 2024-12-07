@@ -1,8 +1,8 @@
 function InvestWithUs() {
   return (
-    <div className="flex items-center h-max">
+    <div className="flex items-center h-max justify-center bg-secondary-400">
       <div
-        className="text-center gap-11 flex flex-col bg-secondary-400 justify-center -mr-32 z-10 px-5"
+        className="container text-center gap-11 flex flex-col bg-secondary-400 justify-center -mr-32 z-10 px-5"
         style={{ height: '591px' }}
       >
         <h1 className="text-beige-400 text-4xl tracking-widest">

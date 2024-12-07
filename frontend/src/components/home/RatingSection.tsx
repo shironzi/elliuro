@@ -2,7 +2,7 @@ import RateCard from './RateCard'
 
 function RatingSection() {
   return (
-    <div className="py-36">
+    <div className="container py-36 mx-auto">
       <h1 className="text-center mb-32 text-3xl tracking-widest">
         WHAT CLIENTS ARE SAYING
       </h1>
