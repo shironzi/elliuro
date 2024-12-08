@@ -1,5 +1,3 @@
-
-
 function Register() {
   return (
     <div className="bg-darkGray-400 h-full pb-52">

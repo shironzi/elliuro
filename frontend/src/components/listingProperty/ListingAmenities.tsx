@@ -1,5 +1,5 @@
 function ListingAmenities() {
-  return <div></div>
+  return <div><h1>Amenities</h1></div>
 }
 
 export default ListingAmenities
