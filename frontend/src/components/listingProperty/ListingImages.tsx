@@ -8,24 +8,24 @@ function ListingImages() {
 
   const handleFileUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files;
-      const validFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
-      const maxSizeInBytes = 10 * 1024 * 1024;
+      const files = event.target.files
+      const validFileTypes = ['image/png', 'image/jpeg', 'image/webp']
+      const maxSizeInBytes = 10 * 1024 * 1024
       try {
         if (files) {
           const newImage = Array.from(files).filter((file) => {
-            if(!validFileTypes.includes(file.type)){
-              return false;
+            if (!validFileTypes.includes(file.type)) {
+              return false
             }
 
-            if(file.size > maxSizeInBytes){
-              return false;
+            if (file.size > maxSizeInBytes) {
+              return false
             }
 
-            return true;
+            return true
           })
-          
-          if(newImage.length > 0){
+
+          if (newImage.length > 0) {
             setUploadedFiles([...uploadedFiles, ...newImage])
           }
         }
@@ -36,17 +36,33 @@ function ListingImages() {
     [uploadedFiles],
   )
 
+  const handleFileDelete = useCallback(
+    async (fileName: string): Promise<void> => {
+      try {
+        const updatedFiles = uploadedFiles.filter(
+          (file) => file.name !== fileName,
+        )
+        setUploadedFiles(updatedFiles)
+      } catch (error) {
+        throw Error(String(error))
+      }
+    },
+    [uploadedFiles],
+  )
+
   return (
     <div className="bg-darkGray-400">
       <div className="container mx-auto">
-        <h1>Listing Image Form</h1>
-        <div>
-          <p>
+        <h1 className="text-3xl border-b border-beige-400 w-fit pr-10 pb-1 mb-8">
+          Showcase Your Property with Stunning Photos
+        </h1>
+        <div className='px-16 flex flex-col gap-10 pb-20'>
+          <p className='text-xs' style={{color:"rgba(224, 224, 224, 0.60)"}}>
             Upload high-quality images of your property to capture its best
             features and appeal to potential buyers or renters.
           </p>
-          <div className="flex flex-row gap-10 justify-center">
-            <form action="" className="mt-8">
+          <div className="flex flex-row gap-10 p-10 justify-center w-fit mx-auto border border-beige-400 shadow-lg">
+            <form action="" className="mt-8 items-center">
               <label
                 htmlFor="image1"
                 className="flex flex-col p-5 gap-3 cursor-pointer bg-transparent border border-dashed w-fit font-proximaNova"
@@ -78,10 +94,18 @@ function ListingImages() {
               <h1>Uploaded Files</h1>
               <ul className="flex flex-col gap-1">
                 {uploadedFiles.map((file, index) => (
-                  <li key={index} className="flex items-center gap-5 text-sm justify-between">
-                    <FaRegImage size={35} /> <h1 className='w-full'>{file.name}</h1>
+                  <li
+                    key={index}
+                    className="flex items-center gap-5 text-sm justify-between"
+                  >
+                    <FaRegImage size={35} />{' '}
+                    <h1 className="w-full">{file.name}</h1>
                     <button>
-                      <MdDelete size={20} color="#bb2124" />
+                      <MdDelete
+                        size={20}
+                        color="#bb2124"
+                        onClick={() => handleFileDelete(file.name)}
+                      />
                     </button>
                   </li>
                 ))}
