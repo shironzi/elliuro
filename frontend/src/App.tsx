@@ -11,6 +11,8 @@ import ListingDetails from './components/listingProperty/ListingDetails'
 import ListingAmenities from './components/listingProperty/ListingAmenities'
 import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
+import ListingProperty from './components/listingProperty/ListingProperty'
+import NearEstablishment from './components/listingProperty/NearEstablishment'
 
 function App() {
   return (
@@ -18,11 +20,12 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/property-listing">
+        <Route path="/property-listing" element={<ListingProperty />}>
           <Route index element={<GetStart />} />
           <Route path="details" element={<ListingDetails />} />
-          <Route path="details/amenities" element={<ListingAmenities />} />
-          <Route path="details/amenities/images" element={<ListingImage />} />
+          <Route path="amenities" element={<ListingAmenities />} />
+          <Route path="establishments" element={<NearEstablishment/>}/>
+          <Route path="images" element={<ListingImage />} />
           <Route path="review" element={<ReviewListing />} />
         </Route>
         <Route path="/login" element={<Login />} />

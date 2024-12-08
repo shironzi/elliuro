@@ -60,7 +60,7 @@ function ListingAmenities() {
               className="mx-auto bg-beige-400 rounded-full p-2 transition-all hover:bg-secondary-400 duration-500"
             />
             <Link
-              to="images"
+              to="/property-listing/establishments"
               className="bg-beige-400 w-fit px-28 py-3 text-xl mx-auto transition-all hover:bg-secondary-400 duration-500"
             >
               NEXT
