@@ -1,4 +1,4 @@
-function ListingImageForm() {
+function ListingImages() {
   return (
     <div>
       <h1>Listing Image Form</h1>
@@ -6,4 +6,4 @@ function ListingImageForm() {
   )
 }
 
-export default ListingImageForm
+export default ListingImages
