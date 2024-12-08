@@ -24,7 +24,7 @@ function App() {
           <Route index element={<GetStart />} />
           <Route path="details" element={<ListingDetails />} />
           <Route path="amenities" element={<ListingAmenities />} />
-          <Route path="establishments" element={<NearEstablishment/>}/>
+          <Route path="establishments" element={<NearEstablishment />} />
           <Route path="images" element={<ListingImage />} />
           <Route path="review" element={<ReviewListing />} />
         </Route>
