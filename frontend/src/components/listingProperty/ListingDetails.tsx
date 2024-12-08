@@ -4,8 +4,24 @@ import { PiHouseBold } from 'react-icons/pi'
 import { LuHotel } from 'react-icons/lu'
 import { BsBuildings } from 'react-icons/bs'
 import { FaHouseLock } from 'react-icons/fa6'
+import { useCallback, useState } from 'react'
 
 function ListingDetails() {
+  const [propertyType, setPropertyType] = useState('house')
+
+  const changePropertyType = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+      try {
+        const property = event?.currentTarget.value
+        setPropertyType(property)
+      } catch (error) {
+        throw Error(String(error))
+      }
+    },
+    [],
+  )
+
   return (
     <div className="bg-darkGray-400">
       <div className="container mx-auto flex flex-col py-14">
@@ -49,23 +65,59 @@ function ListingDetails() {
           <div className="flex flex-col gap-2">
             <h1 className="text-xl font-proximaNova">PROPERTY TYPE</h1>
             <div className="flex items-center font-proximaNova justify-between gap-5">
-              <button className="flex flex-row gap-2 items-center w-full justify-center bg-beige-400 px-10 py-4 text-lg">
+              <button
+                className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
+                  propertyType === 'house' ? 'bg-beige-400' : 'bg-secondary-400'
+                }`}
+                value="house"
+                onClick={changePropertyType}
+              >
                 <FaRegBuilding />
                 <h1>House</h1>
               </button>
-              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+              <button
+                className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
+                  propertyType === 'apartment'
+                    ? 'bg-beige-400'
+                    : 'bg-secondary-400'
+                }`}
+                value="apartment"
+                onClick={changePropertyType}
+              >
                 <PiHouseBold />
                 <h1>Apartment</h1>
               </button>
-              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+              <button
+                className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
+                  propertyType === 'hotel' ? 'bg-beige-400' : 'bg-secondary-400'
+                }`}
+                value="hotel"
+                onClick={changePropertyType}
+              >
                 <LuHotel />
                 <h1>Hotel Room</h1>
               </button>
-              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+              <button
+                className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
+                  propertyType === 'condominium'
+                    ? 'bg-beige-400'
+                    : 'bg-secondary-400'
+                }`}
+                value="condominium"
+                onClick={changePropertyType}
+              >
                 <BsBuildings />
-                <h1>Condo</h1>
+                <h1>Condominium</h1>
               </button>
-              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+              <button
+                className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
+                  propertyType === 'private'
+                    ? 'bg-beige-400'
+                    : 'bg-secondary-400'
+                }`}
+                value="private"
+                onClick={changePropertyType}
+              >
                 <FaHouseLock />
                 <h1>Private room</h1>
               </button>

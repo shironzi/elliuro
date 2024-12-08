@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import { LuUpload } from 'react-icons/lu'
 import { FaRegImage } from 'react-icons/fa6'
 import { MdDelete } from 'react-icons/md'
+import { Link } from 'react-router'
 
 function ListingImages() {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
@@ -56,8 +57,8 @@ function ListingImages() {
         <h1 className="text-3xl border-b border-beige-400 w-fit pr-10 pb-1 mb-8">
           Showcase Your Property with Stunning Photos
         </h1>
-        <div className='px-16 flex flex-col gap-10 pb-20'>
-          <p className='text-xs' style={{color:"rgba(224, 224, 224, 0.60)"}}>
+        <div className="px-16 flex flex-col gap-10 pb-20">
+          <p className="text-xs" style={{ color: 'rgba(224, 224, 224, 0.60)' }}>
             Upload high-quality images of your property to capture its best
             features and appeal to potential buyers or renters.
           </p>
@@ -112,6 +113,12 @@ function ListingImages() {
               </ul>
             </div>
           </div>
+          <Link
+            to="/property-listing/review"
+            className="bg-beige-400 w-fit px-28 py-3 text-xl mx-auto transition-all hover:bg-secondary-400 duration-500"
+          >
+            Next
+          </Link>
         </div>
       </div>
     </div>

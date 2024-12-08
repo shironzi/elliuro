@@ -1,9 +1,26 @@
+import { useCallback } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { MdOutlineRemoveCircleOutline } from 'react-icons/md'
 import { MdOutlineAdd } from 'react-icons/md'
 import { Link } from 'react-router'
 
 function ListingAmenities() {
+  const handleAdd = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
+      event.preventDefault()
+      try {
+        let element = event?.currentTarget.textContent
+        if (element) {
+          const count = parseInt(element)
+          element = (count + 1).toString()
+        }
+      } catch (error) {
+        throw Error(String(error))
+      }
+    },
+    [],
+  )
+
   return (
     <div className="bg-darkGray-400">
       <div className="container mx-auto py-14">
@@ -19,13 +36,17 @@ function ListingAmenities() {
             bathrooms, and parking options. Buyers and renters want to know the
             specifics!
           </p>
-          <div className="px-16 flex flex-col gap-12 mt-12">
+          <form className="px-16 flex flex-col gap-12 mt-12">
             <div className="flex justify-between items-center border-b px-5">
               <h1>BEDROOM</h1>
               <div className="flex flex-row gap-10 items-center py-4">
                 <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
-                <span className="bg-transparent w-5 outline-none">0</span>
-                <MdAddCircleOutline size={25} cursor={'pointer'} />
+                <h1 className="bg-transparent w-5 outline-none" id="bedroom">
+                  0
+                </h1>
+                <button onClick={handleAdd}>
+                  <MdAddCircleOutline size={25} cursor={'pointer'} />
+                </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
@@ -65,7 +86,7 @@ function ListingAmenities() {
             >
               NEXT
             </Link>
-          </div>
+          </form>
         </div>
       </div>
     </div>
