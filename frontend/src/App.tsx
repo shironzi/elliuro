@@ -19,11 +19,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/property-listing">
-          <Route index element={<GetStart/>}/>
+          <Route index element={<GetStart />} />
           <Route path="details" element={<ListingDetails />} />
           <Route path="details/amenities" element={<ListingAmenities />} />
           <Route path="details/amenities/images" element={<ListingImage />} />
-          <Route path='review' element={<ReviewListing/>}/>
+          <Route path="review" element={<ReviewListing />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

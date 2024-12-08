@@ -1,4 +1,9 @@
 import { Link } from 'react-router'
+import { FaRegBuilding } from 'react-icons/fa'
+import { PiHouseBold } from 'react-icons/pi'
+import { LuHotel } from 'react-icons/lu'
+import { BsBuildings } from 'react-icons/bs'
+import { FaHouseLock } from 'react-icons/fa6'
 
 function ListingDetails() {
   return (
@@ -14,7 +19,10 @@ function ListingDetails() {
                 <label htmlFor="title" className="text-xl">
                   TITLE
                 </label>
-                <p className="text-xs mt-1">
+                <p
+                  className="text-xs mt-1"
+                  style={{ color: 'rgba(224, 224, 224, 0.60)' }}
+                >
                   Begin by giving your property an appealing title. Make it
                   attention-grabbing yet informative
                 </p>
@@ -36,6 +44,31 @@ function ListingDetails() {
                 name="price"
                 className="w-6/12 outline-none bg-transparent border px-4 py-2.5 text-lg"
               />
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-xl font-proximaNova">PROPERTY TYPE</h1>
+            <div className="flex items-center font-proximaNova justify-between gap-5">
+              <button className="flex flex-row gap-2 items-center w-full justify-center bg-beige-400 px-10 py-4 text-lg">
+                <FaRegBuilding />
+                <h1>House</h1>
+              </button>
+              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+                <PiHouseBold />
+                <h1>Apartment</h1>
+              </button>
+              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+                <LuHotel />
+                <h1>Hotel Room</h1>
+              </button>
+              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+                <BsBuildings />
+                <h1>Condo</h1>
+              </button>
+              <button className="flex flex-row gap-2 items-center w-full justify-center bg-secondary-400 px-10 py-4 text-lg">
+                <FaHouseLock />
+                <h1>Private room</h1>
+              </button>
             </div>
           </div>
           <div className="flex flex-col gap-2">
