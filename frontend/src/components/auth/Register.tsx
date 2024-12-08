@@ -1,9 +1,11 @@
+
+
 function Register() {
   return (
     <div className="bg-darkGray-400 h-full pb-52">
       <div className="container w-3/12 mx-auto pt-10">
-        <h1>Register</h1>
-        <form action="">
+        <h1 className="text-4xl text-center mb-7 tracking-widest">Register</h1>
+        <form action="" className="flex flex-col gap-5">
           <input
             type="text"
             id="name"
