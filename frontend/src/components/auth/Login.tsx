@@ -20,7 +20,7 @@ function Login() {
           />
           <button
             type="submit"
-            className="bg-beige-400 p-3 font-proximaNova tracking-widest outline-none"
+            className="bg-beige-400 p-3 font-proximaNova tracking-widest outline-none transition-colors duration-300 ease-in hover:bg-secondary-400"
           >
             LOGIN
           </button>
