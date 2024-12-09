@@ -1,7 +1,11 @@
+import Details from "../../property/details"
+
 function ReviewListing() {
   return (
     <div>
-      <h1>Review Your Listing</h1>
+      <div className="bg-darkGray-400">
+        <Details/>
+      </div>
     </div>
   )
 }
