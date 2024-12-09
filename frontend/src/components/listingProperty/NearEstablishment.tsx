@@ -9,7 +9,7 @@ function NearEstablishment() {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
       try {
-        if(inputValue === '') return
+        if (inputValue === '') return
         setEstablishments([...establishment, inputValue])
         setInputValue('')
       } catch (error) {
@@ -51,7 +51,7 @@ function NearEstablishment() {
               ADD
             </button>
           </form>
-          <div className='h-80'>
+          <div className="h-80">
             <ul className="list-disc text-lg">
               {establishment.length > 1 ? (
                 establishment.map((value, index) => (
