@@ -47,22 +47,40 @@ function Details() {
           <a href="">CONTACT BROKER</a>
         </div>
         <div>
-          <p className='px-20 tracking-widest leading-10 text-lg py-32'>
-            <span className='text-beige-400 font-mogella text-2xl'>Luxe Haven Residences</span> presents an extraordinary living experience,
-            situated in the serene neighborhood of Sampaloc, Manila. This modern
-            masterpiece exudes sophistication and comfort, featuring expansive
-            spaces that seamlessly blend indoor luxury with outdoor tranquility.
-            With 5 spacious bedrooms, 4 elegantly designed bathrooms, a
-            refreshing swimming pool, and a 4-car port, this residence perfectly
-            balances form and function. The open-plan layout invites natural
-            light, highlighting high-end finishes and contemporary architecture
-            throughout. <br/> Enjoy moments of relaxation in the exquisite bath area
-            or host gatherings in the spacious living and dining spaces. The
-            property’s state-of-the-art amenities and lush surroundings create
-            an unparalleled ambiance that caters to both relaxation and
+          <p className="px-20 tracking-widest leading-10 text-lg py-32">
+            <span className="text-beige-400 font-mogella text-2xl">
+              Luxe Haven Residences
+            </span>{' '}
+            presents an extraordinary living experience, situated in the serene
+            neighborhood of Sampaloc, Manila. This modern masterpiece exudes
+            sophistication and comfort, featuring expansive spaces that
+            seamlessly blend indoor luxury with outdoor tranquility. With 5
+            spacious bedrooms, 4 elegantly designed bathrooms, a refreshing
+            swimming pool, and a 4-car port, this residence perfectly balances
+            form and function. The open-plan layout invites natural light,
+            highlighting high-end finishes and contemporary architecture
+            throughout. <br /> Enjoy moments of relaxation in the exquisite bath
+            area or host gatherings in the spacious living and dining spaces.
+            The property’s state-of-the-art amenities and lush surroundings
+            create an unparalleled ambiance that caters to both relaxation and
             entertainment. Embrace the prestige of Luxe Haven Residences – where
             luxury meets timeless elegance.
           </p>
+        </div>
+        <div >
+          <h1>NEARBY ESTABLISHMENTS</h1>
+          <div className="flex flex-col">
+            <div className='flex flex-row'>
+              <h1>PARKS</h1>
+              <h1>HOSIPITAL</h1>
+              <h1>SCHOOLS</h1>
+            </div>
+            <div className='flex flex-row'>
+              <h1>MALLS</h1>
+              <h1>RESTAURANT</h1>
+              <h1>AIRPORT</h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
