@@ -4,7 +4,7 @@ function GetStart() {
   return (
     <div className=" bg-darkGray-400">
       <div className="w-fit mx-auto flex items-center">
-        <img src="/public/images/get-Started-Listing.png" alt="" />
+        <img src="/images/get-Started-Listing.png" alt="" />
         <div className="p-20 max-w-screen-lg flex flex-col gap-32 justify-center">
           <div className="flex flex-col gap-3">
             <h1 className="text-4xl tracking-widest">

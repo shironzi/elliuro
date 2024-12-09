@@ -1,24 +1,57 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { MdOutlineRemoveCircleOutline } from 'react-icons/md'
 import { MdOutlineAdd } from 'react-icons/md'
 import { Link } from 'react-router'
 
 function ListingAmenities() {
-  const handleAdd = useCallback(
+  const [bedroomCount, setBedroomCount] = useState(1)
+  const [guestRoomCount, setGuestRoomCount] = useState(0)
+  const [bathroomCount, setBathroomCount] = useState(1)
+  const [carPortCount, setCarPortCount] = useState(0)
+
+  const handleQuantity = useCallback(
     async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
       event.preventDefault()
       try {
-        let element = event?.currentTarget.textContent
-        if (element) {
-          const count = parseInt(element)
-          element = (count + 1).toString()
+        const id = event.currentTarget.id
+        switch (id) {
+          case 'bedroomAdd':
+            setBedroomCount(bedroomCount + 1)
+            break
+          case 'bedroomMinus':
+            if (bedroomCount > 1) {
+              setBedroomCount(bedroomCount - 1)
+            }
+            break
+          case 'guestRoomAdd':
+            setGuestRoomCount(guestRoomCount + 1)
+            break
+          case 'guestRoomMinus':
+            if (guestRoomCount > 0) {
+              setGuestRoomCount(guestRoomCount - 1)
+            }
+            break
+          case 'bathroomAdd':
+            setBathroomCount(bathroomCount + 1)
+            break
+          case 'bathroomMinus':
+            if (bathroomCount > 1) {
+              setBathroomCount(bathroomCount - 1)
+            }
+            break
+          case 'carPortAdd':
+            setCarPortCount(carPortCount + 1)
+            break
+          case 'carPortMinus':
+            if (carPortCount > 0) setCarPortCount(carPortCount - 1)
+            break
         }
       } catch (error) {
         throw Error(String(error))
       }
     },
-    [],
+    [bedroomCount, guestRoomCount, bathroomCount, carPortCount],
   )
 
   return (
@@ -40,11 +73,13 @@ function ListingAmenities() {
             <div className="flex justify-between items-center border-b px-5">
               <h1>BEDROOM</h1>
               <div className="flex flex-row gap-10 items-center py-4">
-                <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                <button onClick={handleQuantity} id="bedroomMinus">
+                  <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                </button>
                 <h1 className="bg-transparent w-5 outline-none" id="bedroom">
-                  0
+                  {bedroomCount}
                 </h1>
-                <button onClick={handleAdd}>
+                <button onClick={handleQuantity} id="bedroomAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
@@ -52,25 +87,43 @@ function ListingAmenities() {
             <div className="flex justify-between items-center border-b px-5">
               <h1>GUEST ROOM</h1>
               <div className="flex flex-row gap-10 items-center py-4">
-                <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
-                <span className="bg-transparent w-5 outline-none">0</span>
-                <MdAddCircleOutline size={25} cursor={'pointer'} />
+                <button onClick={handleQuantity} id="guestRoomMinus">
+                  <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                </button>
+                <h1 className="bg-transparent w-5 outline-none">
+                  {guestRoomCount}
+                </h1>
+                <button onClick={handleQuantity} id="guestRoomAdd">
+                  <MdAddCircleOutline size={25} cursor={'pointer'} />
+                </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>BATHROOM</h1>
               <div className="flex flex-row gap-10 items-center py-4">
-                <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
-                <span className="bg-transparent w-5 outline-none">0</span>
-                <MdAddCircleOutline size={25} cursor={'pointer'} />
+                <button onClick={handleQuantity} id="bathroomMinus">
+                  <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                </button>
+                <h1 className="bg-transparent w-5 outline-none">
+                  {bathroomCount}
+                </h1>
+                <button onClick={handleQuantity} id="bathroomAdd">
+                  <MdAddCircleOutline size={25} cursor={'pointer'} />
+                </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>CAR PORT</h1>
               <div className="flex flex-row gap-10 items-center py-4">
-                <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
-                <span className="bg-transparent w-5 outline-none">0</span>
-                <MdAddCircleOutline size={25} cursor={'pointer'} />
+                <button onClick={handleQuantity} id="carPortMinus">
+                  <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                </button>
+                <h1 className="bg-transparent w-5 outline-none">
+                  {carPortCount}
+                </h1>
+                <button onClick={handleQuantity} id="carPortAdd">
+                  <MdAddCircleOutline size={25} cursor={'pointer'} />
+                </button>
               </div>
             </div>
 
