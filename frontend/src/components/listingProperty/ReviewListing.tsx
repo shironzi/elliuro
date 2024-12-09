@@ -1,10 +1,10 @@
-import Details from "../../property/details"
+import Details from '../../property/details'
 
 function ReviewListing() {
   return (
     <div>
       <div className="bg-darkGray-400">
-        <Details/>
+        <Details />
       </div>
     </div>
   )

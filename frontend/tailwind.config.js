@@ -21,6 +21,7 @@ export default {
         explore: ['Explore', 'sans-serif'],
         proximaNova: ['Proxima Nova', 'sans-serif'],
         merriweather: ['Merriweather'],
+        mogella: ['Mogella'],
       },
     },
   },
