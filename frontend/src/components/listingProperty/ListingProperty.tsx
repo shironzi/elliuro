@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { Outlet } from 'react-router'
 
-enum PropertyType{
+enum PropertyType {
   House = 'house',
   Apartment = 'apartment',
   Hotel = 'hotel',
@@ -24,7 +24,7 @@ function ListingProperty() {
       bathroomCount: 0,
       carPortCount: 0,
     },
-    establishments: {},
+    establishments: [],
     images: {},
   })
 
@@ -37,8 +37,6 @@ function ListingProperty() {
     },
     [],
   )
-
-  console.log(formData.details)
 
   return (
     <div>

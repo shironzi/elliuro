@@ -1,8 +1,20 @@
 import { useCallback, useState } from 'react'
-import { Link } from 'react-router'
+import { useNavigate, useOutletContext } from 'react-router'
+
+interface ContextOutlet {
+  formData: {
+    establishments: string[]
+  }
+  updateFromData: (key: string, value: string[]) => void
+}
 
 function NearEstablishment() {
-  const [establishment, setEstablishments] = useState<string[]>([])
+  const navigate = useNavigate()
+
+  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
+  const [establishment, setEstablishments] = useState<string[]>(
+    formData.establishments || [],
+  )
   const [inputValue, setInputValue] = useState('')
 
   const handleAddEstablishment = useCallback(
@@ -17,6 +29,15 @@ function NearEstablishment() {
       }
     },
     [establishment, inputValue],
+  )
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+      updateFromData('establishments', establishment)
+      navigate('/property-listing/images')
+    },
+    [navigate, updateFromData, establishment],
   )
 
   return (
@@ -57,19 +78,21 @@ function NearEstablishment() {
                 establishment.map((value, index) => (
                   <li key={index}>{value}</li>
                 ))
-              ) : establishment.length == 1 ? (
+              ) : establishment.length === 1 ? (
                 <li>{establishment[0]}</li>
               ) : (
                 <></>
               )}
             </ul>
           </div>
-          <Link
-            to={'/property-listing/images'}
-            className="px-28 py-3 bg-beige-400 w-fit mx-auto hover:bg-secondary-400 transition-colors duration-300 ease-out bottom-0"
-          >
-            NEXT
-          </Link>
+          <form action="" onSubmit={handleSubmit} className="mx-auto">
+            <button
+              type="submit"
+              className="px-28 py-3 bg-beige-400 w-fit  hover:bg-secondary-400 transition-colors duration-300 ease-out bottom-0"
+            >
+              NEXT
+            </button>
+          </form>
         </div>
       </div>
     </div>
