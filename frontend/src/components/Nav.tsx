@@ -3,7 +3,7 @@ import { FaHeart } from 'react-icons/fa'
 import { Link } from 'react-router'
 
 function Nav() {
-  const isAuthenticated = true
+  const isAuthenticated = false
 
   return (
     <nav className="bg-darkGray-400">
