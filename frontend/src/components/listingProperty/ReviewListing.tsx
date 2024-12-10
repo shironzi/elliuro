@@ -1,5 +1,4 @@
-import Details from "../../property/Details"
-
+import Details from '../../property/Details'
 
 function ReviewListing() {
   return (
