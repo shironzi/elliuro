@@ -23,6 +23,7 @@ function ListingProperty() {
       guestRoomCount: 0,
       bathroomCount: 0,
       carPortCount: 0,
+      swimmingPoolCount: 0,
     },
     establishments: [],
     images: [] as File[],

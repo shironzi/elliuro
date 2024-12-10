@@ -11,6 +11,7 @@ interface ContextOutlet {
       guestRoomCount: number
       bathroomCount: number
       carPortCount: number
+      swimmingPoolCount: number
     }
   }
 
@@ -22,6 +23,7 @@ interface Amenities {
   guestRoomCount: number
   bathroomCount: number
   carPortCount: number
+  swimmingPoolCount: number
 }
 
 function ListingAmenities() {
@@ -34,6 +36,7 @@ function ListingAmenities() {
       guestRoomCount: 0,
       bathroomCount: 0,
       carPortCount: 0,
+      swimmingPoolCount: 0
     },
   )
 
@@ -72,6 +75,8 @@ function ListingAmenities() {
         bathroomMinus: { key: 'bathroomCount', increment: false },
         carPortAdd: { key: 'carPortCount', increment: true },
         carPortMinus: { key: 'carPortCount', increment: false },
+        swimmingPoolAdd: { key: 'swimmingPoolCount', increment: true },
+        swimmingPoolMinus: { key: 'swimmingPoolCount', increment: false },
       }
 
       const action = actionMap[id]
@@ -153,6 +158,20 @@ function ListingAmenities() {
                   {amenities.carPortCount}
                 </h1>
                 <button onClick={handleQuantity} id="carPortAdd">
+                  <MdAddCircleOutline size={25} cursor={'pointer'} />
+                </button>
+              </div>
+            </div>
+            <div className="flex justify-between items-center border-b px-5">
+              <h1>SWIMMING POOL</h1>
+              <div className="flex flex-row gap-10 items-center py-4">
+                <button onClick={handleQuantity} id="swimmingPoolMinus">
+                  <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
+                </button>
+                <h1 className="bg-transparent w-5 outline-none">
+                  {amenities.swimmingPoolCount}
+                </h1>
+                <button onClick={handleQuantity} id="swimmingPoolAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
