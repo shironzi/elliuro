@@ -2,10 +2,21 @@ import { useCallback, useState } from 'react'
 import { LuUpload } from 'react-icons/lu'
 import { FaRegImage } from 'react-icons/fa6'
 import { MdDelete } from 'react-icons/md'
-import { Link } from 'react-router'
+import { useNavigate, useOutletContext } from 'react-router'
+
+interface ContextOutlet {
+  formData: {
+    images: File[]
+  }
+  updateFromData: (key: string, value: File[]) => void
+}
 
 function ListingImages() {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
+  const navigate = useNavigate()
+  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>(
+    formData.images || [],
+  )
 
   const handleFileUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,13 +62,25 @@ function ListingImages() {
     [uploadedFiles],
   )
 
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+      updateFromData('images', uploadedFiles)
+      navigate('/property-listing/review')
+    },
+    [updateFromData, uploadedFiles, navigate],
+  )
+
   return (
     <div className="bg-darkGray-400">
       <div className="container mx-auto">
         <h1 className="text-3xl border-b border-beige-400 w-fit pr-10 pb-1 mb-8">
           Showcase Your Property with Stunning Photos
         </h1>
-        <div className="px-16 flex flex-col gap-10 pb-20">
+        <form
+          className="px-16 flex flex-col gap-10 pb-20"
+          onSubmit={handleSubmit}
+        >
           <p className="text-xs" style={{ color: 'rgba(224, 224, 224, 0.60)' }}>
             Upload high-quality images of your property to capture its best
             features and appeal to potential buyers or renters.
@@ -113,13 +136,13 @@ function ListingImages() {
               </ul>
             </div>
           </div>
-          <Link
-            to="/property-listing/review"
+          <button
+            type="submit"
             className="bg-beige-400 w-fit px-28 py-3 text-xl mx-auto transition-all hover:bg-secondary-400 duration-500"
           >
             Next
-          </Link>
-        </div>
+          </button>
+        </form>
       </div>
     </div>
   )

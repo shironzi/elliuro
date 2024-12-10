@@ -25,7 +25,7 @@ function ListingProperty() {
       carPortCount: 0,
     },
     establishments: [],
-    images: {},
+    images: [] as File[],
   })
 
   const updateFromData = useCallback(
