@@ -2,56 +2,84 @@ import { useCallback, useState } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { MdOutlineRemoveCircleOutline } from 'react-icons/md'
 import { MdOutlineAdd } from 'react-icons/md'
-import { Link } from 'react-router'
+import { useNavigate, useOutletContext } from 'react-router'
+
+interface ContextOutlet {
+  formData: {
+    amenities: {
+      bedroomCount: number
+      guestRoomCount: number
+      bathroomCount: number
+      carPortCount: number
+    }
+  }
+
+  updateFromData: (key: string, value: string | number | object) => void
+}
+
+interface Amenities {
+  bedroomCount: number
+  guestRoomCount: number
+  bathroomCount: number
+  carPortCount: number
+}
 
 function ListingAmenities() {
-  const [bedroomCount, setBedroomCount] = useState(1)
-  const [guestRoomCount, setGuestRoomCount] = useState(0)
-  const [bathroomCount, setBathroomCount] = useState(1)
-  const [carPortCount, setCarPortCount] = useState(0)
+  const navigate = useNavigate()
+  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
+
+  const [amenities, setAmenities] = useState(
+    formData.amenities || {
+      bedroomCount: 0,
+      guestRoomCount: 0,
+      bathroomCount: 0,
+      carPortCount: 0,
+    },
+  )
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
+      updateFromData('amenities', amenities)
+      navigate('/property-listing/establishments')
+    },
+    [amenities, updateFromData, navigate],
+  )
 
   const handleQuantity = useCallback(
-    async (event: React.MouseEvent<HTMLButtonElement>): Promise<void> => {
+    (event: React.MouseEvent<HTMLButtonElement>): void => {
       event.preventDefault()
-      try {
-        const id = event.currentTarget.id
-        switch (id) {
-          case 'bedroomAdd':
-            setBedroomCount(bedroomCount + 1)
-            break
-          case 'bedroomMinus':
-            if (bedroomCount > 1) {
-              setBedroomCount(bedroomCount - 1)
-            }
-            break
-          case 'guestRoomAdd':
-            setGuestRoomCount(guestRoomCount + 1)
-            break
-          case 'guestRoomMinus':
-            if (guestRoomCount > 0) {
-              setGuestRoomCount(guestRoomCount - 1)
-            }
-            break
-          case 'bathroomAdd':
-            setBathroomCount(bathroomCount + 1)
-            break
-          case 'bathroomMinus':
-            if (bathroomCount > 1) {
-              setBathroomCount(bathroomCount - 1)
-            }
-            break
-          case 'carPortAdd':
-            setCarPortCount(carPortCount + 1)
-            break
-          case 'carPortMinus':
-            if (carPortCount > 0) setCarPortCount(carPortCount - 1)
-            break
-        }
-      } catch (error) {
-        throw Error(String(error))
+      const { id } = event.currentTarget
+
+      const updateCount = (key: keyof Amenities, increment: boolean) => {
+        setAmenities((prevAmenities) => ({
+          ...prevAmenities,
+          [key]: increment
+            ? prevAmenities[key] + 1
+            : Math.max(prevAmenities[key] - 1, 0),
+        }))
+      }
+
+      const actionMap: Record<
+        string,
+        { key: keyof Amenities; increment: boolean }
+      > = {
+        bedroomAdd: { key: 'bedroomCount', increment: true },
+        bedroomMinus: { key: 'bedroomCount', increment: false },
+        guestRoomAdd: { key: 'guestRoomCount', increment: true },
+        guestRoomMinus: { key: 'guestRoomCount', increment: false },
+        bathroomAdd: { key: 'bathroomCount', increment: true },
+        bathroomMinus: { key: 'bathroomCount', increment: false },
+        carPortAdd: { key: 'carPortCount', increment: true },
+        carPortMinus: { key: 'carPortCount', increment: false },
+      }
+
+      const action = actionMap[id]
+      if (action) {
+        updateCount(action.key, action.increment)
       }
     },
-    [bedroomCount, guestRoomCount, bathroomCount, carPortCount],
+    [],
   )
 
   return (
@@ -69,7 +97,10 @@ function ListingAmenities() {
             bathrooms, and parking options. Buyers and renters want to know the
             specifics!
           </p>
-          <form className="px-16 flex flex-col gap-12 mt-12">
+          <form
+            className="px-16 flex flex-col gap-12 mt-12"
+            onSubmit={handleSubmit}
+          >
             <div className="flex justify-between items-center border-b px-5">
               <h1>BEDROOM</h1>
               <div className="flex flex-row gap-10 items-center py-4">
@@ -77,7 +108,7 @@ function ListingAmenities() {
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none" id="bedroom">
-                  {bedroomCount}
+                  {amenities.bedroomCount}
                 </h1>
                 <button onClick={handleQuantity} id="bedroomAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
@@ -91,7 +122,7 @@ function ListingAmenities() {
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {guestRoomCount}
+                  {amenities.guestRoomCount}
                 </h1>
                 <button onClick={handleQuantity} id="guestRoomAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
@@ -105,7 +136,7 @@ function ListingAmenities() {
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {bathroomCount}
+                  {amenities.bathroomCount}
                 </h1>
                 <button onClick={handleQuantity} id="bathroomAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
@@ -119,7 +150,7 @@ function ListingAmenities() {
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {carPortCount}
+                  {amenities.carPortCount}
                 </h1>
                 <button onClick={handleQuantity} id="carPortAdd">
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
@@ -133,12 +164,12 @@ function ListingAmenities() {
               cursor={'pointer'}
               className="mx-auto bg-beige-400 rounded-full p-2 transition-all hover:bg-secondary-400 duration-500"
             />
-            <Link
-              to="/property-listing/establishments"
+            <button
+              type="submit"
               className="bg-beige-400 w-fit px-28 py-3 text-xl mx-auto transition-all hover:bg-secondary-400 duration-500"
             >
               NEXT
-            </Link>
+            </button>
           </form>
         </div>
       </div>

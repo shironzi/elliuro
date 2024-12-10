@@ -11,7 +11,7 @@ enum PropertyType {
   Apartment = 'apartment',
   Hotel = 'hotel',
   condominium = 'condominium',
-  private = 'private'
+  private = 'private',
 }
 interface ContextOutlet {
   formData: {
@@ -44,7 +44,7 @@ function ListingDetails() {
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
       updateFromData('details', details)
-      navigate("/property-listing/amenities")
+      navigate('/property-listing/amenities')
     },
     [details, updateFromData, navigate],
   )
@@ -212,7 +212,6 @@ function ListingDetails() {
           <button
             type="submit"
             className="bg-beige-400 w-fit px-28 py-3 text-xl mx-auto transition-all hover:bg-secondary-400 duration-500"
-            
           >
             NEXT
           </button>
