@@ -11,17 +11,13 @@ export class AuthService {
 
         const existingUsername = await this.prisma.user.findFirst({
             where: {
-                OR: [
-                    { username: data.username }
-                ]
+                username: data.username
             }
         })
 
         const exisistingEmail = await this.prisma.user.findFirst({
             where: {
-                OR: [
-                    { email: data.email }
-                ]
+                email: data.email
             }
         })
 
