@@ -1,12 +1,18 @@
-import { ConflictException, HttpCode, Injectable } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { ConflictException, HttpCode, Injectable, UnauthorizedException } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from "@nestjs/jwt";
+
+import { PrismaService } from 'src/prisma/prisma.service';
 import { LoginUserDto } from 'src/dto/auth.dto';
+
 
 @Injectable()
 export class AuthService {
-    constructor(private prisma: PrismaService) { }
+    constructor(
+        private prisma: PrismaService,
+        private jwtService: JwtService
+    ) { }
 
     async register(data: Prisma.UserCreateInput): Promise<{ message: string }> {
 
@@ -43,14 +49,13 @@ export class AuthService {
             if (!createdUser) {
                 return { message: "Registration failed" }
             }
-            return { message: "Registration Successfully" }
+            return { message: "Registered Successfully" }
         } catch (error) {
             throw error
         }
     }
 
     async login(data: LoginUserDto): Promise<{ message: string }> {
-
         try {
             const user = await this.prisma.user.findFirst({
                 where: {
@@ -66,10 +71,14 @@ export class AuthService {
             }
 
             if (!user || !isPasswordValid) {
-                return { message: "Username Or Password is invalid" }
+                throw new UnauthorizedException('Username or password is invalid');
+
             }
 
-            return { message: "Login Successfully" }
+            const payload = { sub: user.id, username: user.username }
+            await this.jwtService.signAsync(payload)
+
+            return { message: "logged in Successfully" }
         } catch (error) {
             throw error;
         }
