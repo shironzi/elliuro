@@ -22,3 +22,12 @@ export class CreateUserDto {
     @Match('password', { message: 'Password do not match' })
     cPassword: string
 }
+
+export class LoginUserDto {
+    @IsString()
+    @IsNotEmpty()
+    username: string
+
+    @IsString()
+    password: string
+}
