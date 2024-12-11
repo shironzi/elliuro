@@ -6,6 +6,7 @@ import { AuthController } from "./controller/auth.controller";
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { AuthModule } from './auth/auth.module';
       isGlobal: true,
     }),
     AuthModule,
+    PrismaModule,
   ],
   controllers: [AppController, AuthController],
   providers: [AppService, AuthService],
