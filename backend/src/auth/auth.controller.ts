@@ -10,9 +10,9 @@ export class AuthController {
 
     @HttpCode(201)
     @Post('register')
-    async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    async create(@Body() createUserDto: CreateUserDto): Promise<Omit<User, 'password'>> {
         const { username, email, name, password } = createUserDto;
-        return this.authService.register({
+        return await this.authService.register({
             username,
             email,
             name,
