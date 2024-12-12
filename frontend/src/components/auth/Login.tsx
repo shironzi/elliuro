@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { login } from '../../apis/authApi'
-import { useAuth } from './AuthContext'
+import { useAuth } from '../context/useAuth'
 
 function Login() {
   const navigate = useNavigate()

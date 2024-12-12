@@ -7,7 +7,7 @@ import { FaHeart } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router'
 import { useCallback, useState } from 'react'
 import { logout } from '../apis/authApi'
-import { useAuth } from './auth/AuthContext'
+import { useAuth } from './context/useAuth'
 
 function Nav() {
   const navigate = useNavigate()
