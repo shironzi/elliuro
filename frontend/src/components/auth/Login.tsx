@@ -20,7 +20,7 @@ function Login() {
         }
 
         const res = await login(formData.username, formData.password)
-        if (res.error === 'Unauthorized') {
+        if (res.error) {
           setErrorMessage(res.message)
           return
         }

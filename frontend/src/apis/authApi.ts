@@ -1,6 +1,6 @@
 interface Response {
-  message: string
-  error?: string
+    message: string
+    error?: string
 }
 
 /**
@@ -14,54 +14,46 @@ interface Response {
  */
 
 export async function register(
-  name: string,
-  username: string,
-  email: string,
-  password: string,
-  cPassword: string,
+    name: string,
+    username: string,
+    email: string,
+    password: string,
+    cPassword: string,
 ): Promise<Response> {
-  try {
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, username, email, password, cPassword }),
-    })
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, username, email, password, cPassword }),
+        })
 
-    const result = await response.json()
+        const result = await response.json()
 
-    if (result.error === 400) {
-      return { message: result.message }
+        return result
+    } catch (error) {
+        throw new Error(String(error))
     }
-
-    return result
-  } catch (error) {
-    throw new Error(String(error))
-  }
 }
 
 export async function login(
-  username: string,
-  password: string,
+    username: string,
+    password: string,
 ): Promise<Response> {
-  try {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ username, password }),
-    })
+    try {
+        const response = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        })
 
-    const result = await response.json()
-    console.log(result)
+        const result = await response.json()
 
-    if (result.statusCode === 401) {
-      return { message: result.message, error: 'Unauthorized' }
+        return result
+    } catch (error) {
+        throw new Error(String(error))
     }
-    return result
-  } catch (error) {
-    throw new Error(String(error))
-  }
 }
