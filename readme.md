@@ -20,6 +20,10 @@
 - **Dynamic Pricing**: Adjust rental prices based on demand and market trends.
 - **Notifications**: Email, SMS, and push notifications for updates.
 - **Ratings and Reviews**: Customers can rate properties and provide feedback.
+- **Secure Payment Processing**: Handle transactions securely with integrated payment gateways.
+- **User Verification**: Enhance trust by verifying user identities and property ownership.
+- **Real-time Messaging**: Enable direct communication between customers and property owners.
+- **Analytics Dashboard**: Provide property owners with insights into listing performance.
 
 ---
 
@@ -149,4 +153,3 @@ We welcome contributions! Please follow the steps below:
 
 ## 📜 License
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-```
