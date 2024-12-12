@@ -1,9 +1,11 @@
 import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { login } from '../../apis/authApi'
+import { useAuth } from './AuthContext'
 
 function Login() {
   const navigate = useNavigate()
+  const { setIsAuthenticated } = useAuth()
 
   const [formData, setFormData] = useState({
     username: '',
@@ -25,13 +27,14 @@ function Login() {
           return
         }
 
+        setIsAuthenticated(true)
         navigate('/')
       } catch (error) {
         setErrorMessage('Logged in failed. Please try later.')
         console.error(error)
       }
     },
-    [navigate, formData],
+    [navigate, formData, setIsAuthenticated],
   )
 
   return (

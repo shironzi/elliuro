@@ -48,7 +48,7 @@ function Register() {
           setErrorMessage(response.message)
           return
         }
-        
+
         navigate('/login')
       } catch (error) {
         setErrorMessage('Registration failed. Please try again.')

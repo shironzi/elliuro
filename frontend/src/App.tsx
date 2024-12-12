@@ -13,25 +13,28 @@ import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
 import ListingProperty from './components/listingProperty/ListingProperty'
 import NearEstablishment from './components/listingProperty/NearEstablishment'
+import { AuthProvider } from './components/auth/AuthContext'
 
 function App() {
   return (
     <BrowserRouter>
-      <Nav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/property-listing" element={<ListingProperty />}>
-          <Route index element={<GetStart />} />
-          <Route path="details" element={<ListingDetails />} />
-          <Route path="amenities" element={<ListingAmenities />} />
-          <Route path="establishments" element={<NearEstablishment />} />
-          <Route path="images" element={<ListingImage />} />
-          <Route path="review" element={<ReviewListing />} />
-        </Route>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
-      <Footer />
+      <AuthProvider>
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/property-listing" element={<ListingProperty />}>
+            <Route index element={<GetStart />} />
+            <Route path="details" element={<ListingDetails />} />
+            <Route path="amenities" element={<ListingAmenities />} />
+            <Route path="establishments" element={<NearEstablishment />} />
+            <Route path="images" element={<ListingImage />} />
+            <Route path="review" element={<ReviewListing />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+        <Footer />
+      </AuthProvider>
     </BrowserRouter>
   )
 }
