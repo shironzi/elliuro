@@ -47,7 +47,7 @@ export class AuthService {
             })
 
             if (!createdUser) {
-                return { message: "Registration failed" }
+                return { message: "hello" }
             }
             return { message: "Registered Successfully" }
         } catch (error) {
