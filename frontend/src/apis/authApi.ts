@@ -1,5 +1,5 @@
 interface RegisterResponse {
-  message: string
+    message: string
 }
 
 /**
@@ -13,30 +13,31 @@ interface RegisterResponse {
  */
 
 export async function register(
-  name: string,
-  username: string,
-  email: string,
-  password: string,
-  cPassword: string,
+    name: string,
+    username: string,
+    email: string,
+    password: string,
+    cPassword: string,
 ): Promise<RegisterResponse> {
-  try {
-    const response = await fetch('http://localhost:3000/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ name, username, email, password, cPassword }),
-    })
+    try {
+        const response = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, username, email, password, cPassword }),
+        })
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      throw new Error(
-        `Failed to register: ${errorData.message || response.statusText}`,
-      )
+        if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(
+                `Failed to register: ${errorData.message || response.statusText}`,
+            )
+        }
+
+        return await response.json()
+    } catch (error) {
+        throw new Error(String(error))
     }
-
-    return await response.json()
-  } catch (error) {
-    throw new Error(String(error))
-  }
 }

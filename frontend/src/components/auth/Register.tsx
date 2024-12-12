@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { register } from "../../apis/authApi"
+
+import { useCallback, useState } from "react"
 
 
 function Register() {
@@ -13,12 +15,23 @@ function Register() {
     }
   )
 
+  const handleSubmit = useCallback(async(event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      const response =  await register(formData.name, formData.username, formData.email, formData.password, formData.cPassword)
+      console.log(response)
+      return response
+    } catch (error) {
+      throw new Error(String(error))
+    }
+  },[formData])
+
 
   return (
     <div className="bg-darkGray-400 h-full pb-52">
       <div className="container w-3/12 mx-auto pt-10">
         <h1 className="text-4xl text-center mb-7 tracking-widest">Register</h1>
-        <form action="" className="flex flex-col gap-5">
+        <form action="Post" onSubmit={handleSubmit} className="flex flex-col gap-5">
           <input
             type="text"
             id="name"
@@ -26,6 +39,7 @@ function Register() {
             placeholder="NAME"
             onChange={(e) => setFormData({ ...formData, [e.target.id]: e.target.value })}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
+            required
           />
           <input
             type="text"
@@ -34,6 +48,7 @@ function Register() {
             placeholder="USERNAME"
             onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
+            required
           />
           <input
             type="text"
@@ -42,6 +57,7 @@ function Register() {
             placeholder="EMAIL"
             onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
+            required
           />
           <input
             type="password"
@@ -50,6 +66,7 @@ function Register() {
             placeholder="PASSWORD"
             onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
+            required
           />
           <input
             type="password"
@@ -58,6 +75,7 @@ function Register() {
             placeholder="CONFIRM PASSWORD"
             onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
+            required
           />
           <button
             type="submit"
