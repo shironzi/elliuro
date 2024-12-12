@@ -1,13 +1,34 @@
 import { IoPersonCircleOutline } from 'react-icons/io5'
+import { MdLogout } from 'react-icons/md'
+import { IoMdSettings } from 'react-icons/io'
+import { IoMdPerson } from 'react-icons/io'
+
 import { FaHeart } from 'react-icons/fa'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+import { useCallback, useState } from 'react'
+import { logout } from '../apis/authApi'
+import { useAuth } from './auth/AuthContext'
 
 function Nav() {
-  const isAuthenticated = false
+  const navigate = useNavigate()
+  const { isAuthenticated, setIsAuthenticated } = useAuth()
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+
+  const toggleDropdown = useCallback(() => {
+    setDropdownOpen(!dropdownOpen)
+  }, [dropdownOpen])
+
+  const handleLogout = useCallback(async () => {
+    await logout()
+
+    setDropdownOpen(false)
+    setIsAuthenticated(false)
+    navigate('/login')
+  }, [navigate, setIsAuthenticated])
 
   return (
-    <nav className="bg-darkGray-400">
-      <div className="container flex justify-between mx-auto items-center p-6 transition-shadow shadow-md top-0 sticky z-50">
+    <nav className="bg-darkGray-400 shadow-md top-0 sticky z-50">
+      <div className="container flex justify-between mx-auto items-center p-6 transition-shadow ">
         <div>
           <Link
             to="/"
@@ -34,9 +55,38 @@ function Nav() {
               <Link to="">
                 <FaHeart size={24} />
               </Link>
-              <Link to="">
-                <IoPersonCircleOutline size={30} />
-              </Link>
+              <div className="relative inline-block text-left">
+                <button
+                  onClick={toggleDropdown}
+                  className="flex items-center focus:outline-none"
+                >
+                  <IoPersonCircleOutline size={30} />
+                </button>
+                {dropdownOpen && (
+                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <Link
+                      to="/profile"
+                      className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
+                    >
+                      <IoMdPerson size={25} />
+                      Profile
+                    </Link>
+                    <Link
+                      to="/settings"
+                      className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
+                    >
+                      <IoMdSettings size={25} />
+                      Settings
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
+                    >
+                      <MdLogout size={25} color="#ff0000" /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             <>
