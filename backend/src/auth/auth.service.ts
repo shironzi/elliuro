@@ -55,7 +55,7 @@ export class AuthService {
         }
     }
 
-    async login(data: LoginUserDto): Promise<{ message: string }> {
+    async login(data: LoginUserDto): Promise<{ accessToken: string }> {
         try {
             const user = await this.prisma.user.findFirst({
                 where: {
@@ -76,9 +76,9 @@ export class AuthService {
             }
 
             const payload = { sub: user.id, username: user.username }
-            await this.jwtService.signAsync(payload)
+            const token = await this.jwtService.signAsync(payload)
 
-            return { message: "logged in Successfully" }
+            return { accessToken: token }
         } catch (error) {
             throw error;
         }
