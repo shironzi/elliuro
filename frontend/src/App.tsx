@@ -13,7 +13,7 @@ import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
 import ListingProperty from './components/listingProperty/ListingProperty'
 import NearEstablishment from './components/listingProperty/NearEstablishment'
-import { AuthProvider } from './components/context/AuthContext'
+import { AuthProvider } from './components/context/AuthProvider'
 
 function App() {
   return (
