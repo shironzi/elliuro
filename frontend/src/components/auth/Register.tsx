@@ -1,4 +1,19 @@
+import { useState } from "react"
+
+
 function Register() {
+
+  const [formData, setFormData] = useState(
+    {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      cPassword: "",
+    }
+  )
+
+
   return (
     <div className="bg-darkGray-400 h-full pb-52">
       <div className="container w-3/12 mx-auto pt-10">
@@ -9,6 +24,7 @@ function Register() {
             id="name"
             name="name"
             placeholder="NAME"
+            onChange={(e) => setFormData({ ...formData, [e.target.id]: e.target.value })}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
           />
           <input
@@ -16,6 +32,7 @@ function Register() {
             id="username"
             name="username"
             placeholder="USERNAME"
+            onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
           />
           <input
@@ -23,6 +40,7 @@ function Register() {
             id="email"
             name="email"
             placeholder="EMAIL"
+            onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
           />
           <input
@@ -30,6 +48,7 @@ function Register() {
             id="password"
             name="password"
             placeholder="PASSWORD"
+            onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
           />
           <input
@@ -37,6 +56,7 @@ function Register() {
             id="cPassword"
             name="cPassword"
             placeholder="CONFIRM PASSWORD"
+            onChange={(e) => setFormData({...formData, [e.target.id]: e.target.value})}
             className="p-3 font-proximaNova text-base text-primary-400 bg-transparent border border-primary-400 outline-none"
           />
           <button
