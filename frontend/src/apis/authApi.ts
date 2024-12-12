@@ -1,5 +1,6 @@
 interface Response {
   message: string
+  error?: string
 }
 
 /**
@@ -30,8 +31,8 @@ export async function register(
 
     const result = await response.json()
 
-    if (response.ok) {
-      return { message: 'created' }
+    if (result.error === 400) {
+      return { message: result.message }
     }
 
     return result
@@ -53,12 +54,12 @@ export async function login(
       body: JSON.stringify({ username, password }),
     })
 
-    const result = response.json()
+    const result = await response.json()
+    console.log(result)
 
-    if (response.ok) {
-      return { message: 'logged In' }
+    if (result.statusCode === 401) {
+      return { message: result.message, error: 'Unauthorized' }
     }
-
     return result
   } catch (error) {
     throw new Error(String(error))

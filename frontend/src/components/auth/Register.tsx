@@ -44,7 +44,7 @@ function Register() {
           formData.cPassword,
         )
 
-        if (response.message !== 'created') {
+        if (response.error) {
           setErrorMessage(response.message)
           return
         }

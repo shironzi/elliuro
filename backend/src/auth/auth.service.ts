@@ -72,7 +72,6 @@ export class AuthService {
 
             if (!user || !isPasswordValid) {
                 throw new UnauthorizedException('Username or password is invalid');
-
             }
 
             const payload = { sub: user.id, username: user.username }

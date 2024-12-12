@@ -20,13 +20,12 @@ function Login() {
         }
 
         const res = await login(formData.username, formData.password)
-
-
-        if(res.message !== "logged In"){
+        if (res.error === 'Unauthorized') {
           setErrorMessage(res.message)
+          return
         }
 
-        navigate("/")
+        navigate('/')
       } catch (error) {
         setErrorMessage('Logged in failed. Please try later.')
         console.error(error)
@@ -46,7 +45,7 @@ function Login() {
               : 'hidden'
           }
         >
-          {' '}
+          {errorMessage}
         </span>
         <form
           action="POST"
