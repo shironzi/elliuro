@@ -1,4 +1,4 @@
-import { IsEnum, IsString } from "class-validator";
+import { IsArray, IsEnum, IsJSON, IsString } from "class-validator";
 
 /**
  * Enum representing different types of properties.
@@ -23,6 +23,8 @@ enum PropertyType {
  * This class is used to validate the data for a draft property.
  */
 export class draftPropertyDto {
+
+    // For the description Form
 
     /**
      * The title of the property.
@@ -58,4 +60,11 @@ export class draftPropertyDto {
      */
     @IsString()
     description: string;
+
+    // amenities
+
+    @IsJSON()
+    amenities_list: { name: string, value: number }
+
+    
 }
