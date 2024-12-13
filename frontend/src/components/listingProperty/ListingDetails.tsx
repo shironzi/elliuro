@@ -10,8 +10,8 @@ enum PropertyType {
   House = 'house',
   Apartment = 'apartment',
   Hotel = 'hotel',
-  condominium = 'condominium',
-  private = 'private',
+  Condominium = 'condominium',
+  Private = 'private',
 }
 interface ContextOutlet {
   formData: {
