@@ -20,6 +20,21 @@ enum Role {
   SUPPORT_AGENT
 }
 
+enum Status_List {
+  DRAFT
+  PUBLISH
+  ACTIVE
+  SOLD
+}
+
+enum Property_type {
+  HOUSE
+  APARTMENT
+  HOTEL
+  CONDOMINIUM
+  PRIVATE
+}
+
 model User {
   id         Int      @id @default(autoincrement())
   username   String   @unique
@@ -29,4 +44,50 @@ model User {
   role       Role     @default(CUSTOMER)
   created_at DateTime @default(now())
   updated_At DateTime @updatedAt
+}
+
+model Property {
+  id         Int    @id @default(autoincrement())
+  owner      Int
+  status     String
+  user_id    Int
+  details_id Int
+}
+
+model Status {
+  id     Int         @id @default(autoincrement())
+  status Status_List @default(DRAFT)
+}
+
+model Details {
+  id          Int           @id @default(autoincrement())
+  title       String
+  type        Property_type @default(HOUSE)
+  location    String
+  price       Int
+  description String
+}
+
+model Property_Images {
+  id          Int @id @default(autoincrement())
+  property_id Int
+  image_id    Int
+}
+
+model Image {
+  id       Int      @id @default(autoincrement())
+  image    Bytes
+  added_at DateTime
+}
+
+model Property_Amenities {
+  id          Int @id @default(autoincrement())
+  property_id Int
+  amenity_id  Int
+  value       Int
+}
+
+model Amenities {
+  id   Int    @id @default(autoincrement())
+  name String
 }

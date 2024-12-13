@@ -1,6 +1,3 @@
--- SQL Diagram
--- https://drawsql.app/teams/shironzi/diagrams/elliuro
-
 -- USE elliuro;
 
 -- CREATE TABLE user (
@@ -14,10 +11,9 @@
 --     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 -- );
 
--- CREATE TABLE property(
+-- CREATE TABLE property (
 -- 	id INT AUTO_INCREMENT PRIMARY KEY,
---     owner INT,
---     status VARCHAR(255),
+--     status Int,
 --     user_id INT,
 --     details_id INT,
 --     FOREIGN KEY (status) REFERENCES status_list(id) 
@@ -29,6 +25,22 @@
 --         ON DELETE CASCADE
 -- );
 
+-- ALTER TABLE property
+-- ADD CONSTRAINT fk_status
+-- FOREIGN KEY (status) REFERENCES status_list(id)
+--     ON UPDATE CASCADE;
+    
+-- ALTER TABLE property
+-- ADD CONSTRAINT fk_user
+-- FOREIGN KEY (user_id) REFERENCES user(id)
+--     ON DELETE CASCADE;
+    
+-- ALTER TABLE property
+-- ADD CONSTRAINT fk_details
+-- FOREIGN KEY (details_id) REFERENCES details(id)
+--     ON UPDATE CASCADE
+--     ON DELETE CASCADE;
+
 -- CREATE TABLE status_list(
 -- 	id INT AUTO_INCREMENT PRIMARY KEY,
 --     status ENUM('draft', 'publish', 'active', 'sold') DEFAULT 'draft'
@@ -37,7 +49,7 @@
 -- CREATE TABLE details (
 -- 	id INT AUTO_INCREMENT PRIMARY KEY,
 --     title VARCHAR(255) NOT NULL,
---     type ENUM("house", "Apartment", "Hotel", "Condominium", "Private") DEFAULT ("house"),
+--     type ENUM("house", "Apartment", "Hotel", "Condominium", "Private") DEFAULT "house",
 --     location VARCHAR(524) NOT NULL,
 --     price INT NOT NULL,
 --     description TEXT NOT NULL
