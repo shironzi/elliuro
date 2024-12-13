@@ -1,122 +1,157 @@
-1. Backend Implementation:
+Customer:
+    Search and filter properties.
+    Book properties for rent.
+    Leave reviews and ratings.
+    Manage personal profile and booking history.
 
-Extend the Property Model:
+Property Owner:
+    List properties for rent or sale.
+    Manage property details, availability, and pricing.
+    Respond to customer inquiries and reviews.
+    View analytics and performance of listings.
 
-Add a status field to your property data model with a default value of 'draft'. This way, new properties are considered drafts by default, simplifying the saving process on the frontend.
-Ensure all necessary fields from your connected forms (details, amenities, establishments, images) are included in the model.
-Create API Endpoints:
+Admin:
+    Moderate property listings and user reviews.
+    Manage platform settings and configurations.
+    Handle user verification and disputes.
+    Oversee overall platform security and compliance.
 
-Save Draft Endpoint:
-Develop an endpoint to save or update a property as a draft.
-Allow partial data submissions since drafts may not have all fields completed.
-Publish Property Endpoint:
-Create an endpoint to publish a property by updating its status to 'published'.
-Implement thorough validation to ensure all required fields are completed before publishing.
-Handle Data Persistence and Ownership:
+Support Agent:
+    Resolve user issues and provide customer support.
+    Handle booking disputes and refunds.
+    Assist with user verification and property validation.
+    Provide guidance and support to property owners.
 
-Store both drafts and published properties in your database, differentiated by the status field.
-Associate drafts with the correct user through authentication mechanisms to prevent unauthorized access.
-Consider scenarios where multiple users might collaborate on a draft and implement appropriate permissions.
-2. Frontend Implementation:
+Guest:
+    Browse property listings without booking.
+    View property details and owner information.
+    Register or log in to become a customer.
 
-Manage Form State Across Components:
+---
 
-Use a state management solution (e.g., React Context, Redux) to maintain form data across different components.
-This allows users to navigate between sections without losing data and simplifies saving and loading drafts.
-Implement Save Draft Functionality:
+### 1. **Backend Implementation**
 
-Manual Save:
-Add a "Save Draft" button for users to manually save progress.
-On click, send the current form data to the backend's draft endpoint.
-Auto-Save Mechanism:
-Implement auto-save that triggers at specified intervals (e.g., every 2 minutes) or on significant user actions like field blur.
-Throttle auto-save requests to avoid excessive server calls.
-Implement Publish Functionality:
+#### Extend the Property Model:
+- Add a `status` field to differentiate between `'draft'` and `'published'`. Default to `'draft'` to simplify new entries.
+- Ensure the model includes all necessary fields (details, amenities, establishments, images) for seamless form integration.
 
-Provide a "Publish" button on the final form screen.
-Perform frontend validation before publishing to ensure all mandatory fields are filled.
-If validation passes, send a request to the publish endpoint.
-Handle Unsaved Changes and Draft Warnings:
+#### Create API Endpoints:
+1. **Save Draft Endpoint:**
+   - Accept incomplete data and save the property with a status of `'draft'`.
+   - Ensure authentication to associate the draft with the correct user.
+2. **Publish Property Endpoint:**
+   - Validate that all mandatory fields are filled before updating the status to `'published'`.
+   - Perform server-side checks for data integrity and enforce business rules.
 
-Detect unsaved changes by comparing current form data with the last saved state.
-If the user attempts to navigate away, display a warning about unsaved changes to prevent data loss.
-Indicate when a property is being edited as a draft with visual cues in the UI.
-Load Existing Drafts:
+#### Handle Data Persistence:
+- Store both drafts and published properties in the same table, distinguished by the `status` field.
+- Implement ownership logic to ensure users can only access and modify their own drafts.
+- For collaborative features, consider role-based access control and edit locks.
 
-Fetch existing drafts from the backend when the user accesses the listing feature.
-Display drafts separately from published properties, clearly indicating their status.
-Allow users to select and continue editing drafts.
-3. Data Synchronization:
+---
 
-Server-Side Storage of Drafts:
+### 2. **Frontend Implementation**
 
-Rely on server-side storage to persist drafts across sessions and devices.
-This ensures data security and availability regardless of the client's state.
-Client-Side Considerations:
+#### Manage Form State:
+- Use a state management solution (e.g., React Context, Redux) to maintain form data across components and ensure consistency.
+- Persist form data locally during navigation to prevent data loss.
 
-Use client-side state to hold form data during active sessions.
-Avoid relying on local storage for drafts to prevent data loss due to browser limitations or cache clearing.
-4. User Experience Enhancements:
+#### Save Draft Functionality:
+1. **Manual Save:**
+   - Add a "Save Draft" button to explicitly save progress.
+   - On click, send the current form data to the backend's draft endpoint.
+2. **Auto-Save (Optional):**
+   - Trigger auto-save at set intervals (e.g., every 60 seconds) or after significant user actions (e.g., field blur or section navigation).
+   - Use throttling or debouncing to minimize server requests and maintain performance.
 
-Validation and Feedback:
+#### Publish Functionality:
+- Provide a "Publish" button that triggers validation for required fields.
+- After successful validation, send the request to the publish endpoint to update the status.
 
-Implement real-time validation as users fill out each field to provide immediate feedback.
-Highlight required fields and display error messages to guide users.
-During publishing, perform a final validation check for data completeness.
-Seamless Navigation and State Consistency:
+#### Handle Unsaved Changes:
+- Warn users when navigating away with unsaved changes, e.g., "You have unsaved changes. Do you really want to leave?"
+- Save drafts automatically when moving between sections.
 
-Allow users to navigate between form sections without losing data.
-Maintain consistent form state to enable users to review and edit previous inputs.
-Drafts Listing and Differentiation:
+#### Load Existing Drafts:
+- Fetch and display drafts separately from published properties with clear labels (e.g., "Draft" badge).
+- Allow users to resume editing drafts by pre-filling the form with saved data.
 
-Display drafts in a dedicated section, separated from published properties.
-Use labels or badges to indicate the draft status.
-Provide options to edit, delete, or publish drafts directly from the listing.
-5. Security and Access Control:
+---
 
-Authenticate and Authorize Users:
+### 3. **Validation Flow**
 
-Ensure that only authenticated users can save drafts and publish properties.
-Protect API endpoints with authentication middleware.
-Implement authorization checks so users can only access and modify their own drafts.
-Protect Sensitive Data:
+#### Frontend Validation:
+- Perform real-time checks for required fields, formats, and value ranges as users input data.
+- Provide actionable feedback near affected fields (e.g., "This field is required").
+- Summarize errors at the top of the form for better visibility.
 
-Secure data transmission with HTTPS.
-Store sensitive information securely on the server.
-Handle Errors Gracefully:
+#### Backend Validation:
+- Validate data thoroughly upon publish requests to ensure integrity.
+- Return detailed error responses with field-specific issues to guide users.
 
-Provide clear error messages if saving or publishing fails.
-Notify users of issues and suggest actions, like retrying after a network failure.
-Implement retry logic for transient errors.
-6. Additional Considerations:
+---
 
-Default Draft Status Handling:
+### 4. **UI Differentiation**
 
-Since the backend defaults new properties to 'draft', the frontend doesn't need to specify this when saving, simplifying the client-side logic.
-Auto-Save Frequency:
+#### Visual Indicators:
+- Use badges or distinct labels to mark drafts (e.g., "Draft" in property listings).
+- Apply unique styling (e.g., watermarks or banners) on draft detail pages.
 
-Balance auto-save frequency to protect against data loss without overloading the server.
-Trigger saves on meaningful events, like form section completion or significant inactivity periods.
-Error Handling and User Notifications:
+#### Organized Listings:
+- Separate drafts and published properties into tabs or filters.
+- Display editing actions (e.g., "Edit," "Delete," "Publish") prominently for drafts.
 
-If auto-save encounters errors, inform the user unobtrusively.
-Allow users to manually save or retry failed operations.
-Backend Ownership Logic for Collaboration:
+---
 
-If collaborative editing is required, design your backend to support multiple users accessing the same draft.
-Implement role-based permissions and concurrency controls as needed.
-Summary:
+### 5. **Data Synchronization**
 
-Collaborative Frontend and Backend Approach:
+#### Server-Side Storage:
+- Save drafts on the server for persistence across sessions and devices.
+- Implement database indexing for efficient querying of large numbers of drafts.
 
-The backend manages data storage, validation, and security.
-The frontend handles user interaction, form state management, and immediate feedback.
-Enhanced User Experience:
+#### Client-Side Considerations:
+- Temporarily hold active form data in the client's state for faster interaction but rely on server storage for long-term persistence.
 
-Real-time validation and auto-save features enhance usability.
-Clear differentiation between drafts and published properties helps users navigate their listings.
-Security and Data Integrity:
+---
 
-Strong authentication and authorization protect user data.
-Graceful error handling enhances reliability and user trust.
-By incorporating these guidelines, you'll create a robust system for drafting and publishing properties that prioritizes user experience, data integrity, and security.
+### 6. **User Experience Enhancements**
+
+#### Navigation and Progress:
+- Provide seamless navigation between sections while maintaining form state.
+- Show progress indicators (e.g., step bars) for multi-section forms.
+
+#### Error Messages:
+- Highlight specific fields with issues and provide clear instructions for corrections.
+- Include a summary of all validation errors at the top of the form.
+
+---
+
+### 7. **Security and Scalability**
+
+#### Authentication and Authorization:
+- Require users to log in to save drafts or publish properties.
+- Ensure users can only access and edit their own drafts.
+
+#### Draft Management:
+- Allow users to delete drafts or set automatic cleanup (e.g., archive unused drafts after 90 days with prior notifications).
+- Optimize database schemas and use efficient storage techniques to handle a large number of drafts.
+
+---
+
+### 8. **Optional Features**
+
+#### Version Control:
+- Track changes in drafts by storing multiple versions.
+- Allow users to view and restore previous versions if needed.
+
+#### Recovery Options:
+- Implement automatic recovery to restore drafts after unexpected interruptions (e.g., browser crash or session timeout).
+- Notify users about recoverable drafts upon returning to the form.
+
+---
+
+### 9. **Performance Optimization**
+
+- Use **delta updates** to send only changed fields during auto-save.
+- Perform save operations asynchronously to avoid blocking the UI.
+- Implement lazy loading for non-critical resources (e.g., images) to enhance page performance.
