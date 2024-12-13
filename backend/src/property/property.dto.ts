@@ -61,10 +61,23 @@ export class draftPropertyDto {
     @IsString()
     description: string;
 
-    // amenities
+    // Amenities Form
 
-    @IsJSON()
-    amenities_list: { name: string, value: number }
+    /**
+   * List of amenities with their counts.
+   * @example [{ "name": "bedrooms", "value": 3 }]
+   */
 
-    
+    @IsArray()
+    @IsJSON({ each: true })
+    amenities_list: { name: string, value: number }[]
+    // Images Form
+
+    /**
+   * List of images with paths and timestamps.
+   * @example [{ "path": "images/property-image.jpg", "added_at": "2024-12-13T00:00:00Z" }]
+   */
+
+    @IsArray()
+    image: { path: string; added_at: Date }[];
 }
