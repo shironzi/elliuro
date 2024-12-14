@@ -96,7 +96,7 @@ class DetailsDto {
  * Data Transfer Object (DTO) for creating a draft property.
  * This class is used to validate the data for a draft property.
  */
-export class PropertyDto {
+export class Property_Draft {
 
     // For the description Form
 
