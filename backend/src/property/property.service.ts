@@ -46,7 +46,7 @@ export class PropertyService {
         })
     }
 
-    async update(property_id: number, data: Property_Draft) {
+    async update(data: Property_Draft, property_id: number) {
         try {
             const updatedProperty = this.prisma.property.update({
                 where: {
@@ -132,7 +132,8 @@ export class PropertyService {
     delete(property_id: number) {
         return this.prisma.property.delete({
             where: {
-                id: property_id
+                id: property_id,
+                user_id: 1
             }
         })
     }
