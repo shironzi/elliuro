@@ -36,27 +36,33 @@ enum Property_type {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
-  username   String   @unique
-  email      String   @unique
+  id         Int        @id @default(autoincrement())
+  username   String     @unique
+  email      String     @unique
   name       String
   password   String
-  role       Role     @default(CUSTOMER)
-  created_at DateTime @default(now())
-  updated_At DateTime @updatedAt
+  role       Role       @default(CUSTOMER)
+  created_at DateTime   @default(now())
+  updated_At DateTime   @updatedAt
+  Property   Property[]
 }
 
 model Property {
-  id         Int    @id @default(autoincrement())
-  owner      Int
-  status     String
-  user_id    Int
-  details_id Int
+  id                 Int                  @id @default(autoincrement())
+  status             Status               @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  user               User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  details            Details              @relation(fields: [details_id], references: [id], onDelete: Cascade)
+  status_id          Int
+  user_id            Int
+  details_id         Int
+  Property_Images    Property_Images[]
+  Property_Amenities Property_Amenities[]
 }
 
 model Status {
-  id     Int         @id @default(autoincrement())
-  status Status_List @default(DRAFT)
+  id       Int         @id @default(autoincrement())
+  status   Status_List @default(DRAFT)
+  Property Property[]
 }
 
 model Details {
@@ -66,28 +72,36 @@ model Details {
   location    String
   price       Int
   description String
+  Property    Property[]
 }
 
 model Property_Images {
-  id          Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+  image       Image    @relation(fields: [image_id], references: [id], onDelete: Cascade)
   property_id Int
   image_id    Int
 }
 
 model Image {
-  id       Int      @id @default(autoincrement())
-  image    Bytes
-  added_at DateTime
+  id              Int               @id @default(autoincrement())
+  image           Bytes
+  added_at        DateTime
+  Property_Images Property_Images[]
 }
 
 model Property_Amenities {
-  id          Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+  amenity     Amenity  @relation(fields: [amenityId], references: [id], onDelete: Cascade)
   property_id Int
   amenity_id  Int
   value       Int
+  amenityId   Int
 }
 
-model Amenities {
-  id   Int    @id @default(autoincrement())
-  name String
+model Amenity {
+  id                 Int                  @id @default(autoincrement())
+  name               String
+  Property_Amenities Property_Amenities[]
 }
