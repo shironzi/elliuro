@@ -1,4 +1,5 @@
-import { IsArray, IsEnum, IsJSON, IsOptional, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsDate, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
 /**
  * Enum representing different types of properties.
@@ -18,13 +19,36 @@ enum PropertyType {
     Private = 'private',
 }
 
-/**
- * Data Transfer Object (DTO) for creating a draft property.
- * This class is used to validate the data for a draft property.
- */
-export class PropertyDto {
 
-    // For the description Form
+
+class AmenityDto {
+    @IsOptional()
+    @IsInt()
+    id: number
+
+    @IsString()
+    name: string;
+
+    @IsNumber()
+    value: number;
+}
+
+class ImageDto {
+    @IsOptional()
+    @IsInt()
+    id: number
+
+    @IsString()
+    path: string;
+
+    @IsDate()
+    added_at: Date;
+}
+
+class DetailsDto {
+    @IsOptional()
+    @IsInt()
+    id: number
 
     /**
      * The title of the property.
@@ -66,6 +90,22 @@ export class PropertyDto {
     @IsString()
     description: string;
 
+}
+
+/**
+ * Data Transfer Object (DTO) for creating a draft property.
+ * This class is used to validate the data for a draft property.
+ */
+export class PropertyDto {
+
+    // For the description Form
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => DetailsDto)
+    details: DetailsDto[];
+
     // Amenities Form
 
     /**
@@ -74,8 +114,9 @@ export class PropertyDto {
    */
     @IsOptional()
     @IsArray()
-    @IsJSON({ each: true })
-    amenities_list: { name: string, value: number }[]
+    @ValidateNested({ each: true })
+    @Type(() => AmenityDto)
+    amenities_list: AmenityDto[];
     // Images Form
 
     /**
@@ -84,5 +125,7 @@ export class PropertyDto {
    */
     @IsOptional()
     @IsArray()
-    image: { path: string; added_at: Date }[];
+    @ValidateNested({ each: true })
+    @Type(() => ImageDto)
+    images: ImageDto[];
 }

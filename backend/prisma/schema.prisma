@@ -49,10 +49,10 @@ model User {
 
 model Property {
   id                 Int                  @id @default(autoincrement())
-  status             Status?              @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  status             Status               @relation(fields: [status_id], references: [id], onDelete: Cascade)
   user               User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
   details            Details?             @relation(fields: [details_id], references: [id], onDelete: Cascade)
-  status_id          Int?
+  status_id          Int
   user_id            Int
   details_id         Int?
   Property_Images    Property_Images[]
