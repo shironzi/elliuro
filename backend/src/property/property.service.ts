@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyDto } from './property.dto';
+import { Property_Draft } from './property_draft.dto';
+import { Property_Publish } from './property_publish.dto';
+import { ValidatePublishData } from './property.decorator';
 
 enum Property_type {
     HOUSE = "HOUSE",
@@ -14,7 +16,7 @@ enum Property_type {
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
 
-    create(data: PropertyDto) {
+    createDraft(data: Property_Draft) {
         return this.prisma.property.create({
             data: {
                 ...data,
@@ -44,7 +46,7 @@ export class PropertyService {
         })
     }
 
-    async update(property_id: number, data: PropertyDto) {
+    async update(property_id: number, data: Property_Draft) {
         try {
             const updatedProperty = this.prisma.property.update({
                 where: {
@@ -114,6 +116,17 @@ export class PropertyService {
         } catch (error) {
             throw new Error(String(error))
         }
+    }
+
+    publish(@ValidatePublishData() data: Property_Publish, propert_id: number) {
+        return this.prisma.property.update({
+            where: { id: propert_id, user_id: 1 },
+            data: {
+                status: {
+                    connect: { id: data.statusId }
+                }
+            }
+        })
     }
 
     delete(property_id: number) {
