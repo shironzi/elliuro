@@ -115,4 +115,12 @@ export class PropertyService {
             throw new Error(String(error))
         }
     }
+
+    delete(property_id: number) {
+        return this.prisma.property.delete({
+            where: {
+                id: property_id
+            }
+        })
+    }
 }
