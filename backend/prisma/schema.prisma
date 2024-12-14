@@ -51,10 +51,10 @@ model Property {
   id                 Int                  @id @default(autoincrement())
   status             Status               @relation(fields: [status_id], references: [id], onDelete: Cascade)
   user               User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  details            Details?             @relation(fields: [details_id], references: [id], onDelete: Cascade)
+  details            Details              @relation(fields: [details_id], references: [id], onDelete: Cascade)
   status_id          Int
   user_id            Int
-  details_id         Int?
+  details_id         Int
   Property_Images    Property_Images[]
   Property_Amenities Property_Amenities[]
 }
@@ -78,9 +78,11 @@ model Details {
 model Property_Images {
   id          Int      @id @default(autoincrement())
   property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  image       Image?   @relation(fields: [image_id], references: [id], onDelete: Cascade)
+  image       Image    @relation(fields: [image_id], references: [id], onDelete: Cascade)
   property_id Int
-  image_id    Int?
+  image_id    Int
+
+  @@map("image_id")
 }
 
 model Image {
@@ -93,10 +95,10 @@ model Image {
 model Property_Amenities {
   id          Int      @id @default(autoincrement())
   property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  amenity     Amenity? @relation(fields: [amenity_id], references: [id], onDelete: Cascade)
+  amenity     Amenity  @relation(fields: [amenity_id], references: [id], onDelete: Cascade)
   property_id Int
-  amenity_id  Int?
-  value       Int?
+  amenity_id  Int
+  value       Int
 }
 
 model Amenity {

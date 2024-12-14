@@ -9,8 +9,8 @@ export class PropertyController {
     constructor(private readonly propertyService: PropertyService) { }
 
     @Get(':id')
-    async getProperty(@Param('id') property_id: number, @Body('user_id') user_id: number) {
-        return this.propertyService.getProperty(property_id, user_id)
+    async getProperty(@Param('id') property_id: string) {
+        return this.propertyService.getProperty(parseInt(property_id))
     }
 
     @Post('create')
@@ -18,9 +18,9 @@ export class PropertyController {
         return this.propertyService.createDraft(data)
     }
 
-    @Put('update')
-    async updateProperty(@Body() data: Property_Draft, @Param('id') property_id: number) {
-        return this.propertyService.update(data, property_id)
+    @Put('update/:id')
+    async updateProperty(@Body() data: Property_Draft, @Param('id') property_id: string) {
+        return this.propertyService.update(data, parseInt(property_id))
     }
 
     @Put('publish')

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsArray, IsDate, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
+import { IsArray, IsDate, IsEnum, isInt, IsInt, IsJSON, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
 /**
  * Enum representing different types of properties.
@@ -12,14 +12,19 @@ import { IsArray, IsDate, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString,
  * @property {string} Private - Represents a private property.
  */
 enum PropertyType {
-    House = 'house',
+    HOUSE = 'HOUSE',
     Apartment = 'apartment',
     Hotel = 'hotel',
     Condominium = 'condominium',
     Private = 'private',
 }
 
-
+enum StatusType {
+    Draft = "draft",
+    Published = "published",
+    Sold = "sold",
+    Active = "active"
+}
 
 class AmenityDto {
     @IsOptional()
@@ -38,10 +43,9 @@ class ImageDto {
     @IsInt()
     id: number
 
-    @IsString()
-    path: string;
+    imageFile: File;
 
-    @IsDate()
+    @IsString()
     added_at: Date;
 }
 
@@ -50,81 +54,53 @@ class DetailsDto {
     @IsInt()
     id: number
 
-    /**
-     * The title of the property.
-     * @example "Cozy Cottage"
-     */
     @IsOptional()
     @IsString()
     title: string;
 
-    /**
-     * The type of the property.
-     * Must be one of the values defined in the PropertyType enum.
-     */
     @IsOptional()
     @IsEnum(PropertyType)
     type: PropertyType;
 
-    /**
-     * The location of the property.
-     * @example "123 Main St, Springfield"
-     */
     @IsOptional()
     @IsString()
     location: string;
 
-    /**
-     * The price of the property.
-     * @example "250000"
-     */
     @IsOptional()
-    @IsString()
-    price: string;
+    @IsInt()
+    price: number;
 
-    /**
-     * A description of the property.
-     * @example "A beautiful 3-bedroom cottage with a spacious garden."
-     */
     @IsOptional()
     @IsString()
     description: string;
-
 }
 
-/**
- * Data Transfer Object (DTO) for creating a draft property.
- * This class is used to validate the data for a draft property.
- */
+class StatusDto {
+    @IsOptional()
+    @IsInt()
+    id: number
+
+    @IsEnum(StatusType)
+    status: StatusType
+}
+
 export class Property_Draft {
 
-    // For the description Form
-
     @IsOptional()
-    @IsArray()
     @ValidateNested({ each: true })
     @Type(() => DetailsDto)
-    details: DetailsDto[];
+    details: DetailsDto;
 
-    // Amenities Form
+    @ValidateNested({ each: true })
+    @Type(() => StatusDto)
+    status: StatusDto
 
-    /**
-   * List of amenities with their counts.
-   * @example [{ "name": "bedrooms", "value": 3 }]
-   */
     @IsOptional()
-    @IsArray()
     @ValidateNested({ each: true })
     @Type(() => AmenityDto)
-    amenities_list: AmenityDto[];
-    // Images Form
+    amenities: AmenityDto[];
 
-    /**
-   * List of images with paths and timestamps.
-   * @example [{ "path": "images/property-image.jpg", "added_at": "2024-12-13T00:00:00Z" }]
-   */
     @IsOptional()
-    @IsArray()
     @ValidateNested({ each: true })
     @Type(() => ImageDto)
     images: ImageDto[];
