@@ -1,12 +1,17 @@
-import { Body, Controller, Delete, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 import { PropertyService } from './property.service';
 import { Property_Draft } from './property_draft.dto';
 import { Property_Publish } from './property_publish.dto';
 
-@Controller('property')
+@Controller('property-listing')
 export class PropertyController {
     constructor(private readonly propertyService: PropertyService) { }
+
+    @Get(':id')
+    async getProperty(@Param('id') property_id: number, @Body('user_id') user_id: number) {
+        return this.propertyService.getProperty(property_id, user_id)
+    }
 
     @Post('create')
     async createProperty(@Body() data: Property_Draft) {

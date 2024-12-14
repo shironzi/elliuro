@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Property_Draft } from './property_draft.dto';
 import { Property_Publish } from './property_publish.dto';
 import { ValidatePublishData } from './property.decorator';
+import { Property } from '@prisma/client';
 
 enum Property_type {
     HOUSE = "HOUSE",
@@ -15,6 +16,21 @@ enum Property_type {
 @Injectable()
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
+
+    async getProperty(property_id: number, user_id: number): Promise<Property> {
+        const property = await this.prisma.property.findFirst({
+            where: {
+                id: property_id,
+                user_id: user_id
+            }
+        })
+
+        if (!property) {
+            return
+        }
+
+        return property
+    }
 
     createDraft(data: Property_Draft) {
         return this.prisma.property.create({
