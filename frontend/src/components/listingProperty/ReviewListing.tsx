@@ -1,5 +1,5 @@
 import { useOutletContext } from 'react-router'
-import Details from '../../property/Details'
+import Details from '../property/Details'
 
 enum PropertyType {
   House = 'house',

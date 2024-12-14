@@ -13,6 +13,7 @@ import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
 import ListingProperty from './components/listingProperty/ListingProperty'
 import NearEstablishment from './components/listingProperty/NearEstablishment'
+import Properties from './components/property/Properties'
 import { AuthProvider } from './components/context/AuthProvider'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path="images" element={<ListingImage />} />
             <Route path="review" element={<ReviewListing />} />
           </Route>
+          <Route path="/properties" element={<Properties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
