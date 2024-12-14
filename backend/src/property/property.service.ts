@@ -50,7 +50,8 @@ export class PropertyService {
         try {
             const updatedProperty = this.prisma.property.update({
                 where: {
-                    id: property_id
+                    id: property_id,
+                    user_id: 1
                 },
                 data: {
                     ...data,
