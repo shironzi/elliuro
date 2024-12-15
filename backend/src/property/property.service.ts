@@ -33,6 +33,18 @@ export class PropertyService {
         })
     }
 
+    async getPropertyById(property_id: number) {
+        return await this.prisma.property.findFirst({
+            where: {
+                id: property_id
+            },
+            include: {
+                images: true,
+                amenities: true,
+            }
+        })
+    }
+
     async createDraft(data: PropertyDraftDto) {
         return await this.prisma.property.create({
             data: {

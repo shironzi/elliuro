@@ -18,10 +18,16 @@ export class PropertyController {
         return this.propertyService.getPropertyAll()
     }
 
-    // @Get(':id')
-    // async getProperty(@Param('id') property_id: string) {
-    //     return this.propertyService.getProperty(parseInt(property_id))
-    // }
+    /**
+     * 
+     * @param property_id 
+     * @returns property id that equals to property_id
+     */
+
+    @Get(':id')
+    async getProperty(@Param('id') property_id: string) {
+        return this.propertyService.getPropertyById(parseInt(property_id))
+    }
 
     @Post('create')
     async createProperty(@Body() data: PropertyDraftDto) {
