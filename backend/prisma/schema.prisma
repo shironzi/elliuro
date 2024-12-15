@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Enum for user roles
 enum Role {
   CUSTOMER
   PROPERTY_OWNER
@@ -20,6 +21,7 @@ enum Role {
   SUPPORT_AGENT
 }
 
+// Enum for property status
 enum Status_List {
   DRAFT
   PUBLISH
@@ -27,6 +29,7 @@ enum Status_List {
   SOLD
 }
 
+// Enum for property types
 enum Property_type {
   HOUSE
   APARTMENT
@@ -35,6 +38,7 @@ enum Property_type {
   PRIVATE
 }
 
+// User model represents a user in the system
 model User {
   id         Int        @id @default(autoincrement())
   username   String     @unique
@@ -43,28 +47,39 @@ model User {
   password   String
   role       Role       @default(CUSTOMER)
   created_at DateTime   @default(now())
-  updated_At DateTime   @updatedAt
-  Property   Property[]
+  updated_at DateTime   @updatedAt
+  property   Property[]
+
+  @@index([username])
 }
 
+// Property model represents a property in the system
 model Property {
-  id                 Int                  @id @default(autoincrement())
-  status             Status               @relation(fields: [status_id], references: [id], onDelete: Cascade)
-  user               User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  details            Details              @relation(fields: [details_id], references: [id], onDelete: Cascade)
-  status_id          Int
-  user_id            Int
-  details_id         Int
-  Property_Images    Property_Images[]
-  Property_Amenities Property_Amenities[]
+  id         Int         @id @default(autoincrement())
+  status     Status      @relation(fields: [status_id], references: [id], onDelete: Cascade)
+  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  details    Details     @relation(fields: [details_id], references: [id], onDelete: Cascade)
+  status_id  Int         @unique
+  user_id    Int         @unique
+  details_id Int         @unique
+  images     Images[]
+  amenities  Amenities[]
+
+  @@index([status_id])
+  @@index([user_id])
+  @@index([details_id])
 }
 
+// Status model represents the status of a property
 model Status {
   id       Int         @id @default(autoincrement())
   status   Status_List @default(DRAFT)
-  Property Property[]
+  property Property?
+
+  @@index([status])
 }
 
+// Details model represents the details of a property
 model Details {
   id          Int           @id @default(autoincrement())
   title       String?
@@ -72,37 +87,30 @@ model Details {
   location    String?
   price       Int?
   description String?
-  Property    Property[]
+  Property    Property?
+
+  @@index([type])
+  @@index([location])
 }
 
-model Property_Images {
-  id          Int      @id @default(autoincrement())
-  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  image       Image    @relation(fields: [image_id], references: [id], onDelete: Cascade)
+// Images model represents images associated with a property
+model Images {
+  id          Int       @id @default(autoincrement())
+  image       Bytes?
+  added_at    DateTime?
+  property    Property  @relation(fields: [property_id], references: [id], onDelete: Cascade)
   property_id Int
-  image_id    Int
 
-  @@map("image_id")
+  @@index([property_id])
 }
 
-model Image {
-  id              Int               @id @default(autoincrement())
-  image           Bytes?
-  added_at        DateTime?
-  Property_Images Property_Images[]
-}
-
-model Property_Amenities {
+// Amenities model represents amenities associated with a property
+model Amenities {
   id          Int      @id @default(autoincrement())
-  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  amenity     Amenity  @relation(fields: [amenity_id], references: [id], onDelete: Cascade)
-  property_id Int
-  amenity_id  Int
+  name        String
   value       Int
-}
+  property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+  property_id Int
 
-model Amenity {
-  id                 Int                  @id @default(autoincrement())
-  name               String?
-  Property_Amenities Property_Amenities[]
+  @@index([property_id])
 }
