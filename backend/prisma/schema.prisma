@@ -60,7 +60,7 @@ model Property {
   user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   details    Details     @relation(fields: [details_id], references: [id], onDelete: Cascade)
   status_id  Int         @unique
-  user_id    Int         @unique
+  user_id    Int
   details_id Int         @unique
   images     Images[]
   amenities  Amenities[]
