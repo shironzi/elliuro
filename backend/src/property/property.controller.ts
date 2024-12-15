@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
 import { PropertyService } from './property.service';
-import { Property_Draft } from './property_draft.dto';
+import { PropertyDraftDto } from './property_draft.dto';
 import { Property_Publish } from './property_publish.dto';
 
 @Controller('property-listing')
@@ -14,12 +14,12 @@ export class PropertyController {
     }
 
     @Post('create')
-    async createProperty(@Body() data: Property_Draft) {
+    async createProperty(@Body() data: PropertyDraftDto) {
         return this.propertyService.createDraft(data)
     }
 
     @Put('update/:id')
-    async updateProperty(@Body() data: Property_Draft, @Param('id') property_id: string) {
+    async updateProperty(@Body() data: PropertyDraftDto, @Param('id') property_id: string) {
         return this.propertyService.update(data, parseInt(property_id))
     }
 
