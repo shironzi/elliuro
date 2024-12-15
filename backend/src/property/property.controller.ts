@@ -8,10 +8,20 @@ import { Property_Publish } from './property_publish.dto';
 export class PropertyController {
     constructor(private readonly propertyService: PropertyService) { }
 
-    @Get(':id')
-    async getProperty(@Param('id') property_id: string) {
-        return this.propertyService.getProperty(parseInt(property_id))
+
+    /**
+     * 
+     * @returns all property created by user
+     */
+    @Get()
+    async getAllProperty() {
+        return this.propertyService.getPropertyAll()
     }
+
+    // @Get(':id')
+    // async getProperty(@Param('id') property_id: string) {
+    //     return this.propertyService.getProperty(parseInt(property_id))
+    // }
 
     @Post('create')
     async createProperty(@Body() data: PropertyDraftDto) {

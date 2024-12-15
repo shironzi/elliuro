@@ -24,8 +24,13 @@ enum StatusType {
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
 
-    async getProperty(property_id: number) {
-
+    async getPropertyAll() {
+        return await this.prisma.property.findMany({
+            include: {
+                images: true,
+                amenities: true,
+            }
+        })
     }
 
     async createDraft(data: PropertyDraftDto) {
