@@ -12,6 +12,14 @@ enum Property_type {
     PRIVATE = "PRIVATE",
 }
 
+enum StatusType {
+    Draft = "draft",
+    Published = "published",
+    Sold = "sold",
+    Active = "active"
+}
+
+
 @Injectable()
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
@@ -21,7 +29,39 @@ export class PropertyService {
     }
 
     async createDraft(data: PropertyDraftDto) {
-
+        return await this.prisma.property.create({
+            data: {
+                status: {
+                    create: {}
+                },
+                user: {
+                    connect: {
+                        id: 1
+                    }
+                },
+                details: {
+                    create: {
+                        title: data.details.title,
+                        type: data.details.type as unknown as Property_type,
+                        location: data.details.location,
+                        price: data.details.price,
+                        description: data.details.description
+                    }
+                },
+                images: {
+                    create: data.images?.map(image => ({
+                        image: new Uint8Array(Buffer.from(image.image, 'base64')),
+                        added_at: image.added_at
+                    }))
+                },
+                amenities: {
+                    create: data.amenities?.map(amenity => ({
+                        name: amenity.name,
+                        value: amenity.value
+                    }))
+                }
+            },
+        })
     }
 
     async update(data: PropertyDraftDto, property_id: number) {
