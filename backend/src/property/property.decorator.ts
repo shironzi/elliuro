@@ -1,7 +1,7 @@
 import { BadRequestException, createParamDecorator, ExecutionContext } from "@nestjs/common"
 import { PropertyPublishDto } from "./property_publish.dto"
 
-export const ValidatePublishData = createParamDecorator(
+export const ValidatePropertyData = createParamDecorator(
     (data: unknown, ctx: ExecutionContext) => {
         const request = ctx.switchToHttp().getRequest();
         const body: PropertyPublishDto = request.body;
