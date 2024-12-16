@@ -27,7 +27,7 @@ interface PropertyImages {
 }
 
 export async function createIntialProperty(): Promise<string> {
-    const response = await fetch('/api/property-listing/intialProperty', {
+    const response = await fetch('/api/property-listing/initialProperty', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
