@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto, PropertyType } from './property_draft.dto';
+import { Property_type } from '@prisma/client';
 
 @Controller('property-listing')
 export class PropertyController {
@@ -32,6 +33,12 @@ export class PropertyController {
     async createInitialProperty() {
         return this.propertyService.createIntialProperty()
     }
+
+    // @Put('details/:id')
+    // async upsertPropertyDetails(@Body() data: { title: string, type: PropertyType, location: string, price: number, description: string }, @Param('id') propertyId: string) {
+    //     const convertedData = { ...data, type: data.type as PropertyType };
+    //     return this.propertyService.upsertPropertyDetails(convertedData, parseInt(propertyId))
+    // }
 
     @Put('details/:id')
     async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('id') propertyId: string) {

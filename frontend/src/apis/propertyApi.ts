@@ -10,7 +10,7 @@ interface Details {
     title: string;
     type: PropertyType;
     location: string;
-    price: number;
+    price: string;
     description: string;
 }
 
@@ -42,8 +42,8 @@ export async function createIntialProperty(): Promise<string> {
     return result;
 }
 
-export async function propertyDetails(details: Details): Promise<string> {
-    const response = await fetch('/api/property-listing/details/:id', {
+export async function propertyDetails(details: Details, propertyId: string): Promise<string> {
+    const response = await fetch(`/api/property-listing/details/${propertyId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',

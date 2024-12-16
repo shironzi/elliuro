@@ -1,4 +1,4 @@
-import { BadRequestException, createParamDecorator, ExecutionContext } from "@nestjs/common";
+import { BadRequestException, createParamDecorator, ExecutionContext, PipeTransform, Injectable, ArgumentMetadata } from "@nestjs/common";
 import { PropertyPublishDto } from "./property_publish.dto";
 
 export const ValidatePropertyData = createParamDecorator(

@@ -1,24 +1,13 @@
-import { Type } from "class-transformer";
+import { Property_type } from "@prisma/client";
+import { Transform, Type } from "class-transformer";
 import { IsEnum, IsInt, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-enum PropertyType {
-    HOUSE = 'HOUSE',
-    APARTMENT = 'APARTMENT',
-    HOTEL = 'HOTEL',
-    CONDOMINIUM = 'CONDOMINIUM',
-    PRIVATE = 'PRIVATE',
-}
-
-enum StatusType {
-    Draft = "draft",
-    Published = "published",
-    Sold = "sold",
-    Active = "active"
-}
-
-class StatusDto {
-    @IsEnum(StatusType)
-    status: StatusType
+export enum PropertyType {
+    HOUSE = "HOUSE",
+    APARTMENT = "APARTMENT",
+    HOTEL = "HOTEL",
+    CONDOMINIUM = "CONDOMINIUM",
+    PRIVATE = "PRIVATE"
 }
 
 export class PropertyDetailsDto {
@@ -27,7 +16,7 @@ export class PropertyDetailsDto {
     title?: string
 
     @IsEnum(PropertyType)
-    type: PropertyType
+    type: PropertyType;
 
     @IsOptional()
     @IsString()

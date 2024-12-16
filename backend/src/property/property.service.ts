@@ -1,16 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto, PropertyType } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
-
-enum PropertyType {
-    HOUSE = "HOUSE",
-    APARTMENT = "APARTMENT",
-    HOTEL = "HOTEL",
-    CONDOMINIUM = "CONDOMINIUM",
-    PRIVATE = "PRIVATE",
-}
+import { Property_type } from '@prisma/client';
 
 
 @Injectable()
@@ -53,7 +46,6 @@ export class PropertyService {
                 details: {
                     create: {
                         title: '',
-                        type: PropertyType.HOUSE,
                         location: '',
                         price: 0,
                         description: ''
@@ -75,7 +67,7 @@ export class PropertyService {
                 details: {
                     update: {
                         title: data.title,
-                        type: data.type as unknown as PropertyType,
+                        type: data.type as unknown as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description
@@ -94,7 +86,7 @@ export class PropertyService {
                 details: {
                     create: {
                         title: data.title,
-                        type: data.type as unknown as PropertyType,
+                        type: data.type as unknown as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description

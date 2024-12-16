@@ -4,7 +4,8 @@ import { LuHotel } from 'react-icons/lu'
 import { BsBuildings } from 'react-icons/bs'
 import { FaHouseLock } from 'react-icons/fa6'
 import { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import { propertyDetails } from '../../apis/propertyApi'
 
 enum PropertyType {
   HOUSE = 'HOUSE',
@@ -15,6 +16,7 @@ enum PropertyType {
 }
 
 function ListingDetails() {
+  const { propertyId } = useParams() 
   const navigate = useNavigate()
   const [detailsData, setDetailsData] = useState(
     {
@@ -28,11 +30,17 @@ function ListingDetails() {
   const [propertyType, setPropertyType] = useState(detailsData.type)
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async(event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      navigate('/property-listing/amenities')
+
+      if (propertyId) {
+        await propertyDetails(detailsData, propertyId)
+        navigate(`/property-listing/amenities/${propertyId}`)
+      } else {
+        console.error('Property ID is undefined')
+      }
     },
-    [navigate],
+    [navigate, propertyId, detailsData],
   )
 
   const handlePropertyType = useCallback(
