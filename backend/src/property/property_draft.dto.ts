@@ -42,7 +42,7 @@ export class PropertyDetailsDto {
     description?: string
 }
 
-class ImageDto {
+export class PropertyImageDto {
     @IsOptional()
     @IsNumber()
     id: number
@@ -58,9 +58,13 @@ class ImageDto {
     @IsOptional()
     @IsString()
     added_at?: string
+
+    @IsOptional()
+    @IsString()
+    updated_at?: string
 }
 
-class AmenityDto {
+export class PropertyAmenityDto {
     @IsOptional()
     @IsNumber()
     id: number
@@ -74,20 +78,20 @@ class AmenityDto {
     value: number
 }
 
-export class PropertyDraftDto {
-    @ValidateNested()
-    @Type(() => StatusDto)
-    status: StatusDto;
+// export class PropertyDraftDto {
+//     @ValidateNested()
+//     @Type(() => StatusDto)
+//     status: StatusDto;
 
-    @ValidateNested()
-    @Type(() => PropertyDetailsDto)
-    details: PropertyDetailsDto;
+//     @ValidateNested()
+//     @Type(() => PropertyDetailsDto)
+//     details: PropertyDetailsDto;
 
-    @ValidateNested({ each: true })
-    @Type(() => ImageDto)
-    images: ImageDto[];
+//     @ValidateNested({ each: true })
+//     @Type(() => ImageDto)
+//     images: ImageDto[];
 
-    @ValidateNested({ each: true })
-    @Type(() => AmenityDto)
-    amenities: AmenityDto[];
-}
+//     @ValidateNested({ each: true })
+//     @Type(() => AmenityDto)
+//     amenities: AmenityDto[];
+// }
