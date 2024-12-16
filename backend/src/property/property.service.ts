@@ -181,5 +181,15 @@ export class PropertyService {
             throw new Error('Failed to publish property');
         }
     }
+
+    async delete(propertyId: number) {
+        await this.prisma.property.delete({
+            where: {
+                id: propertyId
+            }
+        })
+
+        return `property with id ${propertyId} has been deleted.`
+    }
 }
 

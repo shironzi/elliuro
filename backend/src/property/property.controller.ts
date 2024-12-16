@@ -43,9 +43,9 @@ export class PropertyController {
         return this.propertyService.publish(data, parseInt(property_id))
     }
 
-    // @Delete('delete/:id')
-    // async deleteProperty(@Param('id') propertyId: string) {
-    //     return this.propertyService.delete(parseInt(propertyId))
-    // }
+    @Delete('delete/:id')
+    async deleteProperty(@Param('id') propertyId: string) {
+        return this.propertyService.delete(parseInt(propertyId))
+    }
 
 }
