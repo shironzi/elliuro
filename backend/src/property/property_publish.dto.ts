@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { IsArray, IsDate, IsEnum, IsInt, IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsDate, IsEnum, IsInt, IsNumber, IsString, ValidateNested } from "class-validator";
 
 enum PropertyType {
     House = 'house',
@@ -53,23 +53,16 @@ class DetailsDto {
 }
 
 
-export class Property_Publish {
-    @IsInt()
-    statusId: number
-
-    @IsArray()
-    @ValidateNested({ each: true })
+export class PropertyPublishDto {
+    @ValidateNested()
     @Type(() => DetailsDto)
-    details: DetailsDto[];
+    details: DetailsDto;
 
-    @IsArray()
-    @ValidateNested({ each: true })
-    @Type(() => AmenityDto)
-    amenities_list: AmenityDto[];
-
-    @IsArray()
     @ValidateNested({ each: true })
     @Type(() => ImageDto)
     images: ImageDto[];
 
+    @ValidateNested({ each: true })
+    @Type(() => AmenityDto)
+    amenities: AmenityDto[];
 }
