@@ -58,6 +58,7 @@ export class PropertyService {
                 },
                 images: {
                     create: data.images?.map(image => ({
+                        name: image.name,
                         image: new Uint8Array(Buffer.from(image.image, 'base64')),
                         added_at: image.added_at
                     }))
@@ -78,9 +79,31 @@ export class PropertyService {
                 property_id: property_id
             },
             select: {
-                id: true
+                id: true,
+                name: true,
+                image: true
             }
         })
+
+        Promise.all(
+            data.images?.map(async image => {
+                const existingImage = propertyImageIds.find(existing => existing.name === image.name)
+                await this.prisma.images.upsert({
+                    where: { id: existingImage?.id || 0 },
+                    update: { image: new Uint8Array(Buffer.from(image.image, 'base64')) },
+                    create: {
+                        name: image.name,
+                        image: new Uint8Array(Buffer.from(image.image, 'base64')),
+                        added_at: image.added_at,
+                        property: {
+                            connect: {
+                                id: property_id
+                            }
+                        }
+                    }
+                })
+            })
+        )
 
         const propertyAmenitiesIds = await this.prisma.amenities.findMany({
             where: {
@@ -90,26 +113,27 @@ export class PropertyService {
                 id: true,
                 name: true,
                 value: true,
-                property_id: true
             }
         })
 
-        data.amenities?.map(async amenity => {
-            const existingAmenity = propertyAmenitiesIds.find(existingAmenity => existingAmenity.name === amenity.name);
-            await this.prisma.amenities.upsert({
-                where: { id: existingAmenity?.id || 0 },
-                update: { value: amenity.value },
-                create: {
-                    name: amenity.name,
-                    value: amenity.value,
-                    property: {
-                        connect: {
-                            id: property_id
+        Promise.all(
+            data.amenities?.map(async amenity => {
+                const existingAmenity = propertyAmenitiesIds.find(existingAmenity => existingAmenity.name === amenity.name);
+                await this.prisma.amenities.upsert({
+                    where: { id: existingAmenity?.id || 0 },
+                    update: { value: amenity.value },
+                    create: {
+                        name: amenity.name,
+                        value: amenity.value,
+                        property: {
+                            connect: {
+                                id: property_id
+                            }
                         }
                     }
-                }
+                })
             })
-        })
+        )
 
         await this.prisma.property.update({
             where: {
