@@ -3,10 +3,10 @@ import { IsEnum, IsInt, IsNumber, IsOptional, IsString, ValidateNested } from "c
 
 enum PropertyType {
     HOUSE = 'HOUSE',
-    Apartment = 'apartment',
-    Hotel = 'hotel',
-    Condominium = 'condominium',
-    Private = 'private',
+    APARTMENT = 'APARTMENT',
+    HOTEL = 'HOTEL',
+    CONDOMINIUM = 'CONDOMINIUM',
+    PRIVATE = 'PRIVATE',
 }
 
 enum StatusType {
@@ -77,21 +77,3 @@ export class PropertyAmenityDto {
     @IsNumber()
     value: number
 }
-
-// export class PropertyDraftDto {
-//     @ValidateNested()
-//     @Type(() => StatusDto)
-//     status: StatusDto;
-
-//     @ValidateNested()
-//     @Type(() => PropertyDetailsDto)
-//     details: PropertyDetailsDto;
-
-//     @ValidateNested({ each: true })
-//     @Type(() => ImageDto)
-//     images: ImageDto[];
-
-//     @ValidateNested({ each: true })
-//     @Type(() => AmenityDto)
-//     amenities: AmenityDto[];
-// }

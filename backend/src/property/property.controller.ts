@@ -28,7 +28,7 @@ export class PropertyController {
         return this.propertyService.getPropertyById(parseInt(property_id))
     }
 
-    @Post('createIntialProperty')
+    @Post('initialProperty')
     async createInitialProperty() {
         return this.propertyService.createIntialProperty()
     }
