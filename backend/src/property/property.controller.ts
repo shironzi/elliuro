@@ -28,10 +28,15 @@ export class PropertyController {
         return this.propertyService.getPropertyById(parseInt(property_id))
     }
 
-    @Post('create')
-    async createProperty(@Body() data: PropertyDraftDto) {
-        return this.propertyService.createDraft(data)
+    @Post('createIntialProperty')
+    async createInitialProperty() {
+        return this.propertyService.createIntialProperty()
     }
+
+    // @Post('create')
+    // async createProperty(@Body() data: PropertyDraftDto) {
+    //     return this.propertyService.createDraft(data)
+    // }
 
     @Put('update/:id')
     async updateProperty(@Body() data: PropertyDraftDto, @Param('id') property_id: string) {
