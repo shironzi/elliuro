@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertyDraftDto } from './property_draft.dto';
+import { PropertyPublishDto } from './property_publish.dto';
+import { ValidatePropertyData } from './property.decorator';
 
 enum Property_type {
     HOUSE = "HOUSE",
@@ -37,7 +39,7 @@ export class PropertyService {
     }
 
     async createDraft(data: PropertyDraftDto) {
-        return await this.prisma.property.create({
+        await this.prisma.property.create({
             data: {
                 status: {
                     create: {}
@@ -71,6 +73,8 @@ export class PropertyService {
                 }
             },
         })
+
+        return `Successfully Created Property.`
     }
 
     async update(data: PropertyDraftDto, property_id: number) {
@@ -156,6 +160,26 @@ export class PropertyService {
                 },
             },
         })
+
+        return `property with id ${property_id} has been updated.`
+    }
+
+    async publish(data: PropertyPublishDto, propertyId: number) {
+        try {
+            ValidatePropertyData(data);
+
+            await this.prisma.status.update({
+                where: {
+                    id: propertyId
+                },
+                data: {
+                    status: "PUBLISH"
+                }
+            });
+        } catch (error) {
+            console.error('Error publishing property:', error);
+            throw new Error('Failed to publish property');
+        }
     }
 }
 
