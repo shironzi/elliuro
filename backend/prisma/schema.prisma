@@ -96,6 +96,7 @@ model Details {
 // Images model represents images associated with a property
 model Images {
   id          Int       @id @default(autoincrement())
+  name        String?
   image       Bytes?
   added_at    DateTime?
   property    Property  @relation(fields: [property_id], references: [id], onDelete: Cascade)
