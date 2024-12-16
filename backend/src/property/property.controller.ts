@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { PropertyService } from './property.service';
-import { PropertyDraftDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
 
 @Controller('property-listing')
 export class PropertyController {
@@ -33,24 +33,29 @@ export class PropertyController {
         return this.propertyService.createIntialProperty()
     }
 
-    // @Post('create')
-    // async createProperty(@Body() data: PropertyDraftDto) {
-    //     return this.propertyService.createDraft(data)
-    // }
+    @Put('amenities/:id')
+    async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('id') propertyId: string) {
+        return this.propertyService.upsertPropertyDetails(data, parseInt(propertyId))
+    }
 
-    @Put('update/:id')
-    async updateProperty(@Body() data: PropertyDraftDto, @Param('id') property_id: string) {
-        return this.propertyService.update(data, parseInt(property_id))
+    @Put('amenities/:id')
+    async upsertPropertyAmenities(@Body() data: PropertyAmenityDto[], @Param('id') propertyId: string) {
+        return this.propertyService.upsertPropertyAmenities(data, parseInt(propertyId))
+    }
+
+    @Put('amenities/:id')
+    async upsertPropertyImages(@Body() data: PropertyImageDto[], @Param('id') propertyId: string) {
+        return this.propertyService.upsertPropertyImages(data, parseInt(propertyId))
     }
 
     @Put('publish/:id')
-    async publishProperty(@Body() data: PropertyPublishDto, @Param('id') property_id: string) {
-        return this.propertyService.publish(data, parseInt(property_id))
+    async publishProperty(@Body() data: PropertyPublishDto, @Param('id') propertyId: string) {
+        return this.propertyService.publishProperty(data, parseInt(propertyId))
     }
 
     @Delete('delete/:id')
     async deleteProperty(@Param('id') propertyId: string) {
-        return this.propertyService.delete(parseInt(propertyId))
+        return this.propertyService.deleteProperty(parseInt(propertyId))
     }
 
 }
