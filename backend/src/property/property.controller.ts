@@ -33,7 +33,7 @@ export class PropertyController {
         return this.propertyService.createIntialProperty()
     }
 
-    @Put('amenities/:id')
+    @Put('details/:id')
     async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('id') propertyId: string) {
         return this.propertyService.upsertPropertyDetails(data, parseInt(propertyId))
     }
@@ -43,7 +43,7 @@ export class PropertyController {
         return this.propertyService.upsertPropertyAmenities(data, parseInt(propertyId))
     }
 
-    @Put('amenities/:id')
+    @Put('images/:id')
     async upsertPropertyImages(@Body() data: PropertyImageDto[], @Param('id') propertyId: string) {
         return this.propertyService.upsertPropertyImages(data, parseInt(propertyId))
     }
