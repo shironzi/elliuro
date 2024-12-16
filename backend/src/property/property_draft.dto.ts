@@ -44,6 +44,10 @@ class DetailsDto {
 
 class ImageDto {
     @IsOptional()
+    @IsNumber()
+    id: number
+
+    @IsOptional()
     @IsString()
     image?: string
 
@@ -53,6 +57,10 @@ class ImageDto {
 }
 
 class AmenityDto {
+    @IsOptional()
+    @IsNumber()
+    id: number
+
     @IsOptional()
     @IsString()
     name: string;
