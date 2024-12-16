@@ -4,57 +4,43 @@ import { LuHotel } from 'react-icons/lu'
 import { BsBuildings } from 'react-icons/bs'
 import { FaHouseLock } from 'react-icons/fa6'
 import { useCallback, useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router'
+import { useNavigate } from 'react-router'
 
 enum PropertyType {
-  House = 'house',
-  Apartment = 'apartment',
-  Hotel = 'hotel',
-  Condominium = 'condominium',
-  Private = 'private',
-}
-interface ContextOutlet {
-  formData: {
-    details: {
-      title: string
-      type: PropertyType
-      location: string
-      price: string
-      description: string
-    }
-  }
-  updateFromData: (key: string, value: string | number | object) => void
+  HOUSE = 'HOUSE',
+  APARTMENT = 'APARTMENT',
+  HOTEL = 'HOTEL',
+  CONDOMINIUM = 'CONDOMINIUM',
+  PRIVATE = 'PRIVATE',
 }
 
 function ListingDetails() {
   const navigate = useNavigate()
-  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
-  const [details, setDetails] = useState(
-    formData.details || {
+  const [detailsData, setDetailsData] = useState(
+    {
       title: '',
-      type: PropertyType.House,
+      type: PropertyType.HOUSE,
       location: '',
       price: '',
       description: '',
     },
   )
-  const [propertyType, setPropertyType] = useState(details.type)
+  const [propertyType, setPropertyType] = useState(detailsData.type)
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      updateFromData('details', details)
       navigate('/property-listing/amenities')
     },
-    [details, updateFromData, navigate],
+    [navigate],
   )
 
-  const changePropertyType = useCallback(
+  const handlePropertyType = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
       const property = event?.currentTarget.value
       setPropertyType(property as PropertyType)
-      setDetails((prevDetails) => ({
+      setDetailsData((prevDetails) => ({
         ...prevDetails,
         ['type']: property as PropertyType,
       }))
@@ -65,7 +51,7 @@ function ListingDetails() {
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget
-      setDetails((prevDetails) => ({ ...prevDetails, [name]: value }))
+      setDetailsData((prevDetails) => ({ ...prevDetails, [name]: value }))
     },
     [],
   )
@@ -73,7 +59,7 @@ function ListingDetails() {
   const handleDescChange = useCallback(
     (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       const { name, value } = event.currentTarget
-      setDetails((prevDetails) => ({ ...prevDetails, [name]: value }))
+      setDetailsData((prevDetails) => ({ ...prevDetails, [name]: value }))
     },
     [],
   )
@@ -112,7 +98,7 @@ function ListingDetails() {
                 id="title"
                 name="title"
                 className="w-full outline-none bg-transparent border px-4 py-2.5 text-lg"
-                value={details.title || ''}
+                value={detailsData.title}
                 onChange={handleChange}
               />
               <input
@@ -121,7 +107,7 @@ function ListingDetails() {
                 name="price"
                 className="w-6/12 outline-none bg-transparent border px-4 py-2.5 text-lg"
                 onChange={handleChange}
-                value={details.price || ''}
+                value={detailsData.price}
               />
             </div>
           </div>
@@ -130,56 +116,56 @@ function ListingDetails() {
             <div className="flex items-center font-proximaNova justify-between gap-5">
               <button
                 className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
-                  propertyType === 'house' ? 'bg-beige-400' : 'bg-secondary-400'
+                  propertyType === 'HOUSE' ? 'bg-beige-400' : 'bg-secondary-400'
                 }`}
-                value="house"
-                onClick={changePropertyType}
+                value="HOUSE"
+                onClick={handlePropertyType}
               >
                 <FaRegBuilding />
                 <h1>House</h1>
               </button>
               <button
                 className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
-                  propertyType === 'apartment'
+                  propertyType === 'APARTMENT'
                     ? 'bg-beige-400'
                     : 'bg-secondary-400'
                 }`}
-                value="apartment"
-                onClick={changePropertyType}
+                value="APARTMENT"
+                onClick={handlePropertyType}
               >
                 <PiHouseBold />
                 <h1>Apartment</h1>
               </button>
               <button
                 className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
-                  propertyType === 'hotel' ? 'bg-beige-400' : 'bg-secondary-400'
+                  propertyType === 'HOTEL' ? 'bg-beige-400' : 'bg-secondary-400'
                 }`}
-                value="hotel"
-                onClick={changePropertyType}
+                value="HOTEL"
+                onClick={handlePropertyType}
               >
                 <LuHotel />
                 <h1>Hotel Room</h1>
               </button>
               <button
                 className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
-                  propertyType === 'condominium'
+                  propertyType === 'CONDOMINIUM'
                     ? 'bg-beige-400'
                     : 'bg-secondary-400'
                 }`}
-                value="condominium"
-                onClick={changePropertyType}
+                value="CONDOMINIUM"
+                onClick={handlePropertyType}
               >
                 <BsBuildings />
                 <h1>Condominium</h1>
               </button>
               <button
                 className={`flex flex-row gap-2 items-center w-full justify-center px-10 py-4 text-lg ${
-                  propertyType === 'private'
+                  propertyType === 'PRIVATE'
                     ? 'bg-beige-400'
                     : 'bg-secondary-400'
                 }`}
-                value="private"
-                onClick={changePropertyType}
+                value="PRIVATE"
+                onClick={handlePropertyType}
               >
                 <FaHouseLock />
                 <h1>Private room</h1>
@@ -195,7 +181,7 @@ function ListingDetails() {
               className="outline-none bg-transparent border px-4 py-2.5 text-lg"
               style={{ width: '65%' }}
               onChange={handleChange}
-              value={details.location || ''}
+              value={detailsData.location}
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -206,7 +192,7 @@ function ListingDetails() {
               className="outline-none bg-transparent border w-full px-4 py-2 text-lg"
               rows={10}
               onChange={handleDescChange}
-              value={details.description || ''}
+              value={detailsData.description}
             ></textarea>
           </div>
           <button
