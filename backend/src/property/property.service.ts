@@ -1,7 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { Property_Publish } from './property_publish.dto';
-import { ValidatePublishData } from './property.decorator';
 import { PropertyDraftDto } from './property_draft.dto';
 
 enum Property_type {
@@ -10,13 +8,6 @@ enum Property_type {
     HOTEL = "HOTEL",
     CONDOMINIUM = "CONDOMINIUM",
     PRIVATE = "PRIVATE",
-}
-
-enum StatusType {
-    Draft = "draft",
-    Published = "published",
-    Sold = "sold",
-    Active = "active"
 }
 
 
@@ -82,16 +73,65 @@ export class PropertyService {
     }
 
     async update(data: PropertyDraftDto, property_id: number) {
+        const propertyImageIds = await this.prisma.images.findMany({
+            where: {
+                property_id: property_id
+            },
+            select: {
+                id: true
+            }
+        })
 
-    }
+        const propertyAmenitiesIds = await this.prisma.amenities.findMany({
+            where: {
+                property_id: property_id
+            },
+            select: {
+                id: true,
+                name: true,
+                value: true,
+                property_id: true
+            }
+        })
 
+        data.amenities?.map(async amenity => {
+            const existingAmenity = propertyAmenitiesIds.find(existingAmenity => existingAmenity.name === amenity.name);
+            await this.prisma.amenities.upsert({
+                where: { id: existingAmenity?.id || 0 },
+                update: { value: amenity.value },
+                create: {
+                    name: amenity.name,
+                    value: amenity.value,
+                    property: {
+                        connect: {
+                            id: property_id
+                        }
+                    }
+                }
+            })
+        })
 
-    async publish(@ValidatePublishData() data: Property_Publish, propert_id: number) {
-
-    }
-
-    async delete(property_id: number) {
-
+        await this.prisma.property.update({
+            where: {
+                id: property_id
+            },
+            data: {
+                user: {
+                    connect: {
+                        id: 1
+                    }
+                },
+                details: {
+                    update: {
+                        title: data.details.title,
+                        type: data.details.type as unknown as Property_type,
+                        location: data.details.location,
+                        price: data.details.price,
+                        description: data.details.description
+                    }
+                },
+            },
+        })
     }
 }
 
