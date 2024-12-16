@@ -99,6 +99,7 @@ model Images {
   name        String?
   image       Bytes?
   added_at    DateTime?
+  updated_at  DateTime?
   property    Property  @relation(fields: [property_id], references: [id], onDelete: Cascade)
   property_id Int
 
