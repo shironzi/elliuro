@@ -1,3 +1,5 @@
+does this have good code quality, follow the best practices, standards, Usability, Functionality, Correctness, Reliability, Testability, Efficiency, and Security.
+
 Customer:
     Search and filter properties.
     Book properties for rent.

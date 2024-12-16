@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyDetailsDto, PropertyDraftDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 
@@ -65,15 +65,34 @@ export class PropertyService {
         return property.id
     }
 
-    async createDraftDetails(data: PropertyDetailsDto, propertyId: number) {
-        await this.prisma.property.update({
+    async upsertPropertyDetails(data: PropertyDetailsDto, propertyId: number) {
+        await this.prisma.property.upsert({
             where: {
-                id: propertyId,
+                id: propertyId ? propertyId : 0,
                 user_id: 1
             },
-            data: {
+            update: {
                 details: {
                     update: {
+                        title: data.title,
+                        type: data.type as unknown as PropertyType,
+                        location: data.location,
+                        price: data.price,
+                        description: data.description
+                    }
+                }
+            },
+            create: {
+                user: {
+                    connect: {
+                        id: 1
+                    }
+                },
+                status: {
+                    create: {}
+                },
+                details: {
+                    create: {
                         title: data.title,
                         type: data.type as unknown as PropertyType,
                         location: data.location,
@@ -84,52 +103,13 @@ export class PropertyService {
             }
         })
 
-        return `Property Details has been Updated`
+        return propertyId ? `Property Details have been Updated` : `Property Details have been Created`;
     }
 
-    // async createDraft(data: PropertyDraftDto) {
-    //     await this.prisma.property.create({
-    //         data: {
-    //             status: {
-    //                 create: {}
-    //             },
-    //             user: {
-    //                 connect: {
-    //                     id: 1
-    //                 }
-    //             },
-    //             details: {
-    //                 create: {
-    //                     title: data.details.title,
-    //                     type: data.details.type as unknown as Property_type,
-    //                     location: data.details.location,
-    //                     price: data.details.price,
-    //                     description: data.details.description
-    //                 }
-    //             },
-    //             images: {
-    //                 create: data.images?.map(image => ({
-    //                     name: image.name,
-    //                     image: new Uint8Array(Buffer.from(image.image, 'base64')),
-    //                     added_at: image.added_at
-    //                 }))
-    //             },
-    //             amenities: {
-    //                 create: data.amenities?.map(amenity => ({
-    //                     name: amenity.name,
-    //                     value: amenity.value
-    //                 }))
-    //             }
-    //         },
-    //     })
-
-    //     return `Successfully Created Property.`
-    // }
-
-    async update(data: PropertyDraftDto, property_id: number) {
+    async upsertPropertyImages(data: PropertyImageDto[], propertyId: number) {
         const propertyImageIds = await this.prisma.images.findMany({
             where: {
-                property_id: property_id
+                property_id: propertyId
             },
             select: {
                 id: true,
@@ -138,86 +118,59 @@ export class PropertyService {
             }
         })
 
-        Promise.all(
-            data.images?.map(async image => {
-                const existingImage = propertyImageIds.find(existing => existing.name === image.name)
-                await this.prisma.images.upsert({
-                    where: { id: existingImage?.id || 0 },
-                    update: { image: new Uint8Array(Buffer.from(image.image, 'base64')) },
-                    create: {
-                        name: image.name,
-                        image: new Uint8Array(Buffer.from(image.image, 'base64')),
-                        added_at: image.added_at,
-                        property: {
-                            connect: {
-                                id: property_id
-                            }
+        for (const image of data) {
+            const existingImage = propertyImageIds.find(existing => existing.name === image.name)
+
+            await this.prisma.images.upsert({
+                where: { id: existingImage?.id || 0 },
+                update: { image: new Uint8Array(Buffer.from(image.image, 'base64')) },
+                create: {
+                    name: image.name,
+                    image: new Uint8Array(Buffer.from(image.image, 'base64')),
+                    added_at: image.added_at,
+                    property: {
+                        connect: {
+                            id: propertyId
                         }
                     }
-                })
+                }
             })
-        )
+        }
+    }
 
+    async upsertPropertyAmenities(data: PropertyAmenityDto[], propertyId: number) {
         const propertyAmenitiesIds = await this.prisma.amenities.findMany({
             where: {
-                property_id: property_id
+                property_id: propertyId
             },
             select: {
                 id: true,
                 name: true,
-                value: true,
+                value: true
             }
         })
 
-        Promise.all(
-            data.amenities?.map(async amenity => {
-                const existingAmenity = propertyAmenitiesIds.find(existingAmenity => existingAmenity.name === amenity.name);
-                await this.prisma.amenities.upsert({
-                    where: { id: existingAmenity?.id || 0 },
-                    update: { value: amenity.value },
-                    create: {
-                        name: amenity.name,
-                        value: amenity.value,
-                        property: {
-                            connect: {
-                                id: property_id
-                            }
+        for (const amenity of data) {
+            const existingAmenity = propertyAmenitiesIds.find(existingAmenity => existingAmenity.name === amenity.name);
+
+            await this.prisma.amenities.upsert({
+                where: { id: existingAmenity?.id || 0 },
+                update: { value: amenity.value },
+                create: {
+                    name: amenity.name,
+                    value: amenity.value,
+                    property: {
+                        connect: {
+                            id: propertyId
                         }
                     }
-                })
+                }
             })
-        )
-
-        await this.prisma.property.update({
-            where: {
-                id: property_id
-            },
-            data: {
-                user: {
-                    connect: {
-                        id: 1
-                    }
-                },
-                details: {
-                    update: {
-                        title: data.details.title,
-                        type: data.details.type as unknown as PropertyType,
-                        location: data.details.location,
-                        price: data.details.price,
-                        description: data.details.description
-                    }
-                },
-            },
-        })
-
-        return `property with id ${property_id} has been updated.`
+        }
     }
 
-    async publish(@ValidatePropertyData() data: PropertyPublishDto, propertyId: number) {
+    async publishProperty(@ValidatePropertyData() data: PropertyPublishDto, propertyId: number) {
         try {
-            // Use the validated data to update the property status
-
-            data
             await this.prisma.status.update({
                 where: {
                     id: propertyId
@@ -234,13 +187,18 @@ export class PropertyService {
         }
     }
 
-    async delete(propertyId: number) {
-        await this.prisma.property.delete({
-            where: {
-                id: propertyId
-            }
-        })
+    async deleteProperty(propertyId: number): Promise<string> {
+        try {
+            await this.prisma.property.delete({
+                where: {
+                    id: propertyId
+                }
+            });
 
-        return `property with id ${propertyId} has been deleted.`
+            return `Property with id ${propertyId} has been deleted.`;
+        } catch (error) {
+            console.error('Error deleting property:', error);
+            throw new Error('Failed to delete property');
+        }
     }
 }
