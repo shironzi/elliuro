@@ -49,6 +49,10 @@ class ImageDto {
 
     @IsOptional()
     @IsString()
+    name: string
+
+    @IsOptional()
+    @IsString()
     image?: string
 
     @IsOptional()
