@@ -1,59 +1,74 @@
 import { Type } from "class-transformer";
-import { IsDate, IsEnum, IsInt, IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsEnum, IsNumber, IsString, ValidateNested } from "class-validator";
 
 enum PropertyType {
-    House = 'house',
+    HOUSE = 'HOUSE',
     Apartment = 'apartment',
     Hotel = 'hotel',
     Condominium = 'condominium',
     Private = 'private',
 }
 
+enum StatusType {
+    DRAFT = "DRAFT",
+    PUBLISH = "PUBLISH",
+    SOLD = "SOLD",
+    ACTIVE = "ACTIVE"
+}
+
+class StatusDto {
+    @IsEnum(StatusType)
+    status: StatusType
+}
+
+class DetailsDto {
+    @IsString()
+    title?: string
+
+    @IsEnum(PropertyType)
+    type: PropertyType
+
+    @IsString()
+    location?: string
+
+    @IsNumber()
+    price?: number;
+
+    @IsString()
+    description?: string
+}
+
+class ImageDto {
+
+    @IsNumber()
+    id: number
+
+    @IsString()
+    name: string
+
+    @IsString()
+    image?: string
+
+    @IsString()
+    added_at?: string
+}
+
 class AmenityDto {
-    @IsInt()
+    @IsNumber()
     id: number
 
     @IsString()
     name: string;
 
     @IsNumber()
-    value: number;
+    value: number
 }
-
-class ImageDto {
-    @IsInt()
-    id: number
-
-    @IsString()
-    path: string;
-
-    @IsDate()
-    added_at: Date;
-}
-
-class DetailsDto {
-    @IsInt()
-    id: number
-
-    @IsString()
-    title: string;
-
-    @IsEnum(PropertyType)
-    type: PropertyType;
-
-    @IsString()
-    location: string;
-
-    @IsString()
-    price: string;
-
-    @IsString()
-    description: string;
-
-}
-
 
 export class PropertyPublishDto {
+    @ValidateNested()
+    @Type(() => StatusDto)
+    status: StatusDto;
+
     @ValidateNested()
     @Type(() => DetailsDto)
     details: DetailsDto;

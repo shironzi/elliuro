@@ -34,6 +34,7 @@ export class PropertyService {
             include: {
                 images: true,
                 amenities: true,
+                status: true
             }
         })
     }
@@ -164,18 +165,21 @@ export class PropertyService {
         return `property with id ${property_id} has been updated.`
     }
 
-    async publish(data: PropertyPublishDto, propertyId: number) {
+    async publish(@ValidatePropertyData() data: PropertyPublishDto, propertyId: number) {
         try {
-            ValidatePropertyData(data);
+            // Use the validated data to update the property status
 
+            data
             await this.prisma.status.update({
                 where: {
                     id: propertyId
                 },
                 data: {
-                    status: "PUBLISH"
+                    status: data.status.status
                 }
             });
+
+            return `Property with id (${propertyId}) has been published.`;
         } catch (error) {
             console.error('Error publishing property:', error);
             throw new Error('Failed to publish property');
