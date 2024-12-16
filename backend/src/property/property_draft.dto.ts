@@ -21,7 +21,7 @@ class StatusDto {
     status: StatusType
 }
 
-class DetailsDto {
+export class PropertyDetailsDto {
     @IsOptional()
     @IsString()
     title?: string
@@ -80,8 +80,8 @@ export class PropertyDraftDto {
     status: StatusDto;
 
     @ValidateNested()
-    @Type(() => DetailsDto)
-    details: DetailsDto;
+    @Type(() => PropertyDetailsDto)
+    details: PropertyDetailsDto;
 
     @ValidateNested({ each: true })
     @Type(() => ImageDto)
