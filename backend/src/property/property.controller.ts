@@ -1,8 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-
 import { PropertyService } from './property.service';
 import { PropertyDraftDto } from './property_draft.dto';
-import { Property_Publish } from './property_publish.dto';
 
 @Controller('property-listing')
 export class PropertyController {
@@ -39,14 +37,14 @@ export class PropertyController {
         return this.propertyService.update(data, parseInt(property_id))
     }
 
-    @Put('publish')
-    async publishProperty(@Body() data: Property_Publish, @Param('id') property_id: number) {
-        return this.propertyService.publish(data, property_id)
-    }
+    // @Put('publish')
+    // async publishProperty(@Body() data: Property_Publish, @Param('id') property_id: number) {
+    //     return this.propertyService.publish(data, property_id)
+    // }
 
-    @Delete('delete')
-    async deleteProperty(@Param('id') property_id: number) {
-        return this.propertyService.delete(property_id)
-    }
+    // @Delete('delete')
+    // async deleteProperty(@Param('id') property_id: number) {
+    //     return this.propertyService.delete(property_id)
+    // }
 
 }
