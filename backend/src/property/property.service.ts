@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyDraftDto } from './property_draft.dto';
+import { PropertyDetailsDto, PropertyDraftDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 
-enum Property_type {
+enum PropertyType {
     HOUSE = "HOUSE",
     APARTMENT = "APARTMENT",
     HOTEL = "HOTEL",
@@ -39,44 +39,70 @@ export class PropertyService {
         })
     }
 
-    async createDraft(data: PropertyDraftDto) {
-        await this.prisma.property.create({
+    async createIntialProperty() {
+        const property = await this.prisma.property.create({
             data: {
-                status: {
-                    create: {}
-                },
                 user: {
                     connect: {
                         id: 1
                     }
                 },
+                status: {
+                    create: {}
+                },
                 details: {
                     create: {
-                        title: data.details.title,
-                        type: data.details.type as unknown as Property_type,
-                        location: data.details.location,
-                        price: data.details.price,
-                        description: data.details.description
+                        title: '',
+                        type: PropertyType.HOUSE,
+                        location: '',
+                        price: 0,
+                        description: ''
                     }
-                },
-                images: {
-                    create: data.images?.map(image => ({
-                        name: image.name,
-                        image: new Uint8Array(Buffer.from(image.image, 'base64')),
-                        added_at: image.added_at
-                    }))
-                },
-                amenities: {
-                    create: data.amenities?.map(amenity => ({
-                        name: amenity.name,
-                        value: amenity.value
-                    }))
                 }
-            },
+            }
         })
 
-        return `Successfully Created Property.`
+        return property.id
     }
+
+    // async createDraft(data: PropertyDraftDto) {
+    //     await this.prisma.property.create({
+    //         data: {
+    //             status: {
+    //                 create: {}
+    //             },
+    //             user: {
+    //                 connect: {
+    //                     id: 1
+    //                 }
+    //             },
+    //             details: {
+    //                 create: {
+    //                     title: data.details.title,
+    //                     type: data.details.type as unknown as Property_type,
+    //                     location: data.details.location,
+    //                     price: data.details.price,
+    //                     description: data.details.description
+    //                 }
+    //             },
+    //             images: {
+    //                 create: data.images?.map(image => ({
+    //                     name: image.name,
+    //                     image: new Uint8Array(Buffer.from(image.image, 'base64')),
+    //                     added_at: image.added_at
+    //                 }))
+    //             },
+    //             amenities: {
+    //                 create: data.amenities?.map(amenity => ({
+    //                     name: amenity.name,
+    //                     value: amenity.value
+    //                 }))
+    //             }
+    //         },
+    //     })
+
+    //     return `Successfully Created Property.`
+    // }
 
     async update(data: PropertyDraftDto, property_id: number) {
         const propertyImageIds = await this.prisma.images.findMany({
@@ -196,4 +222,3 @@ export class PropertyService {
         return `property with id ${propertyId} has been deleted.`
     }
 }
-
