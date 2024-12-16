@@ -65,6 +65,28 @@ export class PropertyService {
         return property.id
     }
 
+    async createDraftDetails(data: PropertyDetailsDto, propertyId: number) {
+        await this.prisma.property.update({
+            where: {
+                id: propertyId,
+                user_id: 1
+            },
+            data: {
+                details: {
+                    update: {
+                        title: data.title,
+                        type: data.type as unknown as PropertyType,
+                        location: data.location,
+                        price: data.price,
+                        description: data.description
+                    }
+                }
+            }
+        })
+
+        return `Property Details has been Updated`
+    }
+
     // async createDraft(data: PropertyDraftDto) {
     //     await this.prisma.property.create({
     //         data: {
@@ -179,7 +201,7 @@ export class PropertyService {
                 details: {
                     update: {
                         title: data.details.title,
-                        type: data.details.type as unknown as Property_type,
+                        type: data.details.type as unknown as PropertyType,
                         location: data.details.location,
                         price: data.details.price,
                         description: data.details.description
