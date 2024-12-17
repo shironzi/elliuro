@@ -72,8 +72,7 @@ export class PropertyService {
         const allowedTypes = Object.values(Property_type)
 
         if (!allowedTypes.includes(data.type?.toUpperCase() as Property_type)) {
-            // throw new BadRequestException(`type must be one of the following values: ${allowedTypes.join(', ')}`);
-            throw new BadRequestException(`type must be one of the following values: ${data.type}`);
+            throw new BadRequestException(`type must be one of the following values: ${allowedTypes.join(', ')}`);
         }
 
         await this.prisma.property.upsert({
