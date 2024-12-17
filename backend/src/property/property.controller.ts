@@ -2,7 +2,6 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes } from '@nest
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
 import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
-import { Property_type } from '@prisma/client';
 
 @Controller('property-listing')
 export class PropertyController {

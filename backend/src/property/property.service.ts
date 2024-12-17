@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
@@ -58,6 +58,13 @@ export class PropertyService {
     }
 
     async upsertPropertyDetails(data: PropertyDetailsDto, propertyId: number) {
+        const allowedTypes = Object.values(Property_type)
+
+        if (!allowedTypes.includes(data.type?.toUpperCase() as Property_type)) {
+            // throw new BadRequestException(`type must be one of the following values: ${allowedTypes.join(', ')}`);
+            throw new BadRequestException(`type must be one of the following values: ${data.type}`);
+        }
+
         await this.prisma.property.upsert({
             where: {
                 id: propertyId ? propertyId : 0,
@@ -67,7 +74,7 @@ export class PropertyService {
                 details: {
                     update: {
                         title: data.title,
-                        type: data.type as keyof typeof Property_type,
+                        type: data.type as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description
@@ -86,7 +93,7 @@ export class PropertyService {
                 details: {
                     create: {
                         title: data.title,
-                        type: data.type as keyof typeof Property_type,
+                        type: data.type as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description
