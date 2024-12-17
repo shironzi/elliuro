@@ -3,9 +3,9 @@ import { PiHouseBold } from 'react-icons/pi'
 import { LuHotel } from 'react-icons/lu'
 import { BsBuildings } from 'react-icons/bs'
 import { FaHouseLock } from 'react-icons/fa6'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
-import { propertyDetails } from '../../apis/propertyApi'
+import { getPropertyDetails, propertyDetails } from '../../apis/propertyApi'
 
 enum PropertyType {
   HOUSE = 'HOUSE',
@@ -23,7 +23,7 @@ function ListingDetails() {
       title: '',
       type: PropertyType.HOUSE,
       location: '',
-      price: '',
+      price: 0,
       description: '',
     },
   )
@@ -71,6 +71,19 @@ function ListingDetails() {
     },
     [],
   )
+
+  useEffect(() => {
+    async function fetchData(): Promise<void> {
+      if (propertyId) {
+        const property = await getPropertyDetails(parseInt(propertyId))
+        setDetailsData(property.details)
+      } else {
+        console.error('Property ID is undefined')
+      }
+    }
+
+    fetchData()
+  }, [propertyId])
 
   return (
     <div className="bg-darkGray-400">

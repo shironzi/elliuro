@@ -10,7 +10,7 @@ interface Details {
     title: string;
     type: PropertyType;
     location: string;
-    price: string;
+    price: number;
     description: string;
 }
 
@@ -42,7 +42,24 @@ export async function createIntialProperty(): Promise<string> {
     return result;
 }
 
-export async function propertyDetails(details: Details, propertyId: string): Promise<string> {
+export async function getPropertyDetails(propertyId: number) {
+    const response = await fetch(`/api/property-listing/details/${propertyId}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch property details')
+    }
+
+    const result = response.json()
+
+    return result
+}
+
+export async function propertyDetails(details: Details, propertyId: string): Promise<void> {
     const response = await fetch(`/api/property-listing/details/${propertyId}`, {
         method: "PUT",
         headers: {
@@ -54,10 +71,6 @@ export async function propertyDetails(details: Details, propertyId: string): Pro
     if (!response.ok) {
         throw new Error('Failed to update property details');
     }
-
-    const result = response.json()
-
-    return result
 }
 
 export async function propertyAmenities(Amenities: PropertyAmenity[]): Promise<string> {

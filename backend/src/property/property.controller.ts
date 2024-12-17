@@ -34,8 +34,8 @@ export class PropertyController {
     }
 
     @Get('details/:id')
-    async getPropertyDetails(@Param() id: string) {
-        return this.propertyService.getPropertyDetails(parseInt(id))
+    async getPropertyDetails(@Param('id') propertyId: string) {
+        return this.propertyService.getPropertyDetails(parseInt(propertyId))
     }
 
     @Put('details/:id')
