@@ -33,11 +33,10 @@ export class PropertyController {
         return this.propertyService.createIntialProperty()
     }
 
-    // @Put('details/:id')
-    // async upsertPropertyDetails(@Body() data: { title: string, type: PropertyType, location: string, price: number, description: string }, @Param('id') propertyId: string) {
-    //     const convertedData = { ...data, type: data.type as PropertyType };
-    //     return this.propertyService.upsertPropertyDetails(convertedData, parseInt(propertyId))
-    // }
+    @Get('details/:id')
+    async getPropertyDetails(@Param() id: string) {
+        return this.propertyService.getPropertyDetails(parseInt(id))
+    }
 
     @Put('details/:id')
     async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('id') propertyId: string) {

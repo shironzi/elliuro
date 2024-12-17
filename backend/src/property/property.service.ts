@@ -19,15 +19,26 @@ export class PropertyService {
         })
     }
 
-    async getPropertyById(property_id: number) {
+    async getPropertyById(propertyId: number) {
         return await this.prisma.property.findFirst({
             where: {
-                id: property_id
+                id: propertyId
             },
             include: {
                 images: true,
                 amenities: true,
                 status: true
+            }
+        })
+    }
+
+    async getPropertyDetails(propertyId: number) {
+        return this.prisma.property.findFirst({
+            where: {
+                id: propertyId
+            },
+            include: {
+                details: true
             }
         })
     }
