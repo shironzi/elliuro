@@ -2,21 +2,17 @@ import { Property_type } from "@prisma/client";
 import { Transform, Type } from "class-transformer";
 import { IsEnum, IsInt, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-export enum PropertyType {
-    HOUSE = "HOUSE",
-    APARTMENT = "APARTMENT",
-    HOTEL = "HOTEL",
-    CONDOMINIUM = "CONDOMINIUM",
-    PRIVATE = "PRIVATE"
-}
-
 export class PropertyDetailsDto {
     @IsOptional()
     @IsString()
     title?: string
 
-    @IsEnum(PropertyType)
-    type: PropertyType;
+    @Transform(({ value }) => {
+        const upperValue = value.toUpperCase();
+        return Property_type[upperValue as keyof typeof Property_type];
+    })
+    @IsEnum(Property_type)
+    type: Property_type;
 
     @IsOptional()
     @IsString()
