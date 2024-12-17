@@ -76,7 +76,7 @@ function ListingDetails() {
     async function fetchData(): Promise<void> {
       if (propertyId) {
         const property = await getPropertyDetails(parseInt(propertyId))
-        setDetailsData(property.details)
+        setDetailsData(property)
       } else {
         console.error('Property ID is undefined')
       }

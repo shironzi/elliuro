@@ -54,9 +54,9 @@ export async function getPropertyDetails(propertyId: number) {
         throw new Error('Failed to fetch property details')
     }
 
-    const result = response.json()
+    const result = await response.json()
 
-    return result
+    return result.details
 }
 
 export async function propertyDetails(details: Details, propertyId: string): Promise<void> {
@@ -71,6 +71,17 @@ export async function propertyDetails(details: Details, propertyId: string): Pro
     if (!response.ok) {
         throw new Error('Failed to update property details');
     }
+}
+
+export async function getPropertyAmenities(propertyId: number) {
+    const response = await fetch(`/api/property-listing/amenities/${propertyId}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+
+    return response
 }
 
 export async function propertyAmenities(Amenities: PropertyAmenity[]): Promise<string> {
