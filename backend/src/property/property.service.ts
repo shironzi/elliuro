@@ -147,6 +147,16 @@ export class PropertyService {
         }
     }
 
+    async getPropertyAmenities(propertyId: number) {
+        const amenities = await this.prisma.amenities.findMany({
+            where: {
+                property_id: propertyId
+            }
+        })
+
+        return amenities
+    }
+
     async upsertPropertyAmenities(data: PropertyAmenityDto[], propertyId: number) {
         const propertyAmenitiesIds = await this.prisma.amenities.findMany({
             where: {

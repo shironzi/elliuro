@@ -17,6 +17,7 @@ interface Details {
 interface PropertyAmenity {
     name: string;
     value: number
+    property_id: number
 }
 
 interface PropertyImages {
@@ -81,25 +82,25 @@ export async function getPropertyAmenities(propertyId: number) {
         },
     })
 
-    return response
+    const result = await response.json();
+
+    console.log(result)
+
+    return result
 }
 
-export async function propertyAmenities(Amenities: PropertyAmenity[]): Promise<string> {
-    const response = await fetch('/api/property-listing/amenities/:id', {
+export async function propertyAmenities(amenities: PropertyAmenity[], propertyId: string): Promise<void> {
+    const response = await fetch(`/api/property-listing/amenities/${parseInt(propertyId)}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(Amenities)
+        body: JSON.stringify(amenities)
     });
 
     if (!response.ok) {
         throw new Error('Failed to update property amenities');
     }
-
-    const result = response.json()
-
-    return result
 }
 
 export async function propertyImages(images: PropertyImages[]): Promise<string> {
