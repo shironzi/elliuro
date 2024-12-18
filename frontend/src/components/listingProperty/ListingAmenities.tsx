@@ -28,7 +28,7 @@ function ListingAmenities() {
         console.error('Property ID is undefined');
       }
       event.preventDefault()
-      navigate('/property-listing/establishments')
+      navigate(`/property-listing/images/${propertyId}`)
     },
     [navigate, amenities, propertyId],
   )
@@ -61,7 +61,7 @@ function ListingAmenities() {
   useEffect(() => {
     async function fetchAmenities() {
       if (propertyId) {
-        const amenitiesArray = await getPropertyAmenities(parseInt(propertyId));
+        const amenitiesArray = await getPropertyAmenities(propertyId);
         const amenitiesObject = amenitiesArray.reduce((acc: Record<string, number>, amenity: { name: string, value: number }) => {
           acc[amenity.name] = amenity.value;
           return acc;

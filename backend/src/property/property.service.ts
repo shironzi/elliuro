@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Param } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
@@ -9,6 +9,15 @@ import { Property_type } from '@prisma/client';
 @Injectable()
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
+
+    private readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as ArrayBuffer);
+            reader.onerror = reject;
+            reader.readAsArrayBuffer(file);
+        });
+    }
 
     async getPropertyAll() {
         return await this.prisma.property.findMany({
@@ -115,6 +124,14 @@ export class PropertyService {
         return propertyId ? `Property Details have been Updated` : `Property Details have been Created`;
     }
 
+    async getPropertyImages(@Param('propertyId') propertyId: number) {
+        return this.prisma.images.findMany({
+            where: {
+                property_id: propertyId
+            }
+        })
+    }
+
     async upsertPropertyImages(data: PropertyImageDto[], propertyId: number) {
         const propertyImageIds = await this.prisma.images.findMany({
             where: {
@@ -127,16 +144,16 @@ export class PropertyService {
             }
         })
 
-        for (const image of data) {
-            const existingImage = propertyImageIds.find(existing => existing.name === image.name)
+        for (const file of data) {
+            const existingImage = propertyImageIds.find(existing => existing.name === file.image.name)
 
             await this.prisma.images.upsert({
                 where: { id: existingImage?.id || 0 },
-                update: { image: new Uint8Array(Buffer.from(image.image, 'base64')) },
+                update: { image: new Uint8Array(await this.readFileAsArrayBuffer(file.image)) },
                 create: {
-                    name: image.name,
-                    image: new Uint8Array(Buffer.from(image.image, 'base64')),
-                    added_at: image.added_at,
+                    name: file.image.name,
+                    image: new Uint8Array(await this.readFileAsArrayBuffer(file.image)),
+                    added_at: new Date(file.image.lastModified),
                     property: {
                         connect: {
                             id: propertyId

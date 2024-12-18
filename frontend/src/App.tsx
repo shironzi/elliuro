@@ -12,7 +12,7 @@ import ListingAmenities from './components/listingProperty/ListingAmenities'
 import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
 import ListingProperty from './components/listingProperty/ListingProperty'
-import NearEstablishment from './components/listingProperty/NearEstablishment'
+// import NearEstablishment from './components/listingProperty/NearEstablishment'
 import Properties from './components/property/Properties'
 import { AuthProvider } from './components/context/AuthProvider'
 
@@ -27,8 +27,8 @@ function App() {
             <Route index element={<GetStart />} />
             <Route path="details/:propertyId" element={<ListingDetails />} />
             <Route path="amenities/:propertyId" element={<ListingAmenities />} />
-            <Route path="establishments" element={<NearEstablishment />} />
-            <Route path="images" element={<ListingImage />} />
+            {/* <Route path="establishments" element={<NearEstablishment />} /> */}
+            <Route path="images/:propertyId" element={<ListingImage />} />
             <Route path="review" element={<ReviewListing />} />
           </Route>
           <Route path="/properties" element={<Properties />} />

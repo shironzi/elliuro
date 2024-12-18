@@ -53,6 +53,11 @@ export class PropertyController {
         return this.propertyService.upsertPropertyAmenities(data, parseInt(propertyId))
     }
 
+    @Get('images/:propertyId')
+    async getPropertyImages(@Param('propertyId') propertyId: string) {
+        return this.propertyService.getPropertyImages(parseInt(propertyId));
+    }
+
     @Put('images/:propertyId')
     async upsertPropertyImages(@Body() data: PropertyImageDto[], @Param('propertyId') propertyId: string) {
         return this.propertyService.upsertPropertyImages(data, parseInt(propertyId))

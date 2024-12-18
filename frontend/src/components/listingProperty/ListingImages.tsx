@@ -2,21 +2,14 @@ import { useCallback, useState } from 'react'
 import { LuUpload } from 'react-icons/lu'
 import { FaRegImage } from 'react-icons/fa6'
 import { MdDelete } from 'react-icons/md'
-import { useNavigate, useOutletContext } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import { propertyImages } from '../../apis/propertyApi'
 
-interface ContextOutlet {
-  formData: {
-    images: File[]
-  }
-  updateFromData: (key: string, value: File[]) => void
-}
 
 function ListingImages() {
+  const {propertyId} = useParams()
   const navigate = useNavigate()
-  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>(
-    formData.images || [],
-  )
+  const [imageFormData, setImageFormData] = useState<File[]>([])
 
   const handleFileUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,37 +31,47 @@ function ListingImages() {
           })
 
           if (newImage.length > 0) {
-            setUploadedFiles([...uploadedFiles, ...newImage])
+            setImageFormData([...imageFormData, ...newImage])
           }
         }
       } catch (error) {
         throw Error(String(error))
       }
     },
-    [uploadedFiles],
+    [imageFormData],
   )
 
   const handleFileDelete = useCallback(
     async (fileName: string): Promise<void> => {
       try {
-        const updatedFiles = uploadedFiles.filter(
+        const updatedFiles = imageFormData.filter(
           (file) => file.name !== fileName,
         )
-        setUploadedFiles(updatedFiles)
+        setImageFormData(updatedFiles)
       } catch (error) {
         throw Error(String(error))
       }
     },
-    [uploadedFiles],
+    [imageFormData],
   )
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      updateFromData('images', uploadedFiles)
+      const propertyImagesData = imageFormData.map(file => ({
+        image: file
+      }))
+
+      propertyImagesData.map(file => console.log(file))
+      if(propertyId){
+        propertyImages(propertyImagesData, propertyId)
+      } else {
+        console.error('Property ID is undefined')
+      }
+      
       navigate('/property-listing/review')
     },
-    [updateFromData, uploadedFiles, navigate],
+    [navigate, imageFormData, propertyId],
   )
 
   return (
@@ -117,7 +120,7 @@ function ListingImages() {
             <div className="flex flex-col gap-2 font-proximaNova w-72">
               <h1>Uploaded Files</h1>
               <ul className="flex flex-col gap-1">
-                {uploadedFiles.map((file, index) => (
+                {imageFormData?.map((file, index) => (
                   <li
                     key={index}
                     className="flex items-center gap-5 text-sm justify-between"

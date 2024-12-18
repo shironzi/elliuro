@@ -21,10 +21,7 @@ interface PropertyAmenity {
 }
 
 interface PropertyImages {
-    name: string,
-    image: File,
-    added_at: Date,
-    updated_at: Date,
+    image: File
 }
 
 export async function createIntialProperty(): Promise<string> {
@@ -43,7 +40,7 @@ export async function createIntialProperty(): Promise<string> {
     return result;
 }
 
-export async function getPropertyDetails(propertyId: number) {
+export async function getPropertyDetails(propertyId: string) {
     const response = await fetch(`/api/property-listing/details/${propertyId}`, {
         method: "GET",
         headers: {
@@ -74,7 +71,7 @@ export async function propertyDetails(details: Details, propertyId: string): Pro
     }
 }
 
-export async function getPropertyAmenities(propertyId: number) {
+export async function getPropertyAmenities(propertyId: string) {
     const response = await fetch(`/api/property-listing/amenities/${propertyId}`, {
         method: "GET",
         headers: {
@@ -84,13 +81,11 @@ export async function getPropertyAmenities(propertyId: number) {
 
     const result = await response.json();
 
-    console.log(result)
-
     return result
 }
 
 export async function propertyAmenities(amenities: PropertyAmenity[], propertyId: string): Promise<void> {
-    const response = await fetch(`/api/property-listing/amenities/${parseInt(propertyId)}`, {
+    const response = await fetch(`/api/property-listing/amenities/${propertyId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
@@ -103,8 +98,21 @@ export async function propertyAmenities(amenities: PropertyAmenity[], propertyId
     }
 }
 
-export async function propertyImages(images: PropertyImages[]): Promise<string> {
-    const response = await fetch('/api/property-listing/amenities/:id', {
+export async function getPropertyImages(propertyId: string) {
+    const response = await fetch(`/api/property-listing/images/${propertyId}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    const result = await response.json()
+
+    return result
+}
+
+export async function propertyImages(images: PropertyImages[], propertyId: string): Promise<void> {
+    const response = await fetch(`/api/property-listing/images/${propertyId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
@@ -116,7 +124,5 @@ export async function propertyImages(images: PropertyImages[]): Promise<string> 
         throw new Error('Failed to update property Images');
     }
 
-    const result = response.json()
-
-    return result
+    console.log(response)
 }

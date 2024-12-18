@@ -75,7 +75,7 @@ function ListingDetails() {
   useEffect(() => {
     async function fetchData(): Promise<void> {
       if (propertyId) {
-        const property = await getPropertyDetails(parseInt(propertyId))
+        const property = await getPropertyDetails(propertyId)
         setDetailsData(property)
       } else {
         console.error('Property ID is undefined')

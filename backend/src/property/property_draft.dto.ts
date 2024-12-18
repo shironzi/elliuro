@@ -24,25 +24,9 @@ export class PropertyDetailsDto {
 }
 
 export class PropertyImageDto {
-    @IsOptional()
-    @IsNumber()
-    id: number
 
     @IsOptional()
-    @IsString()
-    name: string
-
-    @IsOptional()
-    @IsString()
-    image?: string
-
-    @IsOptional()
-    @IsString()
-    added_at?: string
-
-    @IsOptional()
-    @IsString()
-    updated_at?: string
+    image?: File
 }
 
 export class PropertyAmenityDto {
