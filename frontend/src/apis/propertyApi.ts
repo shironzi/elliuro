@@ -21,7 +21,7 @@ interface PropertyAmenity {
 }
 
 interface PropertyImages {
-    image: File
+    base64: Base64URLString
 }
 
 export async function createIntialProperty(): Promise<string> {
@@ -118,11 +118,9 @@ export async function propertyImages(images: PropertyImages[], propertyId: strin
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(images)
-    });
+    })
 
     if (!response.ok) {
         throw new Error('Failed to update property Images');
     }
-
-    console.log(response)
 }

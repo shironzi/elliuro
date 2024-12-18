@@ -4,20 +4,12 @@ import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './prop
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 import { Property_type } from '@prisma/client';
+import { buffer } from 'stream/consumers';
 
 
 @Injectable()
 export class PropertyService {
     constructor(private prisma: PrismaService) { }
-
-    private readFileAsArrayBuffer(file: File): Promise<ArrayBuffer> {
-        return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result as ArrayBuffer);
-            reader.onerror = reject;
-            reader.readAsArrayBuffer(file);
-        });
-    }
 
     async getPropertyAll() {
         return await this.prisma.property.findMany({
@@ -145,22 +137,26 @@ export class PropertyService {
         })
 
         for (const file of data) {
-            const existingImage = propertyImageIds.find(existing => existing.name === file.image.name)
+            const base64Image = file.base64.split(';base64,').pop();
+            const buffer = Buffer.from(base64Image, 'base64');
+            console.log(base64Image)
+            console.log(buffer)
+            // const existingImage = propertyImageIds.find(existing => existing.name === file.image.name)
+            // await this.prisma.images.upsert({
+            //     where: { id: existingImage?.id || 0 },
+            //     update: { image: base64Image },
+            //     create: {
+            //         name: file.image.name,
+            //         image: new Uint8Array(await file.image.arrayBuffer()),
+            //         added_at: new Date(file.image.lastModified),
+            //         property: {
+            //             connect: {
+            //                 id: propertyId
+            //             }
+            //         }
+            //     }
 
-            await this.prisma.images.upsert({
-                where: { id: existingImage?.id || 0 },
-                update: { image: new Uint8Array(await this.readFileAsArrayBuffer(file.image)) },
-                create: {
-                    name: file.image.name,
-                    image: new Uint8Array(await this.readFileAsArrayBuffer(file.image)),
-                    added_at: new Date(file.image.lastModified),
-                    property: {
-                        connect: {
-                            id: propertyId
-                        }
-                    }
-                }
-            })
+            // })
         }
     }
 

@@ -1,6 +1,6 @@
 import { Property_type } from "@prisma/client";
 import { Transform, Type } from "class-transformer";
-import { IsEnum, IsInt, IsNumber, IsOptional, IsString, Matches, ValidateNested } from "class-validator";
+import { IsArray, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString, Matches, ValidateNested } from "class-validator";
 
 export class PropertyDetailsDto {
     @IsOptional()
@@ -25,8 +25,8 @@ export class PropertyDetailsDto {
 
 export class PropertyImageDto {
 
-    @IsOptional()
-    image?: File
+    @IsString()
+    base64: Base64URLString;
 }
 
 export class PropertyAmenityDto {

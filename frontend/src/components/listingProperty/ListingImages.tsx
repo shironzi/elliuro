@@ -56,23 +56,35 @@ function ListingImages() {
   )
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
-      const propertyImagesData = imageFormData.map(file => ({
-        image: file
-      }))
-
-      propertyImagesData.map(file => console.log(file))
-      if(propertyId){
-        propertyImages(propertyImagesData, propertyId)
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+  
+      const convertToBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result as string);
+          reader.onerror = (error) => reject(error);
+        });
+      };
+  
+      const ImagesArray = await Promise.all(
+        imageFormData.map(async (file) => {
+          const base64Image = await convertToBase64(file);
+          return { base64: base64Image };
+        })
+      );
+  
+      if (propertyId) {
+        propertyImages(ImagesArray, propertyId);
       } else {
-        console.error('Property ID is undefined')
+        console.error('Property ID is undefined');
       }
-      
-      navigate('/property-listing/review')
+  
+      navigate('/property-listing/review');
     },
-    [navigate, imageFormData, propertyId],
-  )
+    [navigate, imageFormData, propertyId]
+  );
 
   return (
     <div className="bg-darkGray-400">
