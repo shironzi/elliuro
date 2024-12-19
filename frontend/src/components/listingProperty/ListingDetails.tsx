@@ -16,21 +16,19 @@ enum PropertyType {
 }
 
 function ListingDetails() {
-  const { propertyId } = useParams() 
+  const { propertyId } = useParams()
   const navigate = useNavigate()
-  const [detailsData, setDetailsData] = useState(
-    {
-      title: '',
-      type: PropertyType.HOUSE,
-      location: '',
-      price: 0,
-      description: '',
-    },
-  )
+  const [detailsData, setDetailsData] = useState({
+    title: '',
+    type: PropertyType.HOUSE,
+    location: '',
+    price: 0,
+    description: '',
+  })
   const [propertyType, setPropertyType] = useState(detailsData.type)
 
   const handleSubmit = useCallback(
-    async(event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
 
       if (propertyId) {

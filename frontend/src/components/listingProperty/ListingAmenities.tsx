@@ -6,26 +6,29 @@ import { useNavigate, useParams } from 'react-router'
 import { getPropertyAmenities, propertyAmenities } from '../../apis/propertyApi'
 
 function ListingAmenities() {
-  const {propertyId} = useParams()
+  const { propertyId } = useParams()
 
   const navigate = useNavigate()
   const [amenities, setAmenities] = useState({
-      bedroom: 0,
-      guestRoom: 0,
-      bathroom: 0,
-      carPort: 0,
-      swimmingPool: 0,
-    }
-  )
+    bedroom: 0,
+    guestRoom: 0,
+    bathroom: 0,
+    carPort: 0,
+    swimmingPool: 0,
+  })
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
-      const amenitiesArray = Object.entries(amenities).map(([key, value]) => ({ name: key, value: value, property_id: Number(propertyId) }));
+      const amenitiesArray = Object.entries(amenities).map(([key, value]) => ({
+        name: key,
+        value: value,
+        property_id: Number(propertyId),
+      }))
 
       if (propertyId) {
-        propertyAmenities(amenitiesArray, propertyId);
+        propertyAmenities(amenitiesArray, propertyId)
       } else {
-        console.error('Property ID is undefined');
+        console.error('Property ID is undefined')
       }
       event.preventDefault()
       navigate(`/property-listing/images/${propertyId}`)
@@ -33,45 +36,60 @@ function ListingAmenities() {
     [navigate, amenities, propertyId],
   )
 
-  const handleAddQuantity = useCallback( async(event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const handleAddQuantity = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
 
-    const amenityType = event.currentTarget.closest('div')?.id
-    if(amenityType) {
-      setAmenities((prevAmenities) => ({
-        ...prevAmenities,
-        [amenityType as keyof typeof amenities]: (prevAmenities[amenityType as keyof typeof amenities] || 0) + 1
-      }))
-    }
+      const amenityType = event.currentTarget.closest('div')?.id
+      if (amenityType) {
+        setAmenities((prevAmenities) => ({
+          ...prevAmenities,
+          [amenityType as keyof typeof amenities]:
+            (prevAmenities[amenityType as keyof typeof amenities] || 0) + 1,
+        }))
+      }
+    },
+    [],
+  )
 
-  }, [])
+  const handleMinusQuantity = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
 
-  const handleMinusQuantity = useCallback( async(event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-
-    const amenityType = event.currentTarget.closest('div')?.id
-    if(amenityType) {
-      setAmenities((prevAmenities) => ({
-        ...prevAmenities,
-        [amenityType as keyof typeof amenities]: Math.max((prevAmenities[amenityType as keyof typeof amenities] || 0) - 1, 0)
-      }))
-    }
-  }, [])
+      const amenityType = event.currentTarget.closest('div')?.id
+      if (amenityType) {
+        setAmenities((prevAmenities) => ({
+          ...prevAmenities,
+          [amenityType as keyof typeof amenities]: Math.max(
+            (prevAmenities[amenityType as keyof typeof amenities] || 0) - 1,
+            0,
+          ),
+        }))
+      }
+    },
+    [],
+  )
 
   useEffect(() => {
     async function fetchAmenities() {
       if (propertyId) {
-        const amenitiesArray = await getPropertyAmenities(propertyId);
-        const amenitiesObject = amenitiesArray.reduce((acc: Record<string, number>, amenity: { name: string, value: number }) => {
-          acc[amenity.name] = amenity.value;
-          return acc;
-        }, {});
-        setAmenities(amenitiesObject);
+        const amenitiesArray = await getPropertyAmenities(propertyId)
+        const amenitiesObject = amenitiesArray.reduce(
+          (
+            acc: Record<string, number>,
+            amenity: { name: string; value: number },
+          ) => {
+            acc[amenity.name] = amenity.value
+            return acc
+          },
+          {},
+        )
+        setAmenities(amenitiesObject)
       }
     }
 
-    fetchAmenities();
-  }, [propertyId]);
+    fetchAmenities()
+  }, [propertyId])
 
   return (
     <div className="bg-darkGray-400">
@@ -94,7 +112,10 @@ function ListingAmenities() {
           >
             <div className="flex justify-between items-center border-b px-5">
               <h1>BEDROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4" id='bedroom'>
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="bedroom"
+              >
                 <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
@@ -108,7 +129,10 @@ function ListingAmenities() {
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>GUEST ROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4" id='guestRoom'>
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="guestRoom"
+              >
                 <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
@@ -122,7 +146,10 @@ function ListingAmenities() {
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>BATHROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4" id='bathroom'>
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="bathroom"
+              >
                 <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
@@ -136,7 +163,10 @@ function ListingAmenities() {
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>CAR PORT</h1>
-              <div className="flex flex-row gap-10 items-center py-4" id='carPort'>
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="carPort"
+              >
                 <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
@@ -150,7 +180,10 @@ function ListingAmenities() {
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>SWIMMING POOL</h1>
-              <div className="flex flex-row gap-10 items-center py-4" id='swimmingPool'>
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="swimmingPool"
+              >
                 <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>

@@ -1,11 +1,11 @@
-import { useCallback } from "react"
-import { createIntialProperty } from "../../apis/propertyApi"
-import { useNavigate } from "react-router"
+import { useCallback } from 'react'
+import { createIntialProperty } from '../../apis/propertyApi'
+import { useNavigate } from 'react-router'
 
 function GetStart() {
   const navigate = useNavigate()
 
-  const createProperty = useCallback(async() => {
+  const createProperty = useCallback(async () => {
     const propertyId = await createIntialProperty()
     navigate(`/property-listing/details/${propertyId}`)
   }, [navigate])
@@ -27,7 +27,7 @@ function GetStart() {
             </p>
           </div>
           <button
-          onClick={createProperty}
+            onClick={createProperty}
             className="mx-auto bg-beige-400 px-11 py-4 font-proximaNova text-xl transition-colors duration-300 ease-in hover:bg-secondary-400"
           >
             GET STARTED

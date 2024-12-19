@@ -26,7 +26,10 @@ function App() {
           <Route path="/property-listing" element={<ListingProperty />}>
             <Route index element={<GetStart />} />
             <Route path="details/:propertyId" element={<ListingDetails />} />
-            <Route path="amenities/:propertyId" element={<ListingAmenities />} />
+            <Route
+              path="amenities/:propertyId"
+              element={<ListingAmenities />}
+            />
             {/* <Route path="establishments" element={<NearEstablishment />} /> */}
             <Route path="images/:propertyId" element={<ListingImage />} />
             <Route path="review" element={<ReviewListing />} />

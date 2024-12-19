@@ -136,8 +136,6 @@ export class PropertyService {
             }
         });
 
-        console.log(data)
-
         for (const file of data) {
             const imageData = file.buffer
             const imageName = file.originalname;
