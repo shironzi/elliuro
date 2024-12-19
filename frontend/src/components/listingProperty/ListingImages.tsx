@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { LuUpload } from 'react-icons/lu'
 import { FaRegImage } from 'react-icons/fa6'
 import { MdDelete } from 'react-icons/md'
 import { useNavigate, useParams } from 'react-router'
-import { propertyImages } from '../../apis/propertyApi'
+import { getPropertyImages, propertyImages } from '../../apis/propertyApi'
 
 function ListingImages() {
   const { propertyId } = useParams()
@@ -68,6 +68,24 @@ function ListingImages() {
     },
     [navigate, imageFormData, propertyId],
   )
+
+  useEffect(() => {
+    async function fetchData() {
+      if (propertyId) {
+        const existingImages = await getPropertyImages(propertyId)
+        if(existingImages) {
+            existingImages.map((file: { image: Blob, name: string }) => {
+              file.image = new File([file.image], file.name)
+            })
+            setImageFormData(existingImages.map((file: { image: File }) => file.image))
+        }
+      } else {
+        console.error('Property ID is undefined')
+      }
+    }
+
+    fetchData()
+  }, [propertyId])
 
   return (
     <div className="bg-darkGray-400">

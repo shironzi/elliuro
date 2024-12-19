@@ -117,14 +117,20 @@ export class PropertyService {
     }
 
     async getPropertyImages(@Param('propertyId') propertyId: number) {
-        return this.prisma.images.findMany({
+        const propertyImages = await this.prisma.images.findMany({
             where: {
                 property_id: propertyId
             }
         })
+
+        return propertyImages.map(image => ({
+            image: Buffer.from(image.image).toString('base64'),
+            name: image.name
+        }));
     }
 
     async upsertPropertyImages(data: Express.Multer.File[], propertyId: number) {
+
         const propertyImageIds = await this.prisma.images.findMany({
             where: {
                 property_id: propertyId
@@ -144,27 +150,24 @@ export class PropertyService {
                 throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
             }
 
-            const existingImage = propertyImageIds.find(existing => existing.name === imageName);
+            const existingImages = propertyImageIds.find(existing => existing.name === imageName);
 
-            if (existingImage) {
-                await this.prisma.images.update({
-                    where: { id: existingImage.id },
-                    data: {
-                        image: Buffer.from(imageData),
-                        updated_at: new Date()
-                    },
-                });
-            } else {
-                await this.prisma.images.create({
-                    data: {
-                        property_id: propertyId,
-                        name: imageName,
-                        image: Buffer.from(imageData),
-                        added_at: new Date(),
-                        updated_at: new Date()
-                    },
-                });
-            }
+            console.log(existingImages)
+
+            // await this.prisma.images.upsert({
+            //     where: { id: existingImage?.id || 0 },
+            //     update: {
+            //         image: Buffer.from(existingImage.image),
+            //         updated_at: new Date()
+            //     },
+            //     create: {
+            //         property_id: propertyId,
+            //         name: imageName,
+            //         image: Buffer.from(imageData),
+            //         added_at: new Date(),
+            //         updated_at: new Date()
+            //     }
+            // });
         }
 
         return { message: 'Files uploaded successfully' };
