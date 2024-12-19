@@ -1,16 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, Param } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, FilesUploadDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
-
-enum PropertyType {
-    HOUSE = "HOUSE",
-    APARTMENT = "APARTMENT",
-    HOTEL = "HOTEL",
-    CONDOMINIUM = "CONDOMINIUM",
-    PRIVATE = "PRIVATE",
-}
+import { Property_type } from '@prisma/client';
+import { buffer } from 'stream/consumers';
 
 
 @Injectable()
@@ -26,15 +20,26 @@ export class PropertyService {
         })
     }
 
-    async getPropertyById(property_id: number) {
+    async getPropertyById(propertyId: number) {
         return await this.prisma.property.findFirst({
             where: {
-                id: property_id
+                id: propertyId
             },
             include: {
                 images: true,
                 amenities: true,
                 status: true
+            }
+        })
+    }
+
+    async getPropertyDetails(propertyId: number) {
+        return this.prisma.property.findFirst({
+            where: {
+                id: propertyId
+            },
+            include: {
+                details: true
             }
         })
     }
@@ -53,7 +58,6 @@ export class PropertyService {
                 details: {
                     create: {
                         title: '',
-                        type: PropertyType.HOUSE,
                         location: '',
                         price: 0,
                         description: ''
@@ -66,6 +70,12 @@ export class PropertyService {
     }
 
     async upsertPropertyDetails(data: PropertyDetailsDto, propertyId: number) {
+        const allowedTypes = Object.values(Property_type)
+
+        if (!allowedTypes.includes(data.type?.toUpperCase() as Property_type)) {
+            throw new BadRequestException(`type must be one of the following values: ${allowedTypes.join(', ')}`);
+        }
+
         await this.prisma.property.upsert({
             where: {
                 id: propertyId ? propertyId : 0,
@@ -75,7 +85,7 @@ export class PropertyService {
                 details: {
                     update: {
                         title: data.title,
-                        type: data.type as unknown as PropertyType,
+                        type: data.type as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description
@@ -94,7 +104,7 @@ export class PropertyService {
                 details: {
                     create: {
                         title: data.title,
-                        type: data.type as unknown as PropertyType,
+                        type: data.type as Property_type,
                         location: data.location,
                         price: data.price,
                         description: data.description
@@ -106,7 +116,21 @@ export class PropertyService {
         return propertyId ? `Property Details have been Updated` : `Property Details have been Created`;
     }
 
-    async upsertPropertyImages(data: PropertyImageDto[], propertyId: number) {
+    async getPropertyImages(@Param('propertyId') propertyId: number) {
+        const propertyImages = await this.prisma.images.findMany({
+            where: {
+                property_id: propertyId
+            }
+        })
+
+        return propertyImages.map(image => ({
+            image: Buffer.from(image.image).toString('base64'),
+            name: image.name
+        }));
+    }
+
+    async upsertPropertyImages(data: Express.Multer.File[], propertyId: number) {
+
         const propertyImageIds = await this.prisma.images.findMany({
             where: {
                 property_id: propertyId
@@ -116,26 +140,47 @@ export class PropertyService {
                 name: true,
                 image: true
             }
+        });
+
+        for (const file of data) {
+            const imageData = file.buffer
+            const imageName = file.originalname;
+
+            if (!imageData) {
+                throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
+            }
+
+            const existingImages = propertyImageIds.find(existing => existing.name === imageName);
+
+            console.log(existingImages)
+
+            // await this.prisma.images.upsert({
+            //     where: { id: existingImage?.id || 0 },
+            //     update: {
+            //         image: Buffer.from(existingImage.image),
+            //         updated_at: new Date()
+            //     },
+            //     create: {
+            //         property_id: propertyId,
+            //         name: imageName,
+            //         image: Buffer.from(imageData),
+            //         added_at: new Date(),
+            //         updated_at: new Date()
+            //     }
+            // });
+        }
+
+        return { message: 'Files uploaded successfully' };
+    }
+
+    async getPropertyAmenities(propertyId: number) {
+        const amenities = await this.prisma.amenities.findMany({
+            where: {
+                property_id: propertyId
+            }
         })
 
-        for (const image of data) {
-            const existingImage = propertyImageIds.find(existing => existing.name === image.name)
-
-            await this.prisma.images.upsert({
-                where: { id: existingImage?.id || 0 },
-                update: { image: new Uint8Array(Buffer.from(image.image, 'base64')) },
-                create: {
-                    name: image.name,
-                    image: new Uint8Array(Buffer.from(image.image, 'base64')),
-                    added_at: image.added_at,
-                    property: {
-                        connect: {
-                            id: propertyId
-                        }
-                    }
-                }
-            })
-        }
+        return amenities
     }
 
     async upsertPropertyAmenities(data: PropertyAmenityDto[], propertyId: number) {

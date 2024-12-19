@@ -1,91 +1,95 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MdAddCircleOutline } from 'react-icons/md'
 import { MdOutlineRemoveCircleOutline } from 'react-icons/md'
 import { MdOutlineAdd } from 'react-icons/md'
-import { useNavigate, useOutletContext } from 'react-router'
-
-interface ContextOutlet {
-  formData: {
-    amenities: {
-      bedroomCount: number
-      guestRoomCount: number
-      bathroomCount: number
-      carPortCount: number
-      swimmingPoolCount: number
-    }
-  }
-
-  updateFromData: (key: string, value: string | number | object) => void
-}
-
-interface Amenities {
-  bedroomCount: number
-  guestRoomCount: number
-  bathroomCount: number
-  carPortCount: number
-  swimmingPoolCount: number
-}
+import { useNavigate, useParams } from 'react-router'
+import { getPropertyAmenities, propertyAmenities } from '../../apis/propertyApi'
 
 function ListingAmenities() {
-  const navigate = useNavigate()
-  const { formData, updateFromData } = useOutletContext<ContextOutlet>()
+  const { propertyId } = useParams()
 
-  const [amenities, setAmenities] = useState(
-    formData.amenities || {
-      bedroomCount: 0,
-      guestRoomCount: 0,
-      bathroomCount: 0,
-      carPortCount: 0,
-      swimmingPoolCount: 0,
-    },
-  )
+  const navigate = useNavigate()
+  const [amenities, setAmenities] = useState({
+    bedroom: 0,
+    guestRoom: 0,
+    bathroom: 0,
+    carPort: 0,
+    swimmingPool: 0,
+  })
 
   const handleSubmit = useCallback(
     (event: React.FormEvent<HTMLFormElement>) => {
+      const amenitiesArray = Object.entries(amenities).map(([key, value]) => ({
+        name: key,
+        value: value,
+        property_id: Number(propertyId),
+      }))
+
+      if (propertyId) {
+        propertyAmenities(amenitiesArray, propertyId)
+      } else {
+        console.error('Property ID is undefined')
+      }
       event.preventDefault()
-      updateFromData('amenities', amenities)
-      navigate('/property-listing/establishments')
+      navigate(`/property-listing/images/${propertyId}`)
     },
-    [amenities, updateFromData, navigate],
+    [navigate, amenities, propertyId],
   )
 
-  const handleQuantity = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const handleAddQuantity = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
       event.preventDefault()
-      const { id } = event.currentTarget
 
-      const updateCount = (key: keyof Amenities, increment: boolean) => {
+      const amenityType = event.currentTarget.closest('div')?.id
+      if (amenityType) {
         setAmenities((prevAmenities) => ({
           ...prevAmenities,
-          [key]: increment
-            ? prevAmenities[key] + 1
-            : Math.max(prevAmenities[key] - 1, 0),
+          [amenityType as keyof typeof amenities]:
+            (prevAmenities[amenityType as keyof typeof amenities] || 0) + 1,
         }))
-      }
-
-      const actionMap: Record<
-        string,
-        { key: keyof Amenities; increment: boolean }
-      > = {
-        bedroomAdd: { key: 'bedroomCount', increment: true },
-        bedroomMinus: { key: 'bedroomCount', increment: false },
-        guestRoomAdd: { key: 'guestRoomCount', increment: true },
-        guestRoomMinus: { key: 'guestRoomCount', increment: false },
-        bathroomAdd: { key: 'bathroomCount', increment: true },
-        bathroomMinus: { key: 'bathroomCount', increment: false },
-        carPortAdd: { key: 'carPortCount', increment: true },
-        carPortMinus: { key: 'carPortCount', increment: false },
-        swimmingPoolAdd: { key: 'swimmingPoolCount', increment: true },
-        swimmingPoolMinus: { key: 'swimmingPoolCount', increment: false },
-      }
-
-      const action = actionMap[id]
-      if (action) {
-        updateCount(action.key, action.increment)
       }
     },
     [],
   )
+
+  const handleMinusQuantity = useCallback(
+    async (event: React.MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault()
+
+      const amenityType = event.currentTarget.closest('div')?.id
+      if (amenityType) {
+        setAmenities((prevAmenities) => ({
+          ...prevAmenities,
+          [amenityType as keyof typeof amenities]: Math.max(
+            (prevAmenities[amenityType as keyof typeof amenities] || 0) - 1,
+            0,
+          ),
+        }))
+      }
+    },
+    [],
+  )
+
+  useEffect(() => {
+    async function fetchAmenities() {
+      if (propertyId) {
+        const amenitiesArray = await getPropertyAmenities(propertyId)
+        const amenitiesObject = amenitiesArray.reduce(
+          (
+            acc: Record<string, number>,
+            amenity: { name: string; value: number },
+          ) => {
+            acc[amenity.name] = amenity.value
+            return acc
+          },
+          {},
+        )
+        setAmenities(amenitiesObject)
+      }
+    }
+
+    fetchAmenities()
+  }, [propertyId])
 
   return (
     <div className="bg-darkGray-400">
@@ -108,70 +112,85 @@ function ListingAmenities() {
           >
             <div className="flex justify-between items-center border-b px-5">
               <h1>BEDROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4">
-                <button onClick={handleQuantity} id="bedroomMinus">
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="bedroom"
+              >
+                <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none" id="bedroom">
-                  {amenities.bedroomCount}
+                  {amenities.bedroom}
                 </h1>
-                <button onClick={handleQuantity} id="bedroomAdd">
+                <button onClick={handleAddQuantity}>
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>GUEST ROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4">
-                <button onClick={handleQuantity} id="guestRoomMinus">
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="guestRoom"
+              >
+                <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {amenities.guestRoomCount}
+                  {amenities.guestRoom}
                 </h1>
-                <button onClick={handleQuantity} id="guestRoomAdd">
+                <button onClick={handleAddQuantity}>
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>BATHROOM</h1>
-              <div className="flex flex-row gap-10 items-center py-4">
-                <button onClick={handleQuantity} id="bathroomMinus">
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="bathroom"
+              >
+                <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {amenities.bathroomCount}
+                  {amenities.bathroom}
                 </h1>
-                <button onClick={handleQuantity} id="bathroomAdd">
+                <button onClick={handleAddQuantity}>
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>CAR PORT</h1>
-              <div className="flex flex-row gap-10 items-center py-4">
-                <button onClick={handleQuantity} id="carPortMinus">
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="carPort"
+              >
+                <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {amenities.carPortCount}
+                  {amenities.carPort}
                 </h1>
-                <button onClick={handleQuantity} id="carPortAdd">
+                <button onClick={handleAddQuantity}>
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>
             </div>
             <div className="flex justify-between items-center border-b px-5">
               <h1>SWIMMING POOL</h1>
-              <div className="flex flex-row gap-10 items-center py-4">
-                <button onClick={handleQuantity} id="swimmingPoolMinus">
+              <div
+                className="flex flex-row gap-10 items-center py-4"
+                id="swimmingPool"
+              >
+                <button onClick={handleMinusQuantity}>
                   <MdOutlineRemoveCircleOutline size={25} cursor={'pointer'} />
                 </button>
                 <h1 className="bg-transparent w-5 outline-none">
-                  {amenities.swimmingPoolCount}
+                  {amenities.swimmingPool}
                 </h1>
-                <button onClick={handleQuantity} id="swimmingPoolAdd">
+                <button onClick={handleAddQuantity}>
                   <MdAddCircleOutline size={25} cursor={'pointer'} />
                 </button>
               </div>

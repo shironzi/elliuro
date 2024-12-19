@@ -1,33 +1,15 @@
-import { Type } from "class-transformer";
-import { IsEnum, IsInt, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
-
-enum PropertyType {
-    HOUSE = 'HOUSE',
-    Apartment = 'apartment',
-    Hotel = 'hotel',
-    Condominium = 'condominium',
-    Private = 'private',
-}
-
-enum StatusType {
-    Draft = "draft",
-    Published = "published",
-    Sold = "sold",
-    Active = "active"
-}
-
-class StatusDto {
-    @IsEnum(StatusType)
-    status: StatusType
-}
+import { ApiProperty } from "@nestjs/swagger";
+import { Property_type } from "@prisma/client";
+import { Transform, Type } from "class-transformer";
+import { IsArray, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString, Matches, ValidateNested } from "class-validator";
 
 export class PropertyDetailsDto {
     @IsOptional()
     @IsString()
     title?: string
 
-    @IsEnum(PropertyType)
-    type: PropertyType
+    @IsEnum(Property_type)
+    type: Property_type
 
     @IsOptional()
     @IsString()
@@ -42,26 +24,9 @@ export class PropertyDetailsDto {
     description?: string
 }
 
-export class PropertyImageDto {
-    @IsOptional()
-    @IsNumber()
-    id: number
-
-    @IsOptional()
-    @IsString()
-    name: string
-
-    @IsOptional()
-    @IsString()
-    image?: string
-
-    @IsOptional()
-    @IsString()
-    added_at?: string
-
-    @IsOptional()
-    @IsString()
-    updated_at?: string
+export class FilesUploadDto {
+    @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
+    files: any[];
 }
 
 export class PropertyAmenityDto {
@@ -77,21 +42,3 @@ export class PropertyAmenityDto {
     @IsNumber()
     value: number
 }
-
-// export class PropertyDraftDto {
-//     @ValidateNested()
-//     @Type(() => StatusDto)
-//     status: StatusDto;
-
-//     @ValidateNested()
-//     @Type(() => PropertyDetailsDto)
-//     details: PropertyDetailsDto;
-
-//     @ValidateNested({ each: true })
-//     @Type(() => ImageDto)
-//     images: ImageDto[];
-
-//     @ValidateNested({ each: true })
-//     @Type(() => AmenityDto)
-//     amenities: AmenityDto[];
-// }

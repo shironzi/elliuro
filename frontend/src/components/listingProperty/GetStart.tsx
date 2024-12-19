@@ -1,6 +1,15 @@
-import { Link } from 'react-router'
+import { useCallback } from 'react'
+import { createIntialProperty } from '../../apis/propertyApi'
+import { useNavigate } from 'react-router'
 
 function GetStart() {
+  const navigate = useNavigate()
+
+  const createProperty = useCallback(async () => {
+    const propertyId = await createIntialProperty()
+    navigate(`/property-listing/details/${propertyId}`)
+  }, [navigate])
+
   return (
     <div className=" bg-darkGray-400">
       <div className="w-fit mx-auto flex items-center">
@@ -17,12 +26,12 @@ function GetStart() {
               reaching your real estate goals.
             </p>
           </div>
-          <Link
-            to="details"
+          <button
+            onClick={createProperty}
             className="mx-auto bg-beige-400 px-11 py-4 font-proximaNova text-xl transition-colors duration-300 ease-in hover:bg-secondary-400"
           >
             GET STARTED
-          </Link>
+          </button>
         </div>
       </div>
     </div>

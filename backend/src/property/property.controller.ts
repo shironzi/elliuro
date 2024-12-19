@@ -1,7 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Multer } from 'multer';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors, UsePipes } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { FilesUploadDto, PropertyAmenityDto, PropertyDetailsDto } from './property_draft.dto';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { Express } from 'express';
 
 @Controller('property-listing')
 export class PropertyController {
@@ -23,38 +27,59 @@ export class PropertyController {
      * @returns property id that equals to property_id
      */
 
-    @Get(':id')
-    async getProperty(@Param('id') property_id: string) {
+    @Get(':propertyId')
+    async getProperty(@Param('propertyId') property_id: string) {
         return this.propertyService.getPropertyById(parseInt(property_id))
     }
 
-    @Post('createIntialProperty')
+    @Post('initialProperty')
     async createInitialProperty() {
         return this.propertyService.createIntialProperty()
     }
 
-    @Put('details/:id')
-    async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('id') propertyId: string) {
+    @Get('details/:propertyId')
+    async getPropertyDetails(@Param('propertyId') propertyId: string) {
+        return this.propertyService.getPropertyDetails(parseInt(propertyId))
+    }
+
+    @Put('details/:propertyId')
+    async upsertPropertyDetails(@Body() data: PropertyDetailsDto, @Param('propertyId') propertyId: string) {
         return this.propertyService.upsertPropertyDetails(data, parseInt(propertyId))
     }
 
-    @Put('amenities/:id')
-    async upsertPropertyAmenities(@Body() data: PropertyAmenityDto[], @Param('id') propertyId: string) {
+    @Get('amenities/:propertyId')
+    async getPropertyAmenities(@Param('propertyId') propertyId: string) {
+        return this.propertyService.getPropertyAmenities(parseInt(propertyId))
+    }
+
+    @Put('amenities/:propertyId')
+    async upsertPropertyAmenities(@Body() data: PropertyAmenityDto[], @Param('propertyId') propertyId: string) {
         return this.propertyService.upsertPropertyAmenities(data, parseInt(propertyId))
     }
 
-    @Put('images/:id')
-    async upsertPropertyImages(@Body() data: PropertyImageDto[], @Param('id') propertyId: string) {
-        return this.propertyService.upsertPropertyImages(data, parseInt(propertyId))
+    @Get('images/:propertyId')
+    async getPropertyImages(@Param('propertyId') propertyId: string) {
+        return this.propertyService.getPropertyImages(parseInt(propertyId));
     }
 
-    @Put('publish/:id')
-    async publishProperty(@Body() data: PropertyPublishDto, @Param('id') propertyId: string) {
+    @Put('images/:propertyId')
+    @UseInterceptors(FilesInterceptor('images'))
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({
+        description: 'List of files to upload',
+        type: FilesUploadDto,
+    })
+    async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Param('propertyId') propertyId: string) {
+        return this.propertyService.upsertPropertyImages(files, parseInt(propertyId));
+    }
+
+    @Put('publish/:propertyId')
+    async publishProperty(@Body() data: PropertyPublishDto, @Param('propertyId') propertyId: string) {
         return this.propertyService.publishProperty(data, parseInt(propertyId))
     }
 
-    @Delete('delete/:id')
-    async deleteProperty(@Param('id') propertyId: string) {
+    @Delete('delete/:propertyId')
+    async deleteProperty(@Param('propertyId') propertyId: string) {
         return this.propertyService.deleteProperty(parseInt(propertyId))
     }
 
