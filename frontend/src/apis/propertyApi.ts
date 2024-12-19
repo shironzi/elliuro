@@ -108,23 +108,17 @@ export async function getPropertyImages(propertyId: string) {
 }
 
 export async function propertyImages(images: File[], propertyId: string): Promise<void> {
+    const formData = new FormData();
+    images.forEach((image) => {
+        formData.append('images', image);
+    });
 
     const response = await fetch(`/api/property-listing/images/${propertyId}`, {
         method: "PUT",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: (() => {
-            const formData = new FormData();
-            images.forEach((image, index) => {
-                formData.append(`image_${index}`, image);
-            });
-            return formData;
-        })()
+        body: formData
     });
 
-    console.log(response)
     if (!response.ok) {
-        throw new Error('Failed to update property Images');
+        throw new Error('Failed to update property images');
     }
 }
