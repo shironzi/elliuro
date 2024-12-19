@@ -63,15 +63,16 @@ export class PropertyController {
     }
 
     @Put('images/:propertyId')
-    @UseInterceptors(FileInterceptor('file'))
+    @UseInterceptors(FileInterceptor('image'))
     @ApiConsumes('multipart/form-data')
-    @ApiBody({
-        description: 'List of files to upload',
-        type: FilesUploadDto,
-    })
     async uploadFile(@UploadedFile() file: Express.Multer.File, @Param('propertyId') propertyId: string) {
-        const data: FilesUploadDto[] = [{ files: [file] }];
-        return this.propertyService.savePropertyImage(file, parseInt(propertyId));
+        console.log("WORKIN")
+        console.log("WORKIN")
+        console.log("WORKIN")
+        console.log("WORKIN")
+        console.log("WORKIN")
+        console.log("WORKIN")
+        return this.propertyService.upsertPropertyImages([file], parseInt(propertyId));
     }
 
     @Put('publish/:propertyId')
