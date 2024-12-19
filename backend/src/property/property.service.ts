@@ -136,36 +136,38 @@ export class PropertyService {
             }
         });
 
-        for (const file of data) {
-            const imageData = file.buffer
-            const imageName = file.originalname;
+        console.log(data)
 
-            if (!imageData) {
-                throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
-            }
+        // for (const file of data) {
+        //     const imageData = file.buffer
+        //     const imageName = file.originalname;
 
-            const existingImage = propertyImageIds.find(existing => existing.name === imageName);
+        //     if (!imageData) {
+        //         throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
+        //     }
 
-            if (existingImage) {
-                await this.prisma.images.update({
-                    where: { id: existingImage.id },
-                    data: {
-                        image: Buffer.from(imageData),
-                        updated_at: new Date()
-                    },
-                });
-            } else {
-                await this.prisma.images.create({
-                    data: {
-                        property_id: propertyId,
-                        name: imageName,
-                        image: Buffer.from(imageData),
-                        added_at: new Date(),
-                        updated_at: new Date()
-                    },
-                });
-            }
-        }
+        //     const existingImage = propertyImageIds.find(existing => existing.name === imageName);
+
+        //     if (existingImage) {
+        //         await this.prisma.images.update({
+        //             where: { id: existingImage.id },
+        //             data: {
+        //                 image: Buffer.from(imageData),
+        //                 updated_at: new Date()
+        //             },
+        //         });
+        //     } else {
+        //         await this.prisma.images.create({
+        //             data: {
+        //                 property_id: propertyId,
+        //                 name: imageName,
+        //                 image: Buffer.from(imageData),
+        //                 added_at: new Date(),
+        //                 updated_at: new Date()
+        //             },
+        //         });
+        //     }
+        // }
 
         return { message: 'Files uploaded successfully' };
     }

@@ -1,9 +1,9 @@
 import { Multer } from 'multer';
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors, UsePipes } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
 import { FilesUploadDto, PropertyAmenityDto, PropertyDetailsDto } from './property_draft.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { Express } from 'express';
 
@@ -63,16 +63,14 @@ export class PropertyController {
     }
 
     @Put('images/:propertyId')
-    @UseInterceptors(FileInterceptor('image'))
+    @UseInterceptors(FilesInterceptor('images'))
     @ApiConsumes('multipart/form-data')
-    async uploadFile(@UploadedFile() file: Express.Multer.File, @Param('propertyId') propertyId: string) {
-        console.log("WORKIN")
-        console.log("WORKIN")
-        console.log("WORKIN")
-        console.log("WORKIN")
-        console.log("WORKIN")
-        console.log("WORKIN")
-        return this.propertyService.upsertPropertyImages([file], parseInt(propertyId));
+    @ApiBody({
+        description: 'List of files to upload',
+        type: FilesUploadDto,
+    })
+    async uploadFiles(@UploadedFiles() files: Express.Multer.File[], @Param('propertyId') propertyId: string) {
+        return this.propertyService.upsertPropertyImages(files, parseInt(propertyId));
     }
 
     @Put('publish/:propertyId')
