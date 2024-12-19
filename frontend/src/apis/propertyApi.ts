@@ -20,10 +20,6 @@ interface PropertyAmenity {
     property_id: number
 }
 
-interface PropertyImages {
-    base64: Base64URLString
-}
-
 export async function createIntialProperty(): Promise<string> {
     const response = await fetch('/api/property-listing/initialProperty', {
         method: "POST",
@@ -111,14 +107,19 @@ export async function getPropertyImages(propertyId: string) {
     return result
 }
 
-export async function propertyImages(images: PropertyImages[], propertyId: string): Promise<void> {
+export async function propertyImages(images: File[], propertyId: string): Promise<void> {
+    const formData = new FormData();
+    images.forEach((image, index) => {
+        formData.append(`file${index}`, image);
+    });
+
     const response = await fetch(`/api/property-listing/images/${propertyId}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(images)
-    })
+        body: formData
+    });
 
     if (!response.ok) {
         throw new Error('Failed to update property Images');

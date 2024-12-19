@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, Param } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto, FilesUploadDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 import { Property_type } from '@prisma/client';
@@ -124,7 +124,7 @@ export class PropertyService {
         })
     }
 
-    async upsertPropertyImages(data: PropertyImageDto[], propertyId: number) {
+    async upsertPropertyImages(data: FilesUploadDto[], propertyId: number) {
         const propertyImageIds = await this.prisma.images.findMany({
             where: {
                 property_id: propertyId
@@ -136,28 +136,47 @@ export class PropertyService {
             }
         })
 
-        for (const file of data) {
-            const base64Image = file.base64.split(';base64,').pop();
-            const buffer = Buffer.from(base64Image, 'base64');
-            console.log(base64Image)
-            console.log(buffer)
-            // const existingImage = propertyImageIds.find(existing => existing.name === file.image.name)
-            // await this.prisma.images.upsert({
-            //     where: { id: existingImage?.id || 0 },
-            //     update: { image: base64Image },
-            //     create: {
-            //         name: file.image.name,
-            //         image: new Uint8Array(await file.image.arrayBuffer()),
-            //         added_at: new Date(file.image.lastModified),
-            //         property: {
-            //             connect: {
-            //                 id: propertyId
-            //             }
-            //         }
-            //     }
 
-            // })
+
+        for (const file of data) {
+            console.log(file.files)
+            //     const base64Image = file.base64.split(';base64,').pop();
+            //     const buffer = Buffer.from(base64Image, 'base64');
+            //     console.log(base64Image)
+            //     console.log(buffer)
+            //     // const existingImage = propertyImageIds.find(existing => existing.name === file.image.name)
+            //     // await this.prisma.images.upsert({
+            //     //     where: { id: existingImage?.id || 0 },
+            //     //     update: { image: base64Image },
+            //     //     create: {
+            //     //         name: file.image.name,
+            //     //         image: new Uint8Array(await file.image.arrayBuffer()),
+            //     //         added_at: new Date(file.image.lastModified),
+            //     //         property: {
+            //     //             connect: {
+            //     //                 id: propertyId
+            //     //             }
+            //     //         }
+            //     //     }
+
+            //     // })
         }
+    }
+
+    async savePropertyImage(file: Express.Multer.File, propertyId: number) {
+        const imagePath = file.path; // Path where the file is saved
+        const imageName = file.originalname; // Original file name
+
+        // Save file metadata in the database
+        await this.prisma.images.create({
+            data: {
+                property_id: propertyId,
+                name: imageName,
+                image: new Uint8Array(Buffer.from(imagePath)),
+            },
+        });
+
+        return { message: 'File uploaded successfully' };
     }
 
     async getPropertyAmenities(propertyId: number) {

@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Property_type } from "@prisma/client";
 import { Transform, Type } from "class-transformer";
 import { IsArray, IsEnum, IsInt, IsJSON, IsNumber, IsOptional, IsString, Matches, ValidateNested } from "class-validator";
@@ -23,10 +24,9 @@ export class PropertyDetailsDto {
     description?: string
 }
 
-export class PropertyImageDto {
-
-    @IsString()
-    base64: Base64URLString;
+export class FilesUploadDto {
+    @ApiProperty({ type: 'array', items: { type: 'string', format: 'binary' } })
+    files: any[];
 }
 
 export class PropertyAmenityDto {

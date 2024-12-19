@@ -1,86 +1,69 @@
-import { useCallback, useState } from 'react'
-import { LuUpload } from 'react-icons/lu'
-import { FaRegImage } from 'react-icons/fa6'
-import { MdDelete } from 'react-icons/md'
-import { useNavigate, useParams } from 'react-router'
-import { propertyImages } from '../../apis/propertyApi'
-
+import { useCallback, useState } from 'react';
+import { LuUpload } from 'react-icons/lu';
+import { FaRegImage } from 'react-icons/fa6';
+import { MdDelete } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router';
+import { propertyImages } from '../../apis/propertyApi';
 
 function ListingImages() {
-  const {propertyId} = useParams()
-  const navigate = useNavigate()
-  const [imageFormData, setImageFormData] = useState<File[]>([])
+  const { propertyId } = useParams();
+  const navigate = useNavigate();
+  const [imageFormData, setImageFormData] = useState<File[]>([]);
 
   const handleFileUpload = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const files = event.target.files
-      const validFileTypes = ['image/png', 'image/jpeg', 'image/webp']
-      const maxSizeInBytes = 10 * 1024 * 1024
+      const files = event.target.files;
+      const validFileTypes = ['image/png', 'image/jpeg', 'image/webp'];
+      const maxSizeInBytes = 10 * 1024 * 1024;
       try {
         if (files) {
           const newImage = Array.from(files).filter((file) => {
             if (!validFileTypes.includes(file.type)) {
-              return false
+              return false;
             }
 
             if (file.size > maxSizeInBytes) {
-              return false
+              return false;
             }
 
-            return true
-          })
+            return true;
+          });
 
           if (newImage.length > 0) {
-            setImageFormData([...imageFormData, ...newImage])
+            setImageFormData([...imageFormData, ...newImage]);
           }
         }
       } catch (error) {
-        throw Error(String(error))
+        throw Error(String(error));
       }
     },
     [imageFormData],
-  )
+  );
 
   const handleFileDelete = useCallback(
     async (fileName: string): Promise<void> => {
       try {
         const updatedFiles = imageFormData.filter(
           (file) => file.name !== fileName,
-        )
-        setImageFormData(updatedFiles)
+        );
+        setImageFormData(updatedFiles);
       } catch (error) {
-        throw Error(String(error))
+        throw Error(String(error));
       }
     },
     [imageFormData],
-  )
+  );
 
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-  
-      const convertToBase64 = (file: File): Promise<string> => {
-        return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result as string);
-          reader.onerror = (error) => reject(error);
-        });
-      };
-  
-      const ImagesArray = await Promise.all(
-        imageFormData.map(async (file) => {
-          const base64Image = await convertToBase64(file);
-          return { base64: base64Image };
-        })
-      );
-  
+
       if (propertyId) {
-        propertyImages(ImagesArray, propertyId);
+        await propertyImages(imageFormData, propertyId);
       } else {
         console.error('Property ID is undefined');
       }
-  
+
       navigate('/property-listing/review');
     },
     [navigate, imageFormData, propertyId]
@@ -95,6 +78,7 @@ function ListingImages() {
         <form
           className="px-16 flex flex-col gap-10 pb-20"
           onSubmit={handleSubmit}
+          encType='multipart/form-data'
         >
           <p className="text-xs" style={{ color: 'rgba(224, 224, 224, 0.60)' }}>
             Upload high-quality images of your property to capture its best
@@ -160,7 +144,7 @@ function ListingImages() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default ListingImages
+export default ListingImages;

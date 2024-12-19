@@ -1,7 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes } from '@nestjs/common';
+import { Multer } from 'multer';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors, UsePipes } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
-import { PropertyAmenityDto, PropertyDetailsDto, PropertyImageDto } from './property_draft.dto';
+import { FilesUploadDto, PropertyAmenityDto, PropertyDetailsDto } from './property_draft.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiBody, ApiConsumes } from '@nestjs/swagger';
+import { Express } from 'express';
 
 @Controller('property-listing')
 export class PropertyController {
@@ -59,8 +63,15 @@ export class PropertyController {
     }
 
     @Put('images/:propertyId')
-    async upsertPropertyImages(@Body() data: PropertyImageDto[], @Param('propertyId') propertyId: string) {
-        return this.propertyService.upsertPropertyImages(data, parseInt(propertyId))
+    @UseInterceptors(FileInterceptor('file'))
+    @ApiConsumes('multipart/form-data')
+    @ApiBody({
+        description: 'List of files to upload',
+        type: FilesUploadDto,
+    })
+    async uploadFile(@UploadedFile() file: Express.Multer.File, @Param('propertyId') propertyId: string) {
+        const data: FilesUploadDto[] = [{ files: [file] }];
+        return this.propertyService.savePropertyImage(file, parseInt(propertyId));
     }
 
     @Put('publish/:propertyId')
