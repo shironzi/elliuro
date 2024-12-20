@@ -142,33 +142,43 @@ export class PropertyService {
             }
         });
 
-        for (const file of data) {
-            const imageData = file.buffer
-            const imageName = file.originalname;
+        const imagesToDelete = propertyImageIds.filter(image => !data.some(file => file.originalname === image.name)).map(image => image.id)
 
-            if (!imageData) {
-                throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
-            }
-
-            const existingImages = propertyImageIds.find(existing => existing.name === imageName);
-
-            console.log(existingImages)
-
-            // await this.prisma.images.upsert({
-            //     where: { id: existingImage?.id || 0 },
-            //     update: {
-            //         image: Buffer.from(existingImage.image),
-            //         updated_at: new Date()
-            //     },
-            //     create: {
-            //         property_id: propertyId,
-            //         name: imageName,
-            //         image: Buffer.from(imageData),
-            //         added_at: new Date(),
-            //         updated_at: new Date()
-            //     }
-            // });
+        if (imagesToDelete.length > 0) {
+            await this.prisma.images.deleteMany({
+                where: {
+                    id: { in: imagesToDelete }
+                }
+            })
         }
+
+        Promise.all(
+            data.map(file => {
+                const imageData = file.buffer;
+                const imageName = file.originalname;
+
+                if (!imageData) {
+                    throw new HttpException('File data is undefined', HttpStatus.BAD_REQUEST);
+                }
+
+                const existingImage = propertyImageIds.find(image => image.name === imageName);
+
+                return this.prisma.images.upsert({
+                    where: { id: existingImage?.id || 0 },
+                    update: {
+                        image: Buffer.from(imageData),
+                        updated_at: new Date()
+                    },
+                    create: {
+                        property_id: propertyId,
+                        name: imageName,
+                        image: Buffer.from(imageData),
+                        added_at: new Date(),
+                        updated_at: new Date()
+                    }
+                });
+            })
+        )
 
         return { message: 'Files uploaded successfully' };
     }
