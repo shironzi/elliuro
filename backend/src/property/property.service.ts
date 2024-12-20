@@ -26,11 +26,24 @@ export class PropertyService {
                 id: propertyId
             },
             include: {
-                images: true,
-                amenities: true,
-                status: true
+                details: {
+                    select: {
+                        title: true,
+                        type: true,
+                        location: true,
+                        price: true,
+                        description: true
+                    }
+                },
+                images: {
+                    select: {
+                        name: true,
+                        image: true
+                    }
+                },
+                amenities: true
             }
-        })
+        });
     }
 
     async getPropertyDetails(propertyId: number) {

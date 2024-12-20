@@ -32,7 +32,7 @@ function App() {
             />
             {/* <Route path="establishments" element={<NearEstablishment />} /> */}
             <Route path="images/:propertyId" element={<ListingImage />} />
-            <Route path="review" element={<ReviewListing />} />
+            <Route path="review/:propertyId" element={<ReviewListing />} />
           </Route>
           <Route path="/properties" element={<Properties />} />
           <Route path="/login" element={<Login />} />

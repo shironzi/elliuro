@@ -137,3 +137,25 @@ export async function propertyImages(
         throw new Error('Failed to update property images')
     }
 }
+
+export async function getPropertyById(
+    propertyId: string
+) {
+    const response = await fetch(`/api/property-listing/${propertyId}`, {
+        method: 'GET',
+        headers: {
+            'Contenty-Type': 'application/json'
+        }
+    })
+
+    if (!response.ok) {
+        throw new Error('Failed to fetch property')
+    }
+
+    const result = await response.json()
+
+    console.log(result)
+    console.log("working")
+
+    return result
+}
