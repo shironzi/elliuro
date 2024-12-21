@@ -4,7 +4,6 @@ import { PropertyAmenityDto, PropertyDetailsDto, FilesUploadDto } from './proper
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 import { Property_type } from '@prisma/client';
-import { buffer } from 'stream/consumers';
 
 
 @Injectable()
@@ -33,12 +32,6 @@ export class PropertyService {
                         location: true,
                         price: true,
                         description: true
-                    }
-                },
-                images: {
-                    select: {
-                        name: true,
-                        image: true
                     }
                 },
                 amenities: true
@@ -136,9 +129,9 @@ export class PropertyService {
             }
         })
 
-        return propertyImages.map(image => ({
-            image: Buffer.from(image.image).toString('base64'),
-            name: image.name
+        return propertyImages.map(file => ({
+            image: file.image,
+            name: file.name
         }));
     }
 
