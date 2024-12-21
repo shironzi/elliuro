@@ -84,7 +84,7 @@ model Details {
   id          Int           @id @default(autoincrement())
   title       String?
   type        Property_type @default(HOUSE)
-  location    String?
+  location    String        @default("") @map("location")
   price       Int?
   description String?
   Property    Property?

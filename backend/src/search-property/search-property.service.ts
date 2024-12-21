@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { contains } from 'class-validator';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 enum PropertyStatus {
@@ -25,6 +26,33 @@ export class SearchPropertyService {
       return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
     });
 
+    console.log("1. RUnning")
+
     return filteredProperties;
+  }
+
+  async getPropertyByLocation(location: string) {
+    const properties = await this.prisma.property.findMany({
+      where: {
+        details: {
+          location: {
+            contains: location
+          }
+        }
+      },
+      include: {
+        status: true,
+        details: true,
+        images: true,
+      },
+    });
+
+    console.log("2. Starting")
+
+    const filteredProperties = properties.filter((propertyData) => {
+      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE] && propertyData.details.location.includes(location);
+    });
+
+    return properties
   }
 }
