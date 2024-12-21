@@ -86,6 +86,7 @@ function ReviewListing() {
           carPort={amenities.find(amenity => amenity.name === 'carPort')?.value || 0}
         />
       </div>
+      <button className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white py-4 px-10 w-fit">PUBLISH</button>
     </div>
   )
 }
