@@ -64,33 +64,33 @@ function Nav() {
                   <IoPersonCircleOutline size={30} />
                 </button>
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                  <div className="absolute text-sm right-0 mt-2 w-44 bg-white border border-gray-200 rounded-md shadow-lg">
                     <Link
                       to="/profile"
                       className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
                     >
-                      <IoMdPerson size={25} />
+                      <IoMdPerson size={20} />
                       Profile
                     </Link>
                     <Link
                       to="/myProperties"
                       className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
                     >
-                      <FaHouse size={25} />
+                      <FaHouse size={20} />
                       My Properties
                     </Link>
                     <Link
                       to="/settings"
                       className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
                     >
-                      <IoMdSettings size={25} />
+                      <IoMdSettings size={20} />
                       Settings
                     </Link>
                     <button
                       onClick={handleLogout}
                       className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
                     >
-                      <MdLogout size={25} color="#ff0000" /> Logout
+                      <MdLogout size={20} color="#ff0000" /> Logout
                     </button>
                   </div>
                 )}
