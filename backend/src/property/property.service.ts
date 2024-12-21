@@ -1,6 +1,6 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable, Param } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { PropertyAmenityDto, PropertyDetailsDto, FilesUploadDto } from './property_draft.dto';
+import { PropertyAmenityDto, PropertyDetailsDto } from './property_draft.dto';
 import { PropertyPublishDto } from './property_publish.dto';
 import { ValidatePropertyData } from './property.decorator';
 import { Property_type } from '@prisma/client';

@@ -1,5 +1,5 @@
 import { IoIosSearch } from 'react-icons/io'
-import PropertyCard from './propertyCard'
+import PropertyCard from './PropertyCard'
 
 function ExploreProperties() {
   return (

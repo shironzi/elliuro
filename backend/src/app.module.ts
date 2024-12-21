@@ -8,6 +8,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PropertyController } from './property/property.controller';
 import { PropertyService } from './property/property.service';
 import { PropertyModule } from './property/property.module';
+import { SearchPropertyModule } from './search-property/search-property.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PropertyModule } from './property/property.module';
     AuthModule,
     PrismaModule,
     PropertyModule,
+    SearchPropertyModule,
   ],
   controllers: [AuthController, PropertyController],
   providers: [AuthService, PropertyService],

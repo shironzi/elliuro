@@ -5,9 +5,7 @@ import { PropertyService } from './property.service';
 
 @Module({
     imports: [
-        MulterModule.register({
-            dest: './uploads',
-        }),
+        MulterModule.register(),
     ],
     controllers: [PropertyController],
     providers: [PropertyService],
