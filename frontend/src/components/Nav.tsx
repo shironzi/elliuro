@@ -2,7 +2,7 @@ import { IoPersonCircleOutline } from 'react-icons/io5'
 import { MdLogout } from 'react-icons/md'
 import { IoMdSettings } from 'react-icons/io'
 import { IoMdPerson } from 'react-icons/io'
-import { FaHouse } from "react-icons/fa6";
+import { FaHouse } from 'react-icons/fa6'
 
 import { FaHeart } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router'
@@ -72,7 +72,13 @@ function Nav() {
                       <IoMdPerson size={25} />
                       Profile
                     </Link>
-                    
+                    <Link
+                      to="/myProperties"
+                      className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
+                    >
+                      <FaHouse size={25} />
+                      My Properties
+                    </Link>
                     <Link
                       to="/settings"
                       className="px-4 py-2 text-gray-800 hover:bg-gray-100 flex flex-row gap-5 items-center"
