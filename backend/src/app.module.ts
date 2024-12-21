@@ -9,19 +9,11 @@ import { PropertyController } from './property/property.controller';
 import { PropertyService } from './property/property.service';
 import { PropertyModule } from './property/property.module';
 import { MongoModule } from './mongo/mongo.module';
-import { MongooseModule } from "@nestjs/mongoose";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-    }),
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
-      }),
-      inject: [ConfigService],
     }),
     AuthModule,
     PrismaModule,
