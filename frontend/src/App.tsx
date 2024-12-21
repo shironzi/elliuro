@@ -34,7 +34,7 @@ function App() {
             <Route path="images/:propertyId" element={<ListingImage />} />
             <Route path="review/:propertyId" element={<ReviewListing />} />
           </Route>
-          <Route path="/properties" element={<Properties />} />
+          <Route path="/myProperties" element={<Properties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

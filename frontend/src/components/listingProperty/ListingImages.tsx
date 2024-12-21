@@ -64,7 +64,7 @@ function ListingImages() {
         console.error('Property ID is undefined')
       }
 
-      navigate('/property-listing/review')
+      navigate(`/property-listing/review/${propertyId}`)
     },
     [navigate, imageFormData, propertyId],
   )
@@ -73,11 +73,13 @@ function ListingImages() {
     async function fetchData() {
       if (propertyId) {
         const existingImages = await getPropertyImages(propertyId)
-        if(existingImages) {
-            existingImages.map((file: { image: Blob, name: string }) => {
-              file.image = new File([file.image], file.name)
-            })
-            setImageFormData(existingImages.map((file: { image: File }) => file.image))
+        if (existingImages) {
+          existingImages.map((file: { image: Blob; name: string }) => {
+            file.image = new File([file.image], file.name)
+          })
+          setImageFormData(
+            existingImages.map((file: { image: File }) => file.image),
+          )
         }
       } else {
         console.error('Property ID is undefined')

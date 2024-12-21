@@ -8,7 +8,6 @@ import { PrismaModule } from './prisma/prisma.module';
 import { PropertyController } from './property/property.controller';
 import { PropertyService } from './property/property.service';
 import { PropertyModule } from './property/property.module';
-import { MongoModule } from './mongo/mongo.module';
 
 @Module({
   imports: [
@@ -18,7 +17,6 @@ import { MongoModule } from './mongo/mongo.module';
     AuthModule,
     PrismaModule,
     PropertyModule,
-    MongoModule,
   ],
   controllers: [AuthController, PropertyController],
   providers: [AuthService, PropertyService],
