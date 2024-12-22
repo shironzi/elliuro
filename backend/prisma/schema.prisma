@@ -86,7 +86,7 @@ model Details {
   type        Property_type @default(HOUSE)
   location    String        @default("") @map("location")
   price       Int?
-  description String?
+  description String?       @db.Text
   Property    Property?
 
   @@index([type])

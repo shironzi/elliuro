@@ -84,7 +84,7 @@ export class PropertyService {
 
         await this.prisma.property.upsert({
             where: {
-                id: propertyId ? propertyId : 0,
+                id: propertyId,
                 user_id: 1
             },
             update: {
@@ -195,6 +195,10 @@ export class PropertyService {
                 property_id: propertyId
             }
         })
+
+        if (amenities.length === 0) {
+            return
+        }
 
         return amenities
     }

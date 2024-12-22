@@ -56,7 +56,7 @@ export async function getPropertyDetails(propertyId: string) {
 export async function propertyDetails(
   details: Details,
   propertyId: string,
-): Promise<void> {
+) {
   const response = await fetch(`/api/property-listing/details/${propertyId}`, {
     method: 'PUT',
     headers: {
@@ -64,6 +64,8 @@ export async function propertyDetails(
     },
     body: JSON.stringify(details),
   })
+
+  console.log(details)
 
   if (!response.ok) {
     throw new Error('Failed to update property details')

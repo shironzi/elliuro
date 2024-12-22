@@ -32,7 +32,9 @@ function ListingDetails() {
       event.preventDefault()
 
       if (propertyId) {
+        detailsData.price = parseInt(detailsData.price.toString())
         await propertyDetails(detailsData, propertyId)
+        console.log(propertyId)
         navigate(`/property-listing/amenities/${propertyId}`)
       } else {
         console.error('Property ID is undefined')
