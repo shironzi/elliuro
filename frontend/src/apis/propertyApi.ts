@@ -159,3 +159,23 @@ export async function getPropertyById(propertyId: string) {
 
   return result
 }
+
+export async function searchProperty(params: { location?: string; propertyType?: string; priceMin?: number; priceMax?: number }) {
+  const query = new URLSearchParams(Object.entries(params).map(([key, value]) => [key, String(value)])).toString();
+  const response = await fetch(`/api/search?${query}`, {
+    method: "GET",
+    headers: {
+      'COntent-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to search properties');
+  }
+
+  const result = await response.json();
+
+  console.log(result)
+
+  return result
+}

@@ -15,7 +15,7 @@ import ListingProperty from './components/listingProperty/ListingProperty'
 // import NearEstablishment from './components/listingProperty/NearEstablishment'
 import Properties from './components/property/Properties'
 import { AuthProvider } from './components/context/AuthProvider'
-import ExploreProperties from './components/searchProperty/SearchProperties'
+import SearchProperties from './components/searchProperty/SearchProperties'
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
             <Route path="review/:propertyId" element={<ReviewListing />} />
           </Route>
           <Route path="/myProperties" element={<Properties />} />
-          <Route path="/explore" element={<ExploreProperties />} />
+          <Route path="/search" element={<SearchProperties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

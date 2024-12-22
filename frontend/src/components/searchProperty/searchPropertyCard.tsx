@@ -12,7 +12,7 @@ function searchPropertyCard(props: {
   return (
     <div className="text-darkGray-400 font-proximaNova w-fit">
       <img
-        src="/public/images/property-card.jpg"
+        src="/images/property-card.jpg"
         alt=""
         className="w-full object-cover rounded-t-lg"
       />

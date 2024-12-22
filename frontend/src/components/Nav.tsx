@@ -43,7 +43,7 @@ function Nav() {
             <>
               <Link
                 className="tracking-widest border-b-2 border-transparent transition-all duration-300 ease-linear hover:text-beige-400 hover:border-beige-400 hover:border-opacity-100"
-                to="/explore"
+                to="/search"
               >
                 EXPLORE PROPERTIES
               </Link>
@@ -100,7 +100,7 @@ function Nav() {
             <>
               <Link
                 className="tracking-widest border-b-2 border-transparent transition-all duration-300 ease-linear hover:text-beige-400 hover:border-beige-400 hover:border-opacity-100"
-                to="/explore"
+                to="/search"
               >
                 EXPLORE PROPERTIES
               </Link>
