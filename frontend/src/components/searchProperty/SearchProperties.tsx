@@ -1,7 +1,7 @@
 import { IoIosSearch } from 'react-icons/io'
-import PropertyCard from './PropertyCard'
+import PropertyCard from './searchPropertyCard'
 
-function ExploreProperties() {
+function SearchProperties() {
   return (
     <div className="bg-darkGray h-full">
       <div className="container mx-auto">
@@ -77,4 +77,4 @@ function ExploreProperties() {
   )
 }
 
-export default ExploreProperties
+export default SearchProperties

@@ -15,7 +15,7 @@ import ListingProperty from './components/listingProperty/ListingProperty'
 // import NearEstablishment from './components/listingProperty/NearEstablishment'
 import Properties from './components/property/Properties'
 import { AuthProvider } from './components/context/AuthProvider'
-import ExploreProperties from './components/exploreProperties/ExploreProperties'
+import ExploreProperties from './components/searchProperty/SearchProperties'
 
 function App() {
   return (
