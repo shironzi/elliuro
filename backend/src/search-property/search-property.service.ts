@@ -47,7 +47,7 @@ export class SearchPropertyService {
             },
           },
         }),
-        ...(propertyType && {
+        ...(propertyType && propertyType.toLowerCase() !== 'any' && {
           details: {
             type: {
               equals: propertyType.toUpperCase() as Property_type,
@@ -71,7 +71,7 @@ export class SearchPropertyService {
     });
 
     const filteredProperties = properties.filter((propertyData) => {
-      propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
+      if (propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE]) return propertyData;
     });
 
     return filteredProperties
