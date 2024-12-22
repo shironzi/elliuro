@@ -1,11 +1,9 @@
-import { Multer } from 'multer';
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UploadedFiles, UseInterceptors, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFiles, UseInterceptors, UsePipes } from '@nestjs/common';
 import { PropertyService } from './property.service';
 import { PropertyPublishDto } from './property_publish.dto';
 import { FilesUploadDto, PropertyAmenityDto, PropertyDetailsDto } from './property_draft.dto';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
-import { Express } from 'express';
 
 @Controller('property-listing')
 export class PropertyController {

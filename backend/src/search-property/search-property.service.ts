@@ -1,3 +1,4 @@
+import { Property_type } from '@prisma/client';
 import { Injectable } from '@nestjs/common';
 import { contains } from 'class-validator';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -26,8 +27,6 @@ export class SearchPropertyService {
       return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
     });
 
-    console.log("1. RUnning")
-
     return filteredProperties;
   }
 
@@ -47,12 +46,33 @@ export class SearchPropertyService {
       },
     });
 
-    console.log("2. Starting")
-
     const filteredProperties = properties.filter((propertyData) => {
-      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE] && propertyData.details.location.includes(location);
+      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
     });
 
-    return properties
+    return filteredProperties
+  }
+
+  async getPropertyByPropertyType(propertyType: string) {
+    const properties = await this.prisma.property.findMany({
+      where: {
+        details: {
+          type: {
+            equals: propertyType.toUpperCase() as Property_type
+          }
+        }
+      },
+      include: {
+        status: true,
+        details: true,
+        images: true,
+      },
+    })
+
+    const filteredProperties = properties.filter((propertyData) => {
+      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
+    });
+
+    return filteredProperties
   }
 }
