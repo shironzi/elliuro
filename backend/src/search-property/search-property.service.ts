@@ -30,14 +30,38 @@ export class SearchPropertyService {
     return filteredProperties;
   }
 
-  async getPropertyByLocation(location: string) {
+  async searchProperties(query: {
+    location?: string;
+    propertyType?: string;
+    priceMin?: number;
+    priceMax?: number;
+  }) {
+    const { location, propertyType, priceMin, priceMax } = query;
+
     const properties = await this.prisma.property.findMany({
       where: {
-        details: {
-          location: {
-            contains: location
-          }
-        }
+        ...(location && {
+          details: {
+            location: {
+              contains: location,
+            },
+          },
+        }),
+        ...(propertyType && {
+          details: {
+            type: {
+              equals: propertyType.toUpperCase() as Property_type,
+            },
+          },
+        }),
+        ...(priceMin !== undefined && priceMax !== undefined && {
+          details: {
+            price: {
+              gte: priceMin,
+              lte: priceMax,
+            },
+          },
+        }),
       },
       include: {
         status: true,
@@ -47,59 +71,9 @@ export class SearchPropertyService {
     });
 
     const filteredProperties = properties.filter((propertyData) => {
-      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
+      propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
     });
 
     return filteredProperties
-  }
-
-  async getPropertyByPropertyType(propertyType: string) {
-    const properties = await this.prisma.property.findMany({
-      where: {
-        details: {
-          type: {
-            equals: propertyType.toUpperCase() as Property_type
-          }
-        }
-      },
-      include: {
-        status: true,
-        details: true,
-        images: true,
-      },
-    })
-
-    const filteredProperties = properties.filter((propertyData) => {
-      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
-    });
-
-    return filteredProperties
-  }
-
-  async getPropertyByPriceRange(priceMin?: string, priceMax?: string) {
-
-    const min = priceMin ? parseFloat(priceMin) : 0;
-    const max = priceMax ? parseFloat(priceMax) : 999999999;
-    const properties = await this.prisma.property.findMany({
-      where: {
-        details: {
-          price: {
-            gte: min,
-            lte: max,
-          }
-        }
-      },
-      include: {
-        status: true,
-        details: true,
-        images: true,
-      },
-    })
-
-    const filteredProperties = properties.filter((propertyData) => {
-      return propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE];
-    });
-
-    return properties
   }
 }
