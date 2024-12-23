@@ -4,31 +4,41 @@ import { useCallback, useState } from 'react'
 import { searchProperty } from '../../apis/propertyApi'
 
 function SearchProperties() {
-
   const [searchForm, setSearchForm] = useState({
-    location: "",
-    propertyType: "any",
+    location: '',
+    propertyType: 'any',
     minPrice: 0,
-    maxPrice: undefined
+    maxPrice: undefined,
   })
 
-  const handleInput = useCallback(async(event: React.ChangeEvent<HTMLInputElement>) => {
-      setSearchForm(prevState => ({...prevState, [event.target.name]: event.target.value}))
-    }, [])
+  const handleInput = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchForm((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }))
+    },
+    [],
+  )
 
-  const handleSubmit = useCallback(async() => {
+  const handleSubmit = useCallback(async () => {
     searchProperty(searchForm)
   }, [searchForm])
 
   return (
     <div className="bg-darkGray h-full">
       <div className="container mx-auto">
-      <form
+        <form
           action=""
           onSubmit={handleSubmit}
           className="border border-secondary-400 rounded-full border-r-0 my-20 w-fit mx-auto pl-5 flex flex-row items-center justify-center space-x-4 text-xl text-beige-400"
         >
-          <input type="text" placeholder="LOCATION" onSubmit={() => handleInput} className="outline-none text-beige-400 w-80" />
+          <input
+            type="text"
+            placeholder="LOCATION"
+            onSubmit={() => handleInput}
+            className="outline-none text-beige-400 w-80"
+          />
           <select
             name="propertyType"
             id="propertyType"
@@ -58,10 +68,10 @@ function SearchProperties() {
             <IoIosSearch size={35} color="ffffff" />
           </button>
         </form>
-        <div className='flex flex-row my-32 '>
-          <div className='w-fit'>
+        <div className="flex flex-row my-32 ">
+          <div className="w-fit">
             <h1>0 PROPERTIES</h1>
-            <div className='grid grid-cols-4 gap-10 place-items-center'>
+            <div className="grid grid-cols-4 gap-10 place-items-center">
               <PropertyCard
                 title="title"
                 location="manila"

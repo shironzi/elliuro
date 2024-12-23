@@ -53,10 +53,7 @@ export async function getPropertyDetails(propertyId: string) {
   return result.details
 }
 
-export async function propertyDetails(
-  details: Details,
-  propertyId: string,
-) {
+export async function propertyDetails(details: Details, propertyId: string) {
   const response = await fetch(`/api/property-listing/details/${propertyId}`, {
     method: 'PUT',
     headers: {
@@ -160,20 +157,27 @@ export async function getPropertyById(propertyId: string) {
   return result
 }
 
-export async function searchProperty(params: { location?: string; propertyType?: string; priceMin?: number; priceMax?: number }) {
-  const query = new URLSearchParams(Object.entries(params).map(([key, value]) => [key, String(value)])).toString();
+export async function searchProperty(params: {
+  location?: string
+  propertyType?: string
+  priceMin?: number
+  priceMax?: number
+}) {
+  const query = new URLSearchParams(
+    Object.entries(params).map(([key, value]) => [key, String(value)]),
+  ).toString()
   const response = await fetch(`/api/search?${query}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       'COntent-Type': 'application/json',
     },
-  });
+  })
 
   if (!response.ok) {
-    throw new Error('Failed to search properties');
+    throw new Error('Failed to search properties')
   }
 
-  const result = await response.json();
+  const result = await response.json()
 
   console.log(result)
 
