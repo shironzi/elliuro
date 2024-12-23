@@ -1,6 +1,6 @@
 import { FaLocationDot } from 'react-icons/fa6'
 
-function searchPropertyCard(props: {
+function SearchPropertyCard(props: {
   title: string
   location: string
   price: number
@@ -27,4 +27,4 @@ function searchPropertyCard(props: {
   )
 }
 
-export default searchPropertyCard
+export default SearchPropertyCard
