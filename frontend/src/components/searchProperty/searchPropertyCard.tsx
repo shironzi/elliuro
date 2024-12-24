@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { FaLocationDot } from 'react-icons/fa6'
 
 function SearchPropertyCard(props: {
@@ -27,4 +28,4 @@ function SearchPropertyCard(props: {
   )
 }
 
-export default SearchPropertyCard
+export default memo(SearchPropertyCard)
