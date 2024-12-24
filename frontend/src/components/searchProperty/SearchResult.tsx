@@ -1,3 +1,4 @@
+import { memo } from "react"
 import SearchPropertyCard from "./SearchPropertyCard"
 
 function SearchResult(){
@@ -48,4 +49,4 @@ function SearchResult(){
     )
 }
 
-export default SearchResult
+export default memo(SearchResult)
