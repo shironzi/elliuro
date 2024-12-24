@@ -1,5 +1,5 @@
 import { IoIosSearch } from 'react-icons/io'
-import { useCallback, useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { searchProperty } from '../../apis/propertyApi'
 import SearchResult from './SearchResult'
 
@@ -74,4 +74,4 @@ function SearchProperties() {
   )
 }
 
-export default SearchProperties
+export default memo(SearchProperties)
