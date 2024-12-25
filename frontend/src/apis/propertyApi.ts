@@ -179,7 +179,5 @@ export async function searchProperty(params: {
 
   const result = await response.json()
 
-  // console.log(result)
-
   return result
 }
