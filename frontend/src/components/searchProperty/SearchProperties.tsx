@@ -1,6 +1,6 @@
 import { IoIosSearch } from 'react-icons/io'
 
-import { memo, useCallback, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { searchProperty } from '../../apis/propertyApi'
 import SearchResult from './SearchResult'
 
@@ -44,6 +44,11 @@ function SearchProperties() {
     setPropertiesData(properties)
 
   }, [searchForm])
+
+  useEffect(() => {
+      const event = new Event('submit', { bubbles: true, cancelable: true });
+      handleSubmit(event as unknown as React.FormEvent<HTMLFormElement>);
+    }, [handleSubmit])
 
   return (
     <div className="bg-darkGray h-full">
