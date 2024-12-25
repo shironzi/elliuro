@@ -71,7 +71,7 @@ export class SearchPropertyService {
     });
 
     const filteredProperties = properties.filter((propertyData) => {
-      if (propertyData.status.status === PropertyStatus[PropertyStatus.ACTIVE]) return propertyData;
+      if (propertyData.status.status === PropertyStatus[PropertyStatus.DRAFT]) return propertyData;
     });
 
     return filteredProperties

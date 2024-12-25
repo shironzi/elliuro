@@ -1,7 +1,19 @@
 import { IoIosSearch } from 'react-icons/io'
+
 import { memo, useCallback, useState } from 'react'
 import { searchProperty } from '../../apis/propertyApi'
 import SearchResult from './SearchResult'
+
+interface Property {
+  details: {
+    title: string
+    location: string
+    price: number
+  }
+  image: {
+    image: File
+  }
+}
 
 function SearchProperties() {
   const [searchForm, setSearchForm] = useState({
@@ -11,8 +23,11 @@ function SearchProperties() {
     maxPrice: undefined,
   })
 
+  const [propertiesData, setPropertiesData] = useState<Property[]>([]);
+
   const handleInput = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
+
       setSearchForm((prevState) => ({
         ...prevState,
         [event.target.name]: event.target.value,
@@ -21,8 +36,13 @@ function SearchProperties() {
     [],
   )
 
-  const handleSubmit = useCallback(async () => {
-    searchProperty(searchForm)
+  const handleSubmit = useCallback(async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    const properties = await searchProperty(searchForm)
+
+    setPropertiesData(properties)
+
   }, [searchForm])
 
   return (
@@ -68,7 +88,7 @@ function SearchProperties() {
             <IoIosSearch size={35} color="ffffff" />
           </button>
         </form>
-        <SearchResult/>
+        <SearchResult propertiesData={propertiesData}/>
       </div>
     </div>
   )
