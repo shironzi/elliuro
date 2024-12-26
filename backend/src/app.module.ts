@@ -9,6 +9,7 @@ import { PropertyController } from './property/property.controller';
 import { PropertyService } from './property/property.service';
 import { PropertyModule } from './property/property.module';
 import { SearchPropertyModule } from './search-property/search-property.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SearchPropertyModule } from './search-property/search-property.module';
     PrismaModule,
     PropertyModule,
     SearchPropertyModule,
+    UserModule,
   ],
   controllers: [AuthController, PropertyController],
   providers: [AuthService, PropertyService],
