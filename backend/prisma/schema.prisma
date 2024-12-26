@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -40,7 +34,7 @@ enum Property_type {
 
 // User model represents a user in the system
 model User {
-  id         Int        @id @default(autoincrement())
+  id         String     @id @default(uuid()) @map("_id")
   username   String     @unique
   email      String     @unique
   name       String
@@ -49,19 +43,17 @@ model User {
   created_at DateTime   @default(now())
   updated_at DateTime   @updatedAt
   property   Property[]
-
-  @@index([username])
 }
 
 // Property model represents a property in the system
 model Property {
-  id         Int         @id @default(autoincrement())
+  id         String      @id @default(uuid()) @map("_id")
   status     Status      @relation(fields: [status_id], references: [id], onDelete: Cascade)
   user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   details    Details     @relation(fields: [details_id], references: [id], onDelete: Cascade)
-  status_id  Int         @unique
-  user_id    Int
-  details_id Int         @unique
+  details_id String      @unique
+  status_id  String
+  user_id    String
   images     Images[]
   amenities  Amenities[]
 
@@ -72,16 +64,14 @@ model Property {
 
 // Status model represents the status of a property
 model Status {
-  id       Int         @id @default(autoincrement())
+  id       String      @id @default(uuid()) @map("_id")
   status   Status_List @default(DRAFT)
-  property Property?
-
-  @@index([status])
+  property Property[]
 }
 
 // Details model represents the details of a property
 model Details {
-  id          Int           @id @default(autoincrement())
+  id          String        @id @default(uuid()) @map("_id")
   title       String?
   type        Property_type @default(HOUSE)
   location    String        @default("") @map("location")
@@ -95,24 +85,24 @@ model Details {
 
 // Images model represents images associated with a property
 model Images {
-  id          Int       @id @default(autoincrement())
+  id          String    @id @default(uuid()) @map("_id")
   name        String?
   image       Bytes?
   added_at    DateTime?
   updated_at  DateTime?
   property    Property  @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  property_id Int
+  property_id String
 
   @@index([property_id])
 }
 
 // Amenities model represents amenities associated with a property
 model Amenities {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(uuid()) @map("_id")
   name        String
   value       Int
   property    Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-  property_id Int
+  property_id String
 
   @@index([property_id])
 }
