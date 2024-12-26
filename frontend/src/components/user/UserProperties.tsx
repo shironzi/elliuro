@@ -1,5 +1,4 @@
-import { MdOutlineEdit } from 'react-icons/md'
-import { MdDeleteOutline } from 'react-icons/md'
+import UserPropertiesCard from './UserPropertiesCard'
 
 function userProperties() {
   return (
@@ -12,25 +11,21 @@ function userProperties() {
             <div className="col-span-6">Title</div>
             <div className="col-span-1">Actions</div>
           </div>
-          <div className="grid grid-cols-10 gap-4 items-center border-t py-2 ">
-            <div className="text-center">1</div>
-            <div className="col-span-2">
-              <img
-                src="/images/property-card.jpg"
-                alt="property-card.jpg"
-                className="w-full object-cover rounded"
-              />
-            </div>
-            <div className="col-span-6">Sample Title</div>
-            <div className="col-span-1 flex gap-5 justify-center">
-              <button className="">
-                <MdOutlineEdit size={30} />
-              </button>
-              <button className="">
-                <MdDeleteOutline size={35} color="#ff0000" />
-              </button>
-            </div>
-          </div>
+          <UserPropertiesCard
+            title="Sample"
+            image={'/images/property-card.jpg'}
+            number={1}
+          />
+          <UserPropertiesCard
+            title="Sample"
+            image={'/images/property-card.jpg'}
+            number={2}
+          />
+          <UserPropertiesCard
+            title="Sample"
+            image={'/images/property-card.jpg'}
+            number={3}
+          />
         </div>
       </div>
     </div>
