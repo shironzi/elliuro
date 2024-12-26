@@ -12,10 +12,9 @@ import ListingAmenities from './components/listingProperty/ListingAmenities'
 import ListingImage from './components/listingProperty/ListingImages'
 import ReviewListing from './components/listingProperty/ReviewListing'
 import ListingProperty from './components/listingProperty/ListingProperty'
-// import NearEstablishment from './components/listingProperty/NearEstablishment'
-import Properties from './components/property/Properties'
 import { AuthProvider } from './components/context/AuthProvider'
 import SearchProperties from './components/searchProperty/SearchProperties'
+import UserProperties from './components/user/UserProperties'
 
 function App() {
   return (
@@ -35,7 +34,7 @@ function App() {
             <Route path="images/:propertyId" element={<ListingImage />} />
             <Route path="review/:propertyId" element={<ReviewListing />} />
           </Route>
-          <Route path="/myProperties" element={<Properties />} />
+          <Route path="/myProperties" element={<UserProperties />} />
           <Route path="/search" element={<SearchProperties />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
