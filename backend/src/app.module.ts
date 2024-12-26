@@ -10,12 +10,14 @@ import { PropertyService } from './property/property.service';
 import { PropertyModule } from './property/property.module';
 import { SearchPropertyModule } from './search-property/search-property.module';
 import { UserModule } from './user/user.module';
+import { MongooseModule } from "@nestjs/mongoose";
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    MongooseModule.forRoot(process.env.MONGOOSE_URI),
     AuthModule,
     PrismaModule,
     PropertyModule,
