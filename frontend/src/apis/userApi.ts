@@ -1,8 +1,8 @@
 export async function getProperties() {
     const response = await fetch('/api/user/properties', {
-        method: "GET",
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         }
     });
 
@@ -14,4 +14,8 @@ export async function getProperties() {
     console.log(result.properties);
 
     return result.properties;
+}
+
+export function getImageUrl(imageName: string) {
+    return `/api/user/image/${imageName}`;
 }

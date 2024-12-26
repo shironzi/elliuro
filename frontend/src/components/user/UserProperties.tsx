@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import UserPropertiesCard from './UserPropertiesCard'
-import { getProperties } from '../../apis/userApi'
+import { getProperties, getImageUrl } from '../../apis/userApi'
 
 interface userProperty {
   id: number
   title: string
-  image: string
+  imageName: string
 }
 
 function UserProperties() {
@@ -35,7 +35,7 @@ function UserProperties() {
                 key={index}
                 id={property.id}
                 title={property.title}
-                image={property.image}
+                imageName={getImageUrl(property.imageName)}
                 listNum={index + 1}
               />
             ))

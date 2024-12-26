@@ -4,7 +4,7 @@ import { MdDeleteOutline } from 'react-icons/md'
 interface userProperty {
   id: number
   title: string
-  image: string
+  imageName: string
   listNum: number
 }
 
@@ -14,7 +14,7 @@ function UserPropertiesCard(props: userProperty) {
       <div className="text-center">{props.listNum}</div>
       <div className="col-span-2 w-full">
         <img
-          src={`data:image/png;base64,${props.image}`}
+          src={props.imageName}
           alt="Property"
           className="w-full border object-cover rounded"
         />
