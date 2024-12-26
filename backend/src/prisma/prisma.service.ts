@@ -7,3 +7,10 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
         await this.$connect();
     }
 }
+
+@Injectable()
+export class PrismaMongodbService extends PrismaClient implements OnModuleInit {
+    async onModuleInit() {
+        await this.$connect();
+    }
+}
