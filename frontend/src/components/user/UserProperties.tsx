@@ -1,6 +1,24 @@
+import { useEffect, useState } from 'react'
 import UserPropertiesCard from './UserPropertiesCard'
+import { getProperties } from '../../apis/userApi'
 
-function userProperties() {
+interface userProperty {
+  id: number
+  title: string
+  image: string
+}
+
+function UserProperties() {
+  const [userProperties, setUserProperties] = useState<userProperty[]>()
+
+  useEffect(() => {
+    async function fetchData() {
+      const properties = await getProperties()
+      setUserProperties(properties)
+    }
+    fetchData()
+  }, [])
+
   return (
     <div className="bg-darkGray-400">
       <div className="container mx-auto py-20">
@@ -11,25 +29,23 @@ function userProperties() {
             <div className="col-span-6">Title</div>
             <div className="col-span-1">Actions</div>
           </div>
-          <UserPropertiesCard
-            title="Sample"
-            image={'/images/property-card.jpg'}
-            number={1}
-          />
-          <UserPropertiesCard
-            title="Sample"
-            image={'/images/property-card.jpg'}
-            number={2}
-          />
-          <UserPropertiesCard
-            title="Sample"
-            image={'/images/property-card.jpg'}
-            number={3}
-          />
+          {userProperties ? (
+            userProperties.map((property, index) => (
+              <UserPropertiesCard
+                key={index}
+                id={property.id}
+                title={property.title}
+                image={property.image}
+                listNum={index + 1}
+              />
+            ))
+          ) : (
+            <div>No properties found.</div>
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-export default userProperties
+export default UserProperties

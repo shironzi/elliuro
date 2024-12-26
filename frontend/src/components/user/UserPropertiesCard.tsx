@@ -1,21 +1,22 @@
 import { MdOutlineEdit } from 'react-icons/md'
 import { MdDeleteOutline } from 'react-icons/md'
 
-interface propertiesData {
-  number: number
-  image: string
+interface userProperty {
+  id: number
   title: string
+  image: string
+  listNum: number
 }
 
-function userPropertiesCard(props: propertiesData) {
+function UserPropertiesCard(props: userProperty) {
   return (
-    <div className="grid grid-cols-10 gap-4 items-center border-t py-10 ">
-      <div className="text-center">{props.number}</div>
+    <div className="grid grid-cols-10 gap-4 items-center border-t py-10">
+      <div className="text-center">{props.listNum}</div>
       <div className="col-span-2 w-full">
         <img
-          src={props.image}
-          alt="property-card.jpg"
-          className="w-full object-cover rounded"
+          src={`data:image/png;base64,${props.image}`}
+          alt="Property"
+          className="w-full border object-cover rounded"
         />
       </div>
       <div className="col-span-6">{props.title}</div>
@@ -31,4 +32,4 @@ function userPropertiesCard(props: propertiesData) {
   )
 }
 
-export default userPropertiesCard
+export default UserPropertiesCard
