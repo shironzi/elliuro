@@ -1,10 +1,9 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
-import { databaseProviders } from './config/typeorm.providers';
-import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { databaseProviders } from "./config/typeorm.config";
 
 @Module({
   imports: [
