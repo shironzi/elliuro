@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { MongooseModule } from "@nestjs/mongoose";
+import { databaseProviders } from './config/typeorm.providers';
 
 @Module({
   imports: [
@@ -10,6 +11,6 @@ import { MongooseModule } from "@nestjs/mongoose";
     MongooseModule.forRoot(process.env.MONGOOSE_URI),
   ],
   controllers: [],
-  providers: [...typeorm.config.ts],
+  providers: [...databaseProviders],
 })
 export class AppModule { }
