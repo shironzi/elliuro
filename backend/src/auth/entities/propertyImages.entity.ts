@@ -1,15 +1,13 @@
+import { Column, Entity PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class PropertyImages {
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
-    @Column()
-    amenityName: string
+  @Column()
+  imageName: string
 
-    @Column()
-    amenityQuantity: number
-
-    @ManyToOne(() => Property, (property) => property.amenities)
-    property: Propert
+  @Column({ type: 'bytea' })
+  imageFile: Buffer;
 }

@@ -80,7 +80,7 @@ export class PropertyDetails {
 
 
 @Entity()
-export class PropertyImages {
+export class PropertyAmenities {
     @PrimaryGeneratedColumn('uuid')
     id: string
 
