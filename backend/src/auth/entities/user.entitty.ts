@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Property } from "./property.entity";
 
 export enum UserRole {
     ADMIN = 'admin',
@@ -35,4 +36,7 @@ export class User {
 
     @UpdateDateColumn()
     updatedAt: Date
+
+    @OneToMany(() => Property, (property) => property.user)
+    property: Property
 }
